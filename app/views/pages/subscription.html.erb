@@ -1,0 +1,36 @@
+<% title "Renew Your Account - Yearly Subscription" %>
+<% content_for(:nav) { "is-collapsed" } %>
+
+<div class="bg-grey-lighter">
+  <div class="container px-8 lg:px-16">
+    <div class="py-12 lg:pb-16 max-w-lg mx-auto">
+      <h1 class="text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight">Subscribe to Admired Leadership</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:px-16">
+  <div class="pt-12 pb-16 max-w-lg mx-auto">
+    <div class="flex flex-col md:flex-row md:-mx-8">
+      <div class="md:w-1/2 mb-8 md:mb-0 md:mx-4 md:px-4">
+        <p class="mb-4 font-bold text-grey-darkest text-lg">Continue your leadership journey by subscribing.</p>
+        <p class="mb-4 text-grey-darkest">Extending your membership in the Admired Leadership community is easy. And a great value &mdash; just $200 for another full year. Here are your benefits:</p>
+        <ul class="pl-6 text-grey-darkest">
+          <li>Continued access to all course content<br />(including updated videos)</li>
+          <li>Continuity of tracking history and notes</li>
+          <li>Opportunity for involvement in monthly study&nbsp;groups</li>
+          <li>Access to private “subscribers only” webinars</li>
+          <li>Invitation to our annual Admired Leadership Community&nbsp;Conference</li>
+          <li>Access to weekly book summaries to help you stay abreast of the current writings on&nbsp;leadership</li>
+        </ul>
+      </div>
+
+      <div class="hidden lg:block border-r"></div>
+
+      <div class="flex-1 md:mx-4 md:px-4">
+        <%= link_to "Subscribe", curriculum_subscriptions_new_path, class: "w-full mb-4 btn btn--lg btn--primary-gradient" %>
+        <%= link_to "Talk To Someone First", contact_path, class: "w-full mb-4 btn btn--lg btn--outline" %>
+      </div>
+    </div>
+  </div>
+</div>

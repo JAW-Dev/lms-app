@@ -1,0 +1,55 @@
+<%= form_with(model: [:admin, company], local: true, class: "lg:max-w-3/4") do |form| %>
+  <% if company.errors.any? %>
+    <div id="error_explanation" class="px-8 py-4 mb-8 bg-red-dark">
+      <p class="mb-2 text-xl font-bold text-white leading-tight">Something went wrong. Please correct the following errors and try again:</p>
+      <ul class="text-white">
+        <% company.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-6">
+    <%= form.label :name, class: "block mb-1 font-bold" %>
+    <%= form.text_field :name, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :line_one, "Address", class: "block mb-1 font-bold" %>
+    <%= form.text_field :line_one, class: "w-full mb-2 p-2 bg-grey-lighter shadow-inner" %>
+    <%= form.text_field :line_two, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :city, class: "block mb-1 font-bold" %>
+    <%= form.text_field :city, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :state_id, class: "block mb-1 font-bold" %>
+    <%= form.collection_select :state_id, State.order(abbr: :asc), :id, :name, { include_blank: true }, class: "border" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :zip, class: "block mb-1 font-bold" %>
+    <%= form.text_field :zip, class: "w-64 p-2 bg-grey-lighter shadow-inner" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :country_id, class: "block mb-1 font-bold" %>
+    <%= form.collection_select :country_id, Country.order(alpha2: :asc), :id, :name, { prompt: true }, class: "border" %>
+  </div>
+
+  <div class="mb-6">
+    <%= form.label :phone, class: "block mb-1 font-bold" %>
+    <%= form.text_field :phone, class: "w-64 p-2 bg-grey-lighter shadow-inner" %>
+  </div>
+
+  <hr class="border-t pb-4">
+
+  <div class="flex flex-col md:flex-row items-center md:-mx-2">
+    <%= form.button nil, type: "submit", class: "w-full md:w-auto mb-6 md:mx-2 md:mb-0 btn btn--lg btn--primary rounded" %>
+    <%= link_to "Cancel", admin_companies_path, class: "md:mx-2" %>
+  </div>
+<% end %>

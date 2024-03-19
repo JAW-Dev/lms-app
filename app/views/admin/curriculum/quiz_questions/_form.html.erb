@@ -1,0 +1,80 @@
+<div class="container px-8 md:pr-8 lg:pl-16">
+  <div class="pt-12 pb-16">
+    <div class="lg:max-w-3/4">
+      <%= form_with(model: [:admin, curriculum_quiz_question], local: true, class: "mb-8") do |form| %>
+        <% if curriculum_quiz_question.errors.any? %>
+          <div id="error_explanation" class="px-8 py-4 mb-8 bg-red-dark">
+            <p class="mb-2 text-xl font-bold text-white leading-tight">Something went wrong. Please correct the following errors and try again:</p>
+            <ul class="text-white">
+              <% curriculum_quiz_question.errors.full_messages.each do |message| %>
+                <li><%= message %></li>
+              <% end %>
+            </ul>
+          </div>
+        <% end %>
+
+        <div class="mb-6">
+          <%= form.label :content, class: "block mb-1 font-bold" %>
+          <%= form.text_area :content, class: "w-full p-2 bg-grey-lighter shadow-inner", rows: 2 %>
+        </div>
+
+        <div class="flex flex-col md:flex-row items-center md:-mx-2">
+          <%= form.button "Update Question", type: "submit", class: "w-full md:w-auto mb-6 md:mx-2 md:mb-0 btn btn--lg btn--primary rounded" %>
+          <%= link_to "Cancel", edit_admin_curriculum_quiz_path(curriculum_quiz_question.quiz), class: "md:mx-2" %>
+        </div>
+      <% end %>
+
+      <% if curriculum_quiz_question.answers.any? %>
+        <hr class="border-t py-4">
+
+        <div class="mb-8">
+          <table class="w-full striped-table">
+            <thead>
+              <tr>
+                <th class="w-3/4 text-left">Answers</th>
+                <th></th>
+              </tr>
+            </thead>
+
+            <tbody>
+              <% curriculum_quiz_question.answers.each do |answer| %>
+                <tr id="quiz_question_answer-<%= answer.id %>" data-type="<%= present(answer).draggable_type %>" data-id="<%= answer.id %>" draggable="true" class="flex flex-wrap md:table-row droppable">
+                  <td class="p-2 md:p-4 align-top">
+                    <div class="flex items-center -mx-2">
+                      <span class="w-4 mx-2 text-xl text-grey-darkest text-center leading-tight">
+                        <i class="<%= present(answer).status_icon %>"></i>
+                      </span>
+                      <span class="mx-2 text-sm"><%= answer.content %></span>
+                    </div>
+                  </td>
+                  <td class="p-2 md:p-4">
+                    <div class="flex flex-col justify-end lg:flex-row -mx-1">
+                      <%= link_to 'Edit', edit_admin_curriculum_quiz_question_answer_path(answer), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" %>
+                      <%= link_to 'Delete', [:admin, answer], method: :delete, data: { confirm: 'Delete this answer?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" %>
+                    </div>
+                  </td>
+                </tr>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      <% end %>
+
+      <hr class="border-t py-4">
+
+      <div class="mb-6">
+        <%= form_with(model: curriculum_quiz_question.answers.build, local: true, url: admin_curriculum_quiz_question_quiz_question_answers_path(curriculum_quiz_question), id: "answer_form") do |answer| %>
+          <div class="mb-6">
+            <%= answer.label :content, "Add New Answer", class: "block mb-1 font-bold" %>
+            <%= answer.text_area :content, class: "w-full p-2 bg-grey-lighter shadow-inner", rows: 2 %>
+          </div>
+
+          <div class="flex flex-col md:flex-row items-center md:-mx-2">
+            <%= answer.button "Add Answer", type: "submit", class: "w-full md:w-auto mb-6 md:mx-2 md:mb-0 btn btn--lg btn--primary rounded" %>
+            <%= link_to "Cancel", edit_admin_curriculum_quiz_path(curriculum_quiz_question.quiz), class: "md:mx-2" %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

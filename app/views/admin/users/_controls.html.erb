@@ -1,0 +1,19 @@
+<div class="flex -mx-2">
+  <%= link_to "Invite Users", new_admin_user_invite_path, class: "mx-2 btn btn--primary rounded" if can? :manage, UserInvite %>
+  <% if current_user.has_role?(:manager) %>
+    <div class="mx-2 dropdown">
+      <button class="btn btn--inverse rounded border">
+        <span>Export Users</span>
+        <i class="mx-1 far fa-angle-down"></i>
+      </button>
+      <div class="dropdown__menu" role="menu">
+        <div class="dropdown__menu-content">
+          <%= link_to "All Users", admin_users_path(format: :csv, t: DateTime.now.strftime('%s')), class: "dropdown__menu-item" %>
+          <%= link_to "Active Users", admin_users_path(format: :csv, status: :confirmed, t: DateTime.now.strftime('%s')), class: "dropdown__menu-item" %>
+          <%= link_to "Unconfirmed Users", admin_users_path(format: :csv, status: :unconfirmed, t: DateTime.now.strftime('%s')), class: "dropdown__menu-item" %>
+          <%= link_to "Pending Invites", admin_users_path(format: :csv, status: :pending, t: DateTime.now.strftime('%s')), class: "dropdown__menu-item" %>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>

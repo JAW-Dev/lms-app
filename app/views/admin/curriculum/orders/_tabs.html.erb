@@ -1,0 +1,11 @@
+<ul class="list-reset flex mb-4 border-b">
+  <li class="-mb-px mr-1">
+    <%= active_link_to "Full Courses", admin_curriculum_orders_path, active: is_active_controller('admin/curriculum/orders') && params[:renewals].nil?, class: "py-2 px-4 inline-block bg-white text-sm text-blue no-underline", class_active: "text-grey-darker border-l border-t border-r rounded-t" %>
+  </li>
+  <li class="-mb-px mr-1">
+    <%= active_link_to "Renewals", admin_curriculum_orders_path(renewals: true), active: { renewals: 'true' }, class: "py-2 px-4 inline-block bg-white text-sm text-blue no-underline", class_active: "text-grey-darker border-l border-t border-r rounded-t" %>
+  </li>
+  <li class="-mb-px mr-1">
+    <%= active_link_to "Gifts", admin_curriculum_behavior_orders_path, class: "py-2 px-4 inline-block bg-white text-sm text-blue no-underline", class_active: "text-grey-darker border-l border-t border-r rounded-t" %>
+  </li>
+</ul>

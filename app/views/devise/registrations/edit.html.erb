@@ -1,0 +1,59 @@
+<% title 'Update Password' %>
+
+<div class="h-full z-10 relative">
+
+  <header class="relative pin-l z-50 w-full" id="v2-header" style="position: fixed; z-index: 999; transition: all 0.1s linear 0s; top: 0px;">
+    <div class="bg-white-faint w-full flex justify-center border-b border-gray-light">
+      <div class="w-full full-screen-container my-3 lg:my-6 flex items-center">
+        <a href="/">
+          <img src="/packs/media/reskin-images/logo--cra-reversed-89921be8.svg" alt="Admired Leadership Logo" class="-mb-2" style="max-height: 38px;">
+        </a>
+        <div class="flex items-center ml-auto" style="gap: 36px;">
+          <p class="hide-label font-bold" style="font-size: 14px;"><%= link_to "Get Full Access", new_user_access_path, class: "text-charcoal" %></p>
+          <a href="/users/sign_in" class="uppercase no-underline flex px-6 py-3 bg-link-purple border-2 border-link-purple text-white font-extrabold uppercase rounded-full hover:bg-purple-500 hover:border-purple-500 font-bold" style="width: fit-content; border-radius: 16px;">
+            <div>Log In</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-col justify-center items-center w-full h-full" style="color: #3C3C3C">
+    <div id="login" class="p-6 md:p-16 bg-white" style="border-radius: 32px; box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 50px; width: 100%; max-width: 430px; margin-top: 160px;">
+      <h3 class="mb-8" style="font-size: 20px; font-weight: 600;"><%= resource.direct_access? ? "Set" : "Change" %> Password</h3>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <%= form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |form| %>
+        <% if resource.standard_access? %>
+          <div class="flex flex-col mb-4" style="gap: 8px;">
+            <%= form.label :current_password, class: "text-sm text-charcoal font-bold" %> <span class="text-sm italic">(You must enter your current password to confirm your changes)</span>
+            <div class="active-text flex items-center border-2 relative" style="border-radius: 12px; min-width: 100%;">
+              <%= form.password_field :current_password, autocomplete: "current-password", class: "px-2 py-2 rounded-full focus:outline-none w-full" %>
+            </div>
+          </div>
+        <% end %>
+
+        <div class="flex flex-col mb-4" style="gap: 8px;">
+          <%= form.label :password, "New password", class: "ext-sm text-charcoal font-bold" %>
+          <div class="active-text flex items-center border-2 relative" style="border-radius: 12px; min-width: 100%;">
+            <%= form.password_field :password, autocomplete: "new-password", class: "px-2 py-2 rounded-full focus:outline-none w-full" %>
+          </div>
+        </div>
+
+        <div class="flex flex-col" style="gap: 8px;">
+          <%= form.label :password_confirmation, "New password confirmation", class: "text-sm text-charcoal font-bold" %>
+          <div class="active-text flex items-center border-2 relative" style="border-radius: 12px; min-width: 100%;">
+            <%= form.password_field :password_confirmation, autocomplete: "new-password", class: "px-2 py-2 rounded-full focus:outline-none w-full" %>
+          </div>
+        </div>
+
+        <div class="actions mt-12 px-4 actions inline-flex justify-center itmes-center mt-4 bg-link-purple border-link-purple hover:border-purple-500" style="height: 44px; border-radius: 16px;">
+          <%= form.button "Update Password", type: "submit", class: "w-full h-full text-white font-bold" %>
+          
+        </div>
+        <%= link_to "Cancel", :back, class: "md:mx-2" %>
+
+      <% end %>
+    </div>
+  </div>
+</div>

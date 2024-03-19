@@ -1,0 +1,67 @@
+<% title 'Behavior Notes' %>
+
+<div class="bg-grey-lighter print:bg-white">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="py-12 lg:py-16">
+      <div class="max-w-lg">
+        <h1 class="text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight">Behavior Notes</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<div class="container px-8 md:pr-8 lg:pl-16 print:pl-8">
+  <div class="pt-12 pb-16 print:pt-0">
+    <div class="flex flex-col md:flex-row -mx-1 mb-6 print:hidden">
+      <button type="button" class="flex items-center mx-1 mb-4 md:mb-0 btn btn--default" data-accordion-toggle-all>
+        <i class="far fa-expand-alt"></i>
+        <span class="mx-1">Expand All Notes</span>
+      </button>
+      <button type="button" class="flex items-center mx-1 btn btn--default" data-print>
+        <i class="far fa-print"></i>
+        <span class="mx-1">Print All Notes</span>
+      </button>
+    </div>
+    <% @courses.each do |course| %>
+      <div class="mb-12">
+        <h2 class="flex flex-col lg:flex-row lg:items-center mb-4 -mx-1 leading-tight">
+          <span class="mx-1 mb-2 lg:mb-0 text-2xl text-brown"><%= course.title %></span>
+          <span class="mx-1 text-grey-darker text-sm print:hidden">(<%= link_to "Go to Module", course, class: "font-normal no-underline hover:underline" %>)</span>
+        </h2>
+        <% if course.behaviors.with_notes(current_user).any? %>
+          <ul class="list-reset mb-6">
+            <% course.behaviors.with_notes(current_user).each do |behavior| %>
+              <li class="mb-4">
+                <div class="flex items-center cursor-pointer" data-accordion="true" aria-expanded="false">
+                  <h3 class="font-normal leading-tight text-base print:font-bold">
+                    <%= behavior.title %>
+                  </h3>
+                  <i class="fas fa-angle-right fa-fw text-grey accordion-indicator print:hidden"></i>
+                </div>
+                <div class="text-grey-darkest" aria-hidden="true" data-accordion-panel>
+                  <div class="notes">
+                    <%= behavior.notes.where(user: current_user).first.content %>
+
+                    <div class="flex lg:justify-end -mx-1 print:hidden">
+                      <%= link_to curriculum_course_behavior_path(course, behavior), class: "mx-1 text-sm" do %>
+                        <i class="fas fa-play fa-fw text-grey-darker text-xxs"></i>
+                        <span>Go to Behavior</span>
+                      <% end %>
+                      <%= link_to curriculum_course_behavior_path(course, behavior, print: true), class: "mx-1 text-sm", target: "_blank" do %>
+                        <i class="far fa-print fa-fw text-grey-darker text-xxs"></i>
+                        <span>Print Note</span>
+                      <% end %>
+                    </div>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        <% else %>
+          <p class="mb-6">No notes taken yet.</p>
+        <% end %>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,89 @@
+:root {
+  --map-point-adjust: 0;
+}
+
+.map-points {
+  @apply .py-12;
+}
+
+.panel-full--shadow {
+  @apply .relative;
+}
+
+.panel-full--shadow::after {
+  @apply .absolute .pin-t .h-full .w-12;
+  content: "";
+  right: -0.5rem;
+  background: linear-gradient(
+    90deg,
+    rgba(config(colors.white), 0) 0%,
+    rgba(config(colors.grey-lightest), 0.5) 50%,
+    rgba(config(colors.grey-lightest), 1) 75%
+  );
+}
+
+.behavior--feature .panel-full--shadow::after {
+  background: none;
+}
+
+.map-points li {
+  @apply .w-64;
+}
+
+.map-point-description {
+  @apply .w-full .px-4 .py-8;
+  order: 2;
+}
+
+.map-point-description svg,
+.map-point-description p {
+  order: 2;
+}
+
+.map-points li:nth-child(even) {
+  @apply .relative .self-end;
+  top: var(--map-point-adjust);
+}
+
+.map-points li:nth-child(even) .map-point-description {
+  @apply items-end;
+  order: 1;
+}
+
+.map-points li:nth-child(even) .map-point-description p {
+  order: 1;
+}
+
+.map-point {
+  @apply .relative .w-36 .h-36 .border .border-purple .rounded-full;
+  padding: 0.675rem;
+  order: 1;
+}
+
+.map-point::before {
+  @apply .block .absolute .border .border-purple .rounded-full;
+  content: "";
+  top: -20px;
+  left: -20px;
+  width: calc(100% + 40px);
+  height: calc(100% + 40px);
+}
+
+.map-points li:nth-child(even) .map-point {
+  order: 2;
+}
+
+.map-point__icon {
+  @apply .flex .items-center .justify-center .w-30 .h-30 .p-6 .text-center .border-3 .border-grey-light;
+  border-radius: 50% 50%;
+  background: linear-gradient(
+    130deg,
+    rgba(#ccc, 1) 0%,
+    rgba(config(colors.white), 1) 75%
+  );
+  box-shadow: 20px 20px 20px 5px rgba(0, 0, 0, 0.75);
+}
+
+.map-point__icon img {
+  @apply .max-w-full .max-h-full;
+}

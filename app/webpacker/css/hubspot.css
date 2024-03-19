@@ -1,0 +1,70 @@
+.hs-form .field {
+  @apply .mb-6;
+}
+
+.hs-form label {
+  @apply .block .mb-1 .text-sm .font-bold;
+}
+
+.hs-form input[type="text"],
+.hs-form input[type="email"],
+.hs-form input[type="tel"],
+.hs-form textarea {
+  @apply .w-full .p-2 .bg-grey-lighter .shadow-inner;
+}
+
+.hs-form textarea {
+  @apply .h-32;
+}
+
+.hs-form select.hs-input {
+  @apply .p-2 .border;
+}
+
+.hs-form .input .inputs-list {
+  @apply .list-reset;
+}
+
+.hs-form .hs-fieldtype-checkbox .input {
+  @apply .mt-2;
+}
+
+.hs-form .hs-form-checkbox-display {
+  @apply .flex .items-start .-mx-1 .mb-2;
+}
+
+.hs-form .hs-form-checkbox-display input {
+  @apply .mx-1 .mt-1;
+}
+
+.hs-form .hs-form-checkbox-display span {
+  @apply .mx-1 .mt-px .leading-tight;
+}
+
+.hbspt-form .submitted-message {
+  @apply .p-4;
+}
+
+.hbspt-form select.hs-input {
+  @apply .w-full;
+}
+
+@screen lg {
+  .hs-form input[type="text"],
+  .hs-form input[type="email"],
+  .hs-form input[type="tel"] {
+    @apply .w-1/2;
+  }
+
+  .hbspt-form select.hs-input {
+    @apply .w-auto;
+  }
+}
+
+@screen xl {
+  .hs-form.full-width input[type="text"],
+  .hs-form.full-width input[type="email"],
+  .hs-form.full-width input[type="tel"] {
+    @apply .w-1/3;
+  }
+}

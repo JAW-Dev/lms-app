@@ -1,0 +1,2 @@
+class BundleOrderPresenter < OrderPresenter
+end

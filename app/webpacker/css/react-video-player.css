@@ -1,0 +1,44 @@
+.video-player {
+  border-radius: 32px;
+
+  @media only screen and (max-width: 992px) {
+    border-radius: 0px;
+  }
+}
+
+.video-player--mini {
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.video-player-wrapper--mini {
+  width: 450px;
+  aspect-ratio: 16 / 9;
+  bottom: 0;
+  right: 20px;
+  position: fixed;
+  border-top-right-radius: 16px;
+  border-top-left-radius: 16px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+/* .video-player-forward-backward-buttons {
+  display: flex;
+  background: transparent;
+  position: absolute;
+  bottom: 0;
+  left: 100px;
+  gap: 24px;
+}
+
+.video-player-forward-backward-buttons button {
+  height: 24px;
+  width: 24px;
+}
+
+.video-player-forward-backward-buttons button svg {
+  stroke: white;
+  fill: white;
+} */

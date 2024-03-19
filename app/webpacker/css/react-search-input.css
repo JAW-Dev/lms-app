@@ -1,0 +1,7 @@
+.search-input-icon {
+  opacity: 0.5;
+}
+
+.search-input-icon--active {
+  opacity: 1;
+}

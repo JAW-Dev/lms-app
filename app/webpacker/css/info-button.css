@@ -1,0 +1,28 @@
+button[data-info].info-circle {
+  padding: 0;
+  border-radius: 50%;
+  outline: none;
+  width: 24px;
+  height: 24px;
+  background: none;
+  display: inline-block;
+  vertical-align: -4px;
+}
+
+button[data-info][aria-expanded="true"].info-circle,
+button[data-info].info-circle:focus-visible {
+  outline: 2px solid currentColor;
+  outline-offset: 2px;
+}
+
+[data-info-panel] {
+  visibility: hidden;
+  max-height: 0;
+  transition: all 0.25s;
+  overflow: hidden;
+}
+
+[data-info-panel]:not([aria-hidden="true"]) {
+  visibility: visible;
+  max-height: 100vh;
+}

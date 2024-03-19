@@ -1,0 +1,65 @@
+.team-signup-form ul.hs-error-msgs {
+  @apply .text-red;
+
+  list-style: none;
+  padding-left: 0;
+}
+
+.team-signup-form .hs-error-msg {
+  margin-top: 0.25rem;
+  margin-bottom: 0;
+}
+
+/* M+ */
+@media (min-width: 768px) {
+  .team-signup-form {
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .team-signup-form .field {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: calc(50% - 1rem);
+  }
+
+  .team-signup-form .field:nth-of-type(odd) {
+    margin-right: 1rem;
+  }
+
+  .team-signup-form input[type="text"],
+  .team-signup-form input[type="email"],
+  .team-signup-form input[type="tel"] {
+    width: 100%;
+  }
+
+  .team-signup-form .hs_message {
+    flex: 0 0 100%;
+    margin-right: 0 !important;
+  }
+
+  .team-signup-form .hs_submit {
+    flex: 0 0 100%;
+  }
+
+  .team-signup-form .hs_submit_btn {
+    min-width: 250px;
+  }
+}
+
+/* XL+ */
+@media (min-width: 1200px) {
+  .team-signup-form .field {
+    flex-grow: 1;
+    flex-shrink: 1;
+    flex-basis: calc(25% - 1rem);
+  }
+
+  .team-signup-form .field {
+    margin-right: 1rem;
+  }
+
+  .team-signup-form .field:nth-of-type(4) {
+    margin-right: 0;
+  }
+}

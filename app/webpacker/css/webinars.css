@@ -1,0 +1,18 @@
+.ReactModal__Body--open .meeting-client-inner {
+  width: calc(100% - 64px);
+  margin-left: 64px;
+}
+
+.webinar-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: auto;
+  column-gap: 3rem;
+}
+
+@screen md {
+  .webinar-grid {
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: auto;
+  }
+}

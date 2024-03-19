@@ -1,0 +1,7 @@
+<div class="micromodal" id="<%= modal_id %>" aria-hidden="true" <%= hash_to_data(local_assigns[:data]) %>>
+  <div class="micromodal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="max-h-screen md:min-w-1/2 lg:min-w-1/3 p-4 md:px-8 md:pt-6 md:pb-8 bg-white micromodal__container" role="dialog" aria-modal="true" aria-label="<%= aria_label %>">
+      <%= yield %>
+    </div>
+  </div>
+</div>

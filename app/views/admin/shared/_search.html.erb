@@ -1,0 +1,6 @@
+<%= search_form_for @q, url: search_path, html: { class: "flex flex-wrap items-center w-full md:w-1/2 mb-6 md:mb-0" } do |f| %>
+  <%= f.text_field search_scope, value: sanitize(@search_term), class: "flex-1 mx-1 p-2 bg-grey-lighter shadow-inner" %>
+  <%= button_tag "Search", class: "mx-1 btn btn--primary rounded" %>
+  <%= hidden_field_tag(:confirmed, sanitize(params[:confirmed])) if params[:confirmed].present? %>
+  <%= link_to "Clear search", search_path, class: "w-full sm:w-auto mx-1 mt-2 sm:mt-0 text-sm #{"invisible" unless @search_term.present?}" %>
+<% end %>

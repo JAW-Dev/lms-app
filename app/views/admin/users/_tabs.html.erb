@@ -1,0 +1,11 @@
+<ul class="list-reset flex mb-4 border-b">
+  <li class="-mb-px mr-1">
+    <%= active_link_to "Active", admin_users_path, class: "py-2 px-4 inline-block bg-white text-sm text-blue no-underline", class_active: "text-grey-darker border-l border-t border-r rounded-t", active: is_active_link?(admin_users_path) && params[:confirmed].blank? %>
+  </li>
+  <li class="-mb-px mr-1">
+    <%= active_link_to "Unconfirmed", admin_users_path(confirmed: false), class: "py-2 px-4 inline-block bg-white text-sm text-blue no-underline", class_active: "text-grey-darker border-l border-t border-r rounded-t", active: { confirmed: 'false' } %>
+  </li>
+  <li class="-mb-px mr-1">
+    <%= active_link_to "Pending Invites", admin_user_invites_path(:"q[s]" => "invited_at desc"), class: "py-2 px-4 inline-block bg-white text-sm text-blue no-underline", class_active: "text-grey-darker border-l border-t border-r rounded-t" %>
+  </li>
+</ul>

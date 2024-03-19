@@ -1,0 +1,17 @@
+<% content_for :additional_stylesheets do %>
+  <%= stylesheet_link_tag "https://source.zoom.us/1.7.9/css/bootstrap.css" %>
+  <%= stylesheet_link_tag "https://source.zoom.us/1.7.9/css/react-select.css" %>
+<% end %>
+
+<div data-leave="<%= root_url %>" data-key="<%= Rails.application.credentials.dig(:zoom, :api_key) %>" data-room="<%= @room %>" data-email="<%= current_user.email %>" data-name="<%= present(current_user.profile).full_name %>" data-signature="<%= @signature %>" data-pwd="<%= @password %>"></div>
+
+<% content_for :additional_javascript do %>
+  <%= javascript_include_tag "https://source.zoom.us/1.7.9/lib/vendor/react.min.js" %>
+  <%= javascript_include_tag "https://source.zoom.us/1.7.9/lib/vendor/react-dom.min.js" %>
+  <%= javascript_include_tag "https://source.zoom.us/1.7.9/lib/vendor/redux.min.js" %>
+  <%= javascript_include_tag "https://source.zoom.us/1.7.9/lib/vendor/redux-thunk.min.js" %>
+  <%= javascript_include_tag "https://source.zoom.us/1.7.9/lib/vendor/jquery.min.js" %>
+  <%= javascript_include_tag "https://source.zoom.us/1.7.9/lib/vendor/lodash.min.js" %>
+  <%= javascript_include_tag "https://source.zoom.us/zoom-meeting-1.7.9.min.js" %>
+  <%= javascript_packs_with_chunks_tag 'v1/zoom' %>
+<% end %>

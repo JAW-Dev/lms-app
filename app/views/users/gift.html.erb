@@ -1,0 +1,95 @@
+<% title 'Welcome' %>
+
+<div class="min-h-full">
+  <div class="container px-6 lg:pr-12">
+    <div class="w-full xl:w-2/3 py-16 text-grey-darker">
+      <div class="max-w-md md:mx-10">
+        <h1 class="mb-4 md:text-xl leading-tight">
+          Welcome to Admired Leadership<%= ", #{@gift.recipient_name}" if @gift.recipient_name.present? %>!
+        </h1>
+        <p class="mb-8 font-bold text-3xl md:text-5xl leading-none">Someone clearly cares about you and your&nbsp;leadership.</p>
+        <p class="mb-5">You were sent a gift, <span class="font-bold"><%= present(@gift.order).title %></span>. Your gift includes a video of an Admired Leadership behavior. There is also additional study material to help you apply this leadership behavior and make it into a routine.</p>
+        <p>We are excited about what you will learn, and more important what you will be able to do with what you have learned.</p>
+      </div>
+    </div>
+  </div>
+
+  <%= render partial: "curriculum/behaviors/gift", locals: { behavior: @behavior, course: @course, bundle: false } %>
+
+  <div
+    id="complete-modal"
+    class="hidden"
+    data-modal="hidden"
+    data-title="Now that you've watched your video gift"
+    data-description="Dialog explaining next steps after watching the gifted behavior. Escape will close the dialog."
+    data-content="<p class='mb-4'>What’s the next step? Get to work. Put the behavior into practice. Mastery won’t happen just by watching a video. Find ways to work the behavior into your personal leadership style. Review the video often.</p><p class='mb-4'>Because you watched the video gift, you’ve now unlocked additional content. You have access to our complimentary module An Introduction to Admired Leadership. The five foundational videos in this module can transform your view of leadership.</p><a href='<%= curriculum_courses_path %>' class='btn btn--primary-gradient btn--lg'>Get Started</a>"
+  ></div>
+</div>
+
+<% content_for :additional_javascript do %>
+  <script>
+    var isComplete = false;
+    var COMPLETE_PERCENT = 90;
+
+    var modal = document.getElementById('complete-modal');
+    var modalDisplayed = false;
+    var openModal = function() {
+      if (isComplete && !modalDisplayed) {
+        modalDisplayed = true;
+        modal.dispatchEvent(new Event('openModal'));
+      }
+    };
+
+    var vidyardPlayers = document.querySelectorAll('.vidyard-player');
+    if (vidyardPlayers.length) {
+      document.addEventListener('onVidyardAPI', function(event) {
+        var vidyardEmbed = event.detail;
+        vidyardEmbed.api.addReadyListener(function(_, player) {
+          var length = player.metadata.length_in_seconds;
+          var isAudioEmbed = player.placeholder.getAttribute('id') === 'audio-embed';
+
+          // track when video is complete
+          vidyardEmbed.api.progressEvents(function() {
+            isComplete = true;
+          }, [COMPLETE_PERCENT]);
+
+          player.on('seek', function(seekTimes) {
+            var percent = (seekTimes[1] / length) * 100;
+            isComplete = isComplete || percent >= COMPLETE_PERCENT;
+          });
+
+          // add event handlers
+          player.on('lightboxClose', openModal);
+
+          player.on('playerComplete', function() {
+            if (player.hideLightbox) {
+              player.hideLightbox();
+            }
+            openModal();
+          });
+
+          player.on('pause', function() {
+            if (!isAudioEmbed) {
+              openModal();
+            }
+          });
+
+          // pause other players
+          player.on('play', function() {
+            for (i in vidyardEmbed.players) {
+              var p = vidyardEmbed.players[i];
+              if (p.status && p.uuid !== player.uuid) {
+                p.pause();
+              }
+            }
+          });
+        });
+      });
+    }
+  </script>
+
+  <%= javascript_include_tag "https://play.vidyard.com/embed/v4.js", async: Rails.env.production? %>
+  <%= javascript_packs_with_chunks_tag 'v1/video' %>
+  <%= javascript_packs_with_chunks_tag 'v1/modal' %>
+  <%= javascript_packs_with_chunks_tag 'v1/behaviors' %>
+<% end %>

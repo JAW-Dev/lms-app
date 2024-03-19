@@ -1,0 +1,26 @@
+<% title 'Program Modules' %>
+<% description 'The proven framework for teaching leaders how to be effective.' %>
+<div class="bg-cover" style="background-image: url('<%= asset_path "red-rocks-bg.jpg" %>'); background-position: 50% 70%;">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="py-12 lg:py-16">
+      <div class="max-w-lg">
+        <h1 class="text-4xl lg:text-5xl text-white font-extrabold leading-tight">Program Modules</h1>
+      </div>
+    </div>
+  </div>
+</div>
+<% course_counter = 0 %>
+<% @courses.each_with_index do |course, index| %>
+  <%
+      course_counter += 1 if course.number_icon?
+      next_course = @courses[index + 1]
+    %>
+  <%= render "course", { course: course, course_counter: course_counter } %>
+  <% if course.intro? && !next_course&.expandable_display? %>
+    <div class="w-full bg-pistachio h-8"></div>
+  <% end %>
+<% end %>
+<% content_for :additional_javascript do %>
+  <%= javascript_include_tag "https://play.vidyard.com/embed/v4.js", async: Rails.env.production? %>
+  <%= javascript_packs_with_chunks_tag 'v1/video' %>
+<% end %>

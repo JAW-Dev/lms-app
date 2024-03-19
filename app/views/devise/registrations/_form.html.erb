@@ -1,0 +1,105 @@
+<%= render "devise/shared/error_messages", resource: resource %>
+
+<%= form_for(resource.with_profile_and_company, as: resource_name, url: registration_path(resource_name), html: { class: "px-8 pb-8 pt-6" }) do |f| %>
+  <h1 class="mb-4 text-2xl text-brown font-bold"><%= local_assigns[:form_title] || "Sign Up" %></h1>
+
+  <%= render partial: "devise/shared/omniauth_buttons", locals: { registration: true } unless local_assigns[:hide_omniauth]  %>
+
+  <%= f.fields_for :profile do |p| %>
+    <div class="flex flex-col md:flex-row mb-4 -mx-2">
+      <div class="w-50 md:w-full mx-2 mb-4 md:mb-0">
+        <%= p.label :first_name, autocomplete: "given-name", class: "block text-sm font-bold" %>
+        <%= p.text_field :first_name, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+      </div>
+      <div class="w-50 md:w-full mx-2">
+        <%= p.label :last_name, autocomplete: "family-name", class: "block text-sm font-bold" %>
+        <%= p.text_field :last_name, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+      </div>
+    </div>
+  <% end %>
+
+  <div class="mb-4">
+    <%= f.label :email, class: "block text-sm font-bold" %>
+    <%= f.email_field :email, autocomplete: "email", required: true, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+  </div>
+
+  <div class="no-op">
+    <%= f.text_field :account_number %>
+  </div>
+
+  <%= f.fields_for :profile do |p| %>
+    <div class="flex flex-col md:flex-row mb-4 -mx-2">
+      <div class="w-50 md:w-full mx-2 mb-4 md:mb-0">
+        <%= p.label :phone, autocomplete: "phone-number", class: "block text-sm font-bold" %>
+        <%= p.telephone_field :phone, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+      </div>
+      <div class="w-50 md:w-full mx-2">
+        <%= p.label :company_name, class: "block text-sm font-bold" %>
+        <%= p.text_field :company_name, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+      </div>
+    </div>
+  <% end %>
+
+
+  <div class="flex flex-col md:flex-row mb-4 -mx-2">
+    <div class="w-50 md:w-full mx-2 mb-4 md:mb-0">
+      <%= f.label :password, class: "block text-sm font-bold" do %>
+        Password
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %>
+      <% end %>
+      <%= f.password_field :password, autocomplete: "new-password", class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+    </div>
+    <div class="w-50 md:w-full mx-2">
+      <%= f.label :password_confirmation, "Confirm password", class: "block text-sm font-bold" %>
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+    </div>
+  </div>
+
+  <% variant ||= "" %>
+      <% if variant != "invited_user" %>
+        <%= f.fields_for :profile do |p| %>
+          <% if @source_options %>
+            <%= p.fields_for :hubspot do |h| %>
+              <div class="mb-4">
+                <%= h.label :what_inspired_you_to_buy_admired_leadership_, hubspot_label(:what_inspired_you_to_buy_admired_leadership_), class: "block text-sm font-bold" %>
+                <%= h.select :what_inspired_you_to_buy_admired_leadership_, @source_options, {}, autocomplete: :off, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+              </div>
+            <% end %>
+          <% end %>
+          <div class="mb-6 checkbox <%= "hidden" unless local_assigns[:show_opt_in] %>">
+            <%= p.check_box :opt_in, checked: !local_assigns[:show_opt_in] %>
+            <%= p.label :opt_in, class: "ml-1 text-sm" do %>
+              <span>
+                Please send me
+                <span
+                  data-modal="link"
+                  data-link="more information and insights"
+                  data-title="Communications from Admired Leadership"
+                  data-description="Dialog explaining additional communications. Escape will close the window."
+                  data-content="<%= t('communications') %>">
+                </span>
+              from Admired Leadership</span>
+            <% end %>
+          </div>
+        <% end %>
+      <% end %>
+
+
+  <div class="flex flex-col md:flex-row items-center md:-mx-2">
+    <%= f.hidden_field :express_checkout %>
+    <%= f.hidden_field :has_gift %>
+    <%= f.button local_assigns[:button_label] || "Sign Up", type: "submit", class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 px-6 py-3 text-center is-highlighted" %>
+    <p class="md:flex-1 md:mx-2 text-sm">
+      By creating an account, you are agreeing to the terms of our
+      <span
+        data-modal="link"
+        data-link="user&nbsp;agreement"
+        data-title="User Agreement"
+        data-description="Dialog explaining the user agreement terms. Escape will close the window."
+        data-content="Welcome and thank you for your interest in Admired Leadership.<br /><br />When you view our content and use our services, you are agreeing to our terms, so please read the User Agreement below.<br /><br />This agreement is a legal contract between you and Admired Leadership. You acknowledge that you have read, understood and agree to be bound by the terms of this agreement. If you do not agree to this contract, you should not use or view Admired Leadership.<br /><br />The User agrees not to present, teach, distribute or in any way share the content of Admired Leadership. The User understands and agrees that the Admired Leadership content is for personal use and personal development only and that any distribution, downloading, re-transmission or sharing of the content of Admired Leadership, without the express written consent of Admired Leadership, is strictly prohibited.">
+      </span>.
+    </p>
+  </div>
+<% end %>

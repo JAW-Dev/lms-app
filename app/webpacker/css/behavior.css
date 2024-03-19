@@ -1,0 +1,117 @@
+.behavior {
+  @apply .relative .border-b .bg-grey-lightest;
+  transition: box-shadow 0.2s ease;
+}
+
+.behavior:hover {
+  @apply .shadow-lg .z-1;
+}
+
+.behavior--feature {
+  background: linear-gradient(
+    160deg,
+    rgba(config("colors.grey-darker"), 0.85) 0,
+    rgba(config("colors.grey-darker"), 0.65) 100%
+  );
+}
+
+.behavior--feature .behavior__title {
+  @apply .text-white;
+}
+
+.behavior--feature .behavior__time {
+  @apply .text-white;
+}
+
+.behavior [data-accordion],
+.bundle-item [data-accordion] {
+  @apply .cursor-pointer;
+}
+
+.behavior__details [data-accordion-panel] {
+  @apply .max-w-lg;
+}
+
+.behavior__details [data-accordion-panel].panel-full {
+  @apply .max-w-none;
+}
+
+.behavior.locked .behavior__details {
+  @apply .pointer-events-none;
+}
+
+.behavior--feature .behavior__details * {
+  @apply .text-white;
+}
+
+.behavior__indicator {
+  transition: transform 0.3s ease;
+  transform-origin: 8px 16px;
+  transform-box: fill-box;
+}
+
+[data-accordion][aria-expanded="true"] .behavior__indicator {
+  transform: rotate(180deg);
+}
+
+.behavior--feature .behavior__indicator {
+  @apply .text-white;
+}
+
+.behavior-title__number {
+  width: 1.8rem;
+  height: 1.8rem;
+  border-radius: 50%;
+}
+
+.behavior-title__number svg {
+  font-size: 0.875rem;
+}
+
+.bundle-item .behavior .behavior-title__number,
+.behavior--bundle .behavior-title__number {
+  @apply .text-transparent;
+}
+
+.behavior-button {
+  @apply .absolute .w-full .pin-b .pin-l;
+}
+
+.behavior__video-count:empty + span {
+  @apply .hidden;
+}
+
+.supplemental-nav__item::before {
+  @apply .block .bg-white .opacity-50;
+  content: "";
+  display: block;
+  width: 10px;
+  height: 10px;
+  border-radius: 5px;
+}
+
+.supplemental-nav__item:hover,
+.supplemental-nav__item:active,
+.supplemental-nav__item:focus,
+.supplemental-nav__item--active::before {
+  @apply .opacity-100;
+}
+
+.supplemental-panel {
+  transition: margin-left 0.5s ease;
+}
+
+@screen md {
+  .behavior__indicator {
+    transform-origin: 8.875px 18.875px;
+  }
+}
+
+@screen lg {
+  .behavior-button {
+    @apply .w-auto;
+    bottom: 10%;
+    right: -1rem;
+    left: auto;
+  }
+}

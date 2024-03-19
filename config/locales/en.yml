@@ -1,0 +1,57 @@
+# Files in the config/locales directory are used for internationalization
+# and are automatically loaded by Rails. If you want to use locales other
+# than English, add the necessary files in this directory.
+#
+# To use the locales, use `I18n.t`:
+#
+#     I18n.t 'hello'
+#
+# In views, this is aliased to just `t`:
+#
+#     <%= t('hello') %>
+#
+# To use a different locale, set it with `I18n.locale`:
+#
+#     I18n.locale = :es
+#
+# This would use the information in config/locales/es.yml.
+#
+# The following keys must be escaped otherwise they will not be retrieved by
+# the default I18n backend:
+#
+# true, false, on, off, yes, no
+#
+# Instead, surround them with single quotes.
+#
+# en:
+#   'true': 'foo'
+#
+# To learn more, please read the Rails Internationalization guide
+# available at https://guides.rubyonrails.org/i18n.html.
+
+en:
+  unauthorized:
+    view_conference:
+      subscriber_content: "Please log in or sign up to continue."
+    manage:
+      all: "Please log in or sign up to continue."
+
+  time:
+    formats:
+      short_with_year: "%b %e, %Y"
+
+  activerecord:
+    models:
+      curriculum/course: "Module"
+
+  gifting: 'For $25, you can gift the behavior <span class="font-semibold italic">“%{behavior}”</span> to another leader. It’s a decision we celebrate. Thank you for <strong>helping them lead</strong> through your generosity.'
+  communications: "Admired Leadership is committed to protecting and respecting your privacy, and we’ll only use your personal information to administer your account and to provide the products and services you requested from us. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.<br /><br />You can unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our Privacy&nbsp;Policy."
+
+  magic_links:
+    signed_in: 'Signed in successfully. <a class="text-white" href="/users/edit">Click here to set or reset your password.</a>'
+    check_email: "Please check your email for your login link."
+    already_signed_in: "You are already signed in."
+    token_invalid: "Your login link has expired. Please request a new link."
+    mailer:
+      magic_link:
+        subject: "Your Admired Leadership Login Link"

@@ -1,0 +1,248 @@
+<% title "Community Conference 2021" %>
+
+<div class="bg-grey-lighter">
+  <div class="container px-8 lg:px-16">
+    <div class="py-12 max-w-2xl mx-auto">
+      <h1 class="mb-0 text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight">Community Conference&nbsp;2021</h1>
+    </div>
+  </div>
+</div>
+
+<div>
+  <div class="container px-8 lg:px-16">
+    <div class="max-w-2xl mx-auto">
+      <div class="-mx-6 xl:flex">
+        <div class="px-6 pt-12 w-full">
+          <h2 class="mb-8">
+            Morning Sessions
+            <small class="block uppercase">Open for all attendees</small>
+          </h2>
+
+          <div class="xl:flex -mx-5 mb-8">
+            <div class="px-5 xl:w-48 flex-no-shrink">
+              9:00 – 9:45 am
+            </div>
+            <div class="px-5 xl:pl-0 flex-grow">
+              <h3 class="text-lg font-semibold">
+                Opening Session<br>
+                <%= link_to "Changing the Language of Leadership".html_safe, "/conferences/community-2021/changing-the-language-of-leadership", class: "text-blue-dark text-lg font-semibold" %>
+              </h3>
+              with 
+              <span
+                data-modal="link"
+                data-link="Shaun McAlmont"
+                data-title=""
+                data-description="Shaun McAlmont speaker bio."
+                data-content='<%= h(render "pages/conferences/community-2021/speaker-shaun-mcalmont") %>'>
+                Shaun McAlmont
+              </span>
+              &
+              <span
+                data-modal="link"
+                data-link="Randall Stutman"
+                data-title=""
+                data-description="Randall Stutman speaker bio."
+                data-content='<%= h(render "pages/conferences/community-2021/speaker-randall-stutman") %>'>
+                Randall Stutman
+              </span>
+            </div>
+            <div class="px-5 pt-6 xl:pt-0 xl:w-full xl:max-w-xs xl:flex-no-shrink">
+              <%= link_to "/conferences/community-2021/changing-the-language-of-leadership", class: "block relative bg-black video-preview" do %>
+                <%= image_tag "https://play.vidyard.com/B91qFaKSHEXb3RDbZrLiWS.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="xl:flex -mx-5 mb-8">
+            <div class="px-5 xl:w-48 flex-no-shrink">
+              10:00 – 10:45 am
+            </div>
+            <div class="px-5 xl:pl-0 flex-grow">
+              <h3 class="text-lg font-semibold">
+                Special Keynote Speaker<br>
+                <%= link_to "The New Rules of Engagement and Evolving Relationships".html_safe, "/conferences/community-2021/the-new-rules-of-engagement-and-evolving-relationships", class: "text-blue-dark text-lg font-semibold" %>
+              </h3>
+              with
+              <span
+                data-modal="link"
+                data-link="Terry Real"
+                data-title=""
+                data-description="Terry Real speaker bio."
+                data-content='<%= h(render "pages/conferences/community-2021/speaker-terry-real") %>'>
+                Terry Real
+              </span>
+            </div>
+            <div class="px-5 pt-6 xl:pt-0 xl:w-full xl:max-w-xs xl:flex-no-shrink">
+              <%= link_to "/conferences/community-2021/the-new-rules-of-engagement-and-evolving-relationships", class: "block relative bg-black video-preview" do %>
+                <%= image_tag "https://play.vidyard.com/zzsn3659dYDxnWBBjJTYdS.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="xl:flex -mx-5 mb-8">
+            <div class="px-5 xl:w-48 flex-no-shrink">
+              11:00 – 12:00 pm
+            </div>
+            <div class="px-5 xl:pl-0 flex-grow">
+              <h3 class="text-lg font-semibold">
+                Featured Conversation<br>
+                <%= link_to "DEI Leadership Challenge: Interrupting Bias".html_safe, "/conferences/community-2021/dei-leadership-challenge-interrupting-bias", class: "text-blue-dark text-lg font-semibold" %>
+              </h3>
+              with
+              <span
+                data-modal="link"
+                data-link="Sophie Chandauka"
+                data-title=""
+                data-description="Sophie Chandauka speaker bio."
+                data-content='<%= h(render "pages/conferences/community-2021/speaker-sophie-chandauka") %>'>
+                Sophie Chandauka
+              </span>
+              &
+              <span
+                data-modal="link"
+                data-link="John Cook"
+                data-title=""
+                data-description="John Cook speaker bio."
+                data-content='<%= h(render "pages/conferences/community-2021/speaker-john-cook") %>'>
+                John Cook
+              </span>
+            </div>
+            <div class="px-5 pt-6 xl:pt-0 xl:w-full xl:max-w-xs xl:flex-no-shrink">
+              <%= link_to "/conferences/community-2021/dei-leadership-challenge-interrupting-bias", class: "block relative bg-black video-preview" do %>
+                <%= image_tag "https://play.vidyard.com/jDE8mD4rxqX6BrkR7QXkmM.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+
+          <h2 class="mb-8 mt-8">
+            Afternoon Sessions
+            <small class="block uppercase">For full-access subscribers only</small>
+          </h2>
+
+          <div class="<%= can?(:view_conference, :subscriber_content) ? "unlocked" : "locked" %>">
+            <div class="xl:flex -mx-5 mb-8">
+              <div class="px-5 xl:w-48 flex-no-shrink">
+                1:00 – 2:00 pm
+              </div>
+              <div class="px-5 xl:pl-0 flex-grow">
+                <h3 class="text-lg font-semibold">
+                  Subscriber Webinar<br>
+                  <%= link_to "Live Q&A", can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/live-q-a" : "javascript:;", class: "text-blue-dark text-lg font-semibold", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i>
+                </h3>
+                with Scott Baker, Alan Nelson & Suzanne&nbsp;Peterson
+              </div>
+              <div class="px-5 pt-6 xl:pt-0 xl:w-full xl:max-w-xs xl:flex-no-shrink">
+                <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/live-q-a" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                  <%= image_tag "https://play.vidyard.com/P3tMZwXF85JiAGmfGJLJrU.jpg" %>
+                  <i class="fas fa-play text-4xl text-white"></i>
+                <% end %>
+              </div>
+            </div>
+
+            <div class="xl:flex -mx-5 mb-8">
+              <div class="px-5 xl:w-48 flex-no-shrink">
+                2:00 – 3:00 pm
+              </div>
+              <div class="px-5 xl:pl-0 flex-grow">
+                <h3 class="text-lg font-semibold">
+                  Concurrent Leadership Topics<br>
+                </h3>
+                <ul class="list-reset">
+                  <li class="mt-2 mb-5">
+                    <div class="xl:flex -mx-5">
+                      <div class="px-5 flex-grow">
+                        <p>
+                          <%= link_to "The War for Talent: Helping Leaders Create Engaging Retention Strategies", can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/the-war-for-talent-helping-leaders-create-engaging-retention-strategies" : "javascript:;", class: "text-blue-dark text-lg font-semibold", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i>
+                        </p>
+                        <p>with Kristen Hoey & Courtney Storz</p>
+                      </div>
+                      <div class="px-5 pt-6 xl:pt-0 xl:w-full xl:max-w-xs xl:flex-no-shrink">
+                        <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/the-war-for-talent-helping-leaders-create-engaging-retention-strategies" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                          <%= image_tag "https://play.vidyard.com/KjsXs7YL9A6crDNWi9ntLB.jpg" %>
+                          <i class="fas fa-play text-4xl text-white"></i>
+                        <% end %>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="mt-2 mb-5">
+                    <div class="xl:flex -mx-5">
+                      <div class="px-5 flex-grow">
+                        <p>
+                          <%= link_to "Sponsorship, a True Advocation", can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/sponsorship-a-true-advocation" : "javascript:;", class: "text-blue-dark text-lg font-semibold", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i>
+                        </p>
+                        <p>with Diana Hong & Teresa Wallace</p>
+                      </div>
+                      <div class="px-5 pt-6 xl:pt-0 xl:w-full xl:max-w-xs xl:flex-no-shrink">
+                        <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/sponsorship-a-true-advocation" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                          <%= image_tag "https://play.vidyard.com/bSKNjkJ4XPfJoV4LhKVmmo.jpg" %>
+                          <i class="fas fa-play text-4xl text-white"></i>
+                        <% end %>
+                      </div>
+                    </div>
+                  </li>
+                  <li class="mt-2">
+                    <div class="xl:flex -mx-5">
+                      <div class="px-5 flex-grow">
+                        <p>
+                          <%= link_to "Navigating Hybrid Leadership", can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/navigating-hybrid-leadership" : "javascript:;", class: "text-blue-dark text-lg font-semibold", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i>
+                        </p>
+                        <p>with Emma Mufraggi & Leticia Hartmann</p>
+                      </div>
+                      <div class="px-5 pt-6 xl:pt-0 xl:w-full xl:max-w-xs xl:flex-no-shrink">
+                        <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/navigating-hybrid-leadership" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                          <%= image_tag "https://play.vidyard.com/H1k1UtUhu3mwJKGY3jXmK5.jpg" %>
+                          <i class="fas fa-play text-4xl text-white"></i>
+                        <% end %>
+                      </div>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </div>
+
+            <div class="xl:flex -mx-5 mb-16">
+              <div class="px-5 xl:w-48 flex-no-shrink">
+                3:30 - 4:30 pm
+              </div>
+              <div class="px-5 xl:pl-0 flex-grow">
+                <h3 class="text-lg font-semibold">
+                  Closing Session<br>
+                  <%= link_to "Creating a Team Culture of Recognition", can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/creating-a-team-culture-of-recognition" : "javascript:;", class: "text-blue-dark text-lg font-semibold", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i>
+                </h3>
+                with Randall Stutman, founder of the Admired Leadership Institute.
+              </div>
+              <div class="px-5 pt-6 xl:pt-0 xl:w-full xl:max-w-xs xl:flex-no-shrink">
+                <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2021/subscribers/creating-a-team-culture-of-recognition" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                  <%= image_tag "https://play.vidyard.com/pYPR1KoK1qHQbB8UMascV5.jpg" %>
+                  <i class="fas fa-play text-4xl text-white"></i>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="micromodal" id="subscriber_cta" aria-hidden="true">
+  <div class="micromodal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="max-h-screen px-8 py-6 bg-white micromodal__container" role="dialog" aria-modal="true" aria-label="Become a subscriber to unlock all conference content.">
+      <header class="flex justify-end">
+        <button class="micromodal__close p-2" aria-label="Close modal" data-micromodal-close></button>
+      </header>
+      <main class="mb-6 text-grey-darkest leading-normal">
+        <p class="mb-2 text-2xl font-bold">Subscribers Only</p>
+        <p class="mb-4">Upgrade now for full access to all of our exclusive leadership&nbsp;content.</p>
+        <%= link_to "Get Full Access", new_user_access_path(user_type: :me), class: "w-full md:w-auto btn btn--primary-gradient" %>
+      </main>
+    </div>
+  </div>
+</div>
+
+<% content_for :additional_javascript do %>
+  <%= javascript_packs_with_chunks_tag 'v1/modal' %>
+<% end %>

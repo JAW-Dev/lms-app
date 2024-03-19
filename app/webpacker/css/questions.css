@@ -1,0 +1,117 @@
+.question-circle {
+  @apply .relative .flex .rounded-full;
+  width: 350px;
+  height: 350px;
+  border: 5px solid config(colors.purple-dark);
+  transform: translate(-15%, -5%) scale(0.7);
+}
+
+.question-circle__inner {
+  @apply .relative .flex .items-center .w-full .m-4 .p-12 .text-white .text-center .rounded-full;
+  background: linear-gradient(
+    224deg,
+    config("colors.purple") 0,
+    config("colors.blue") 100%
+  );
+}
+
+.circle-nav {
+  @apply .list-reset .absolute .pin-t .pin-l .w-full .h-full .m-0 .p-0;
+}
+
+.circle-nav__item {
+  @apply .absolute .flex .items-center .justify-center .rounded-full .bg-grey-dark .shadow-md cursor-pointer;
+  width: 20px;
+  height: 20px;
+  transform: translate3d(-10px, -10px, 0);
+  transition: all 0.1s ease;
+}
+
+.circle-nav__item:hover,
+.circle-nav__item:focus,
+.circle-nav__item:active,
+.circle-nav__item--active {
+  @apply .bg-purple-dark .outline-none;
+  width: 30px;
+  height: 30px;
+  border: 3px solid config(colors.white);
+  transform: translate3d(-15px, -15px, 0);
+}
+
+.circle-nav__button {
+  @apply .hidden;
+}
+
+.circle-nav__item:hover .circle-nav__button,
+.circle-nav__item:focus .circle-nav__button,
+.circle-nav__item:active .circle-nav__button,
+.circle-nav__item--active .circle-nav__button {
+  @apply .block;
+}
+
+/* TODO: calculate these positions with fancy trigonometry */
+.circle-nav__item:nth-child(1) {
+  top: 0;
+  left: 50%;
+}
+
+.circle-nav__item:nth-child(2) {
+  top: 30px;
+  left: calc(50% + 88px);
+}
+
+.circle-nav__item:nth-child(3) {
+  top: 102px;
+  left: calc(50% + 142px);
+}
+
+.circle-nav__item:nth-child(4) {
+  top: 208px;
+  left: calc(50% + 142px);
+}
+
+.circle-nav__item:nth-child(5) {
+  top: calc(50% + 124px);
+  left: calc(50% + 88px);
+}
+
+.circle-nav__item:nth-child(6) {
+  top: calc(100% - 2px);
+  left: 50%;
+}
+
+.circle-nav__item:nth-child(7) {
+  top: calc(50% + 124px);
+  left: 66px;
+}
+
+.circle-nav__item:nth-child(8) {
+  top: 208px;
+  left: 12px;
+}
+
+.circle-nav__item:nth-child(9) {
+  top: 102px;
+  left: 12px;
+}
+
+.circle-nav__item:nth-child(10) {
+  top: 30px;
+  left: 66px;
+}
+
+.circle-nav__button {
+  color: config(colors.white);
+}
+
+@screen sm {
+  .question-circle {
+    transform: translate(-5%, 0) scale(0.875);
+  }
+}
+
+@screen md {
+  .question-circle {
+    transform: translate(0, 0) scale(1);
+  }
+}

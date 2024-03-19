@@ -1,0 +1,77 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="text-5xl text-grey-darker font-extrabold leading-tight">Users</h1>
+        <% if @company.present? %>
+          <h2 class="mt-2 text-3xl text-grey-darker font-bold leading-tight"><%= @company.name %></h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div class="pt-12 pb-16">
+
+    <div class="flex flex-col md:flex-row justify-between w-full mb-4 md:mb-6">
+      <%= render "admin/shared/search", search_scope: :email_or_profile_first_name_or_profile_last_name_cont, search_path: admin_users_path %>
+      <%= render "admin/users/controls" %>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
+      <p class="text-lg mb-4 sm:mb-0 <%= "invisible" if @users.any? %>" aria-hidden="<%= @users.any? %>">No users found.</p>
+    </div>
+
+    <% if @users.any? %>
+      <%= render "admin/users/tabs" if can? :manage, UserInvite %>
+
+      <table class="w-full mb-8 striped-table">
+        <thead>
+          <tr>
+            <th class="px-2 md:px-4 text-left"><%= sort_link(@q, :profile_last_name, 'Name', {default_order: :asc}, {class: "text-purple-darker no-underline"}) %></th>
+            <th class="px-2 md:px-4 text-left">Email</th>
+            <th class="px-2 md:px-4 text-left"><%= sort_link(@q, :created_at, 'Signup Date', {default_order: :desc}, {class: "text-purple-darker no-underline"}) %></th>
+            <th class="px-2 md:px-4 text-left">Discount</th>
+            <th class="md:w-48 text-right"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each do |user| %>
+            <tr class="<%= !user.confirmed? && user.created_at <= 2.weeks.ago ? 'inactive' : '' %>">
+              <td class="p-2 md:p-4">
+                <% present(user.profile) do |profile| %>
+                  <%= profile.full_name %>
+                <% end %>
+              </td>
+              <td class="p-2 md:p-4">
+                <%= mail_to user.email %>
+              </td>
+              <td class="p-2 md:p-4 text-nowrap">
+                <%= l(user.created_at, format: :short_with_year) %>
+              </td>
+              <td class="p-2 md:p-4">
+                <% if user.orders.length > 0 %>
+                  <%= display_price( 1000 - user.orders.last.discount.to_i ) if user.orders.last.discount.to_i > 1 %>
+                <% end %>
+              </td>
+              <td class="p-2 md:p-4">
+                <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                  <%= link_to 'Details', admin_user_path(user), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--default rounded" if can? :show, user %>
+                  <%= link_to 'Edit', edit_admin_user_path(user), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" if can? :edit, user %>
+                  <%= link_to 'Delete', [:admin, user], method: :delete, data: { confirm: 'Delete this user?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" if can? :destroy, user %>
+                </div>
+              </td>
+              
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+  </div>
+</div>

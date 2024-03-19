@@ -1,0 +1,80 @@
+.video-module__nav {
+  @apply .mb-4 .p-4 .shadow-lg;
+}
+
+.video-module__nav-indicator {
+  transition: transform 0.3s ease 0.1s;
+  transform-origin: 50% 45%;
+}
+
+.video-module__behavior-list {
+  @apply .absolute .w-full .h-0 .bg-grey-lightest .rounded-sm .opacity-0 .z-10 .overflow-hidden .overflow-y-auto;
+  top: -10rem;
+  max-height: 90vh;
+}
+
+.video-module__nav--open .video-module__behavior-list {
+  @apply .opacity-100 .h-auto;
+  top: 2rem;
+  transition: top 0.4s ease, opacity 0.3s ease 0.2s;
+}
+
+.video-module__nav--open .video-module__nav-indicator {
+  transform: rotate(180deg);
+}
+
+.video-preview img {
+  @apply .opacity-50;
+  transition: opacity 0.2s ease;
+}
+
+.video-preview:hover img {
+  @apply .opacity-100;
+}
+
+.video-preview svg {
+  @apply .absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+@screen md {
+  .video-module__behavior-list {
+    @apply .w-3/4;
+  }
+}
+
+@screen lg {
+  .video-module__behavior-list {
+    @apply .w-1/2;
+  }
+
+  .video-module__behavior-list .behavior__indicator {
+    transform-origin: 50% 30%;
+  }
+
+  .vidyard-player iframe {
+    /* take off the height of the nav + margin */
+    max-height: calc(100vh - 70px);
+    max-height: calc((var(--vh, 1vh) * 100) - 70px);
+  }
+}
+
+@media print {
+  .video-module__nav {
+    @apply .shadow-none;
+  }
+}
+
+img#vidyard-popbox-constraint {
+  max-width: none;
+}
+
+#vidyard-popbox #vidyard-popbox-constraint.portrait {
+  width: 80vw;
+}
+
+#vidyard-popbox #vidyard-popbox-constraint.landscape {
+  height: 80vh;
+}

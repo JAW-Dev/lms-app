@@ -1,0 +1,103 @@
+.admin-user p,
+.admin-user h1,
+.admin-user h2,
+.admin-user h3,
+.admin-user h4,
+.admin-user h5,
+.admin-user h6,
+.admin-user td {
+  color: #3c3c3c;
+}
+
+table.react-table {
+  table-layout: fixed;
+  min-width: 900px;
+}
+
+.react-table th,
+.react-table td,
+table.react-table {
+  border: 1px solid #e4ecf5;
+  padding: 16px;
+}
+
+.admin-user th.checkbox-container,
+.admin-user td.checkbox-container {
+  padding: 0 !important;
+}
+
+.admin-user th.checkbox-container label,
+.admin-user td.checkbox-container label {
+  display: block;
+  padding: 16px;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+}
+
+.side-action-board {
+  width: 700px;
+  animation: slideIn 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  background: white;
+  position: absolute;
+  top: 0;
+}
+
+table.sidebar-table {
+  table-layout: fixed;
+}
+
+.sidebar-table tr:not(:last-child) {
+  border-bottom: 1px solid #e4ecf5;
+}
+
+.sidebar-table td {
+  padding: 12px 60px 12px 0;
+}
+
+.sidebar-table tr td:first-child {
+  text-transform: uppercase;
+  color: gray;
+  font-weight: 700;
+  font-size: 0.75rem;
+  min-width: 300px;
+}
+
+@keyframes slideIn {
+  0% {
+    right: -100%;
+  }
+  100% {
+    right: 0;
+  }
+}
+
+.svg-green path,
+.svg-green rect {
+  stroke: green !important;
+}
+
+.svg-red path,
+.svg-red rect {
+  stroke: red !important;
+}
+.custom-select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background: transparent;
+  position: relative;
+  outline: none;
+}
+
+.custom-select::-ms-expand {
+  display: none;
+}
+
+.gray-text {
+color: #dfdfe0 !important;
+}
+
+input.placeholder-text::placeholder {
+  color: #FF0000; /* Set your desired color */
+}

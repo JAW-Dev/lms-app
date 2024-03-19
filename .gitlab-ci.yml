@@ -1,0 +1,39 @@
+image: carneyco/cra-docker
+
+# Cache gems/node_modules in between builds
+cache:
+  key: admired-leadership
+  paths:
+    - vendor/ruby
+    - node_modules
+
+services:
+  - postgres:12.2-alpine
+
+variables:
+  POSTGRES_DB: nice_marmot
+  POSTGRES_USER: runner
+  POSTGRES_PASSWORD: ""
+  POSTGRES_HOST_AUTH_METHOD: trust
+
+before_script:
+  - echo "$MASTER_KEY" > config/master.key
+  - ln -s /usr/local/features.yml config/features.yml
+  - gem install bundler
+  - bundle install --jobs $(nproc) --path vendor "${FLAGS[@]}"
+  - bundle exec rails db:create
+  - bundle exec rails db:migrate
+  - bundle exec rails assets:precompile
+
+rspec:
+  except:
+    refs:
+      - master
+  script:
+    - bundle exec rspec --fail-fast
+  artifacts:
+    paths:
+      - node_modules/
+      - vendor/
+    expire_in: 1 week
+

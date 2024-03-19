@@ -1,0 +1,51 @@
+/* purgecss start ignore */
+.show-collapsible-menu {
+  transition: height ease 0.3s;
+  overflow: hidden;
+}
+
+.hide-collapsible-menu {
+  height: 0px !important;
+  overflow: hidden;
+  transition: height ease 0.3s;
+}
+
+.sub-menu-hover:hover {
+  background: rgb(255, 255, 255);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 1) 0%,
+    rgba(139, 127, 219, 0.3) 30%,
+    rgba(139, 127, 219, 0.3) 70%,
+    rgba(255, 255, 255, 1) 100%
+  );
+}
+
+.sub-menu-hover:hover p {
+  border-color: rgba(255, 255, 255, 0);
+}
+
+.menu-hover:hover .menu-icon-bg,
+.dashboard-menu-hover:hover .menu-icon-bg {
+  background: #8b7fdb;
+}
+
+.menu-hover:hover path {
+  stroke: white;
+}
+
+.dashboard-menu-hover:hover path {
+  fill: white;
+  stroke: #8b7fdb;
+}
+
+.current-menu path {
+  stroke: white;
+}
+
+.dashboard-current-menu path {
+  fill: white;
+  stroke: #8b7fdb;
+}
+
+/* purgecss end ignore */

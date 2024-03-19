@@ -1,0 +1,52 @@
+<% title "Book Summary - #{@book_summary.title}" %>
+
+<% content_for :additional_stylesheets do %>
+  <% @book_summary.stylesheets.each do |stylesheet_url| %>
+    <%= stylesheet_link_tag stylesheet_url %>
+  <% end %>
+<% end %>
+
+<div class="book-summaries-header"></div>
+
+<article class="book-summary">
+  <header class="book-summary__header container">
+    <h1 class="book-summary__title">
+      <%= @book_summary.title %>
+      <% if @book_summary.subtitle %>
+        <div class="book-summary__subtitle"><%= @book_summary.subtitle %></div>
+      <% end %>
+    </h1>
+    <div class="book-summary__author">
+      <span>Book Author: </span>
+      <%= @book_summary.author %>
+    </div>
+    <div class="book-summary__header-row">
+      <div class="book-summary__image-wrap">
+        <%= raw @book_summary.featured_image %>
+      </div>
+      <div class="book-summary__excerpt-wrap">
+        <div class="book-summary__excerpt-inner">
+          <%= raw @book_summary.excerpt %>
+        </div>
+
+        <% if @book_summary.pdf_url %>
+          <a href="<%= @book_summary.pdf_url %>" class="btn btn--primary" download>
+            Download PDF
+            <svg aria-hidden="true" focusable="false" role="img" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512" data-fa-i2svg=""><path fill="currentColor" d="M224 136V0H24C10.7 0 0 10.7 0 24v464c0 13.3 10.7 24 24 24h336c13.3 0 24-10.7 24-24V160H248c-13.2 0-24-10.8-24-24zm76.45 211.36l-96.42 95.7c-6.65 6.61-17.39 6.61-24.04 0l-96.42-95.7C73.42 337.29 80.54 320 94.82 320H160v-80c0-8.84 7.16-16 16-16h32c8.84 0 16 7.16 16 16v80h65.18c14.28 0 21.4 17.29 11.27 27.36zM377 105L279.1 7c-4.5-4.5-10.6-7-17-7H256v128h128v-6.1c0-6.3-2.5-12.4-7-16.9z"></path></svg>
+          </a>
+        <% end %>
+      </div>
+    </div>
+  </header>
+
+  <div class="book-summary__content container">
+    <%= raw @book_summary.content %>
+  </div>
+
+  <div class="book-summary__footer">
+    <div class="container">
+      <h2>The Latest and Greatest Books for Leaders</h2>
+      <p>We work hard to stay abreast of the current writings on leadership, especially those books our clients are reading or have been recommended to read. As a benefit to our clients and to facilitate our own learning, the Admired Leadership team has long maintained a tradition of summarizing the newest books of interest to leaders. Better to read a summary for eight minutes before investing eight hours in the entire book. After reading a good summary, we believe leaders can make better choices as to what to ignore, what to peruse and what to make the time to read closely.</p>
+    </div>
+  </div>
+</article>

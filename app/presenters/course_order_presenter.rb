@@ -1,0 +1,2 @@
+class CourseOrderPresenter < OrderPresenter
+end

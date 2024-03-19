@@ -1,0 +1,18 @@
+default: &default
+  notes: false
+  ecomm: false
+  hubspot: false
+  api: false
+  options:
+    hide_omniauth_buttons: false
+    default_full_access: false
+    default_full_access_invitation_length: 1.year
+    disable_signup_question: true
+    number_modules: true
+    number_behaviors: true
+
+development:
+  <<: *default
+
+production:
+  <<: *default

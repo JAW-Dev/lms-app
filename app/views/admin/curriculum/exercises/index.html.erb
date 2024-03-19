@@ -1,0 +1,79 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="mb-2 text-5xl text-grey-darker font-extrabold leading-tight">Behavior Exercises</h1>
+        <h2 class="text-3xl text-grey-darker font-bold leading-tight"><%= @behavior.title %></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16 mb-8">
+  <div class="pt-12 pb-16">
+    <div class="flex flex-col-reverse md:flex-row items-center justify-between mb-8 md:-mx-2">
+      <%= link_to "&laquo; Return to Behavior".html_safe, edit_admin_curriculum_behavior_path(@behavior), class: "md:mx-2 text-xs md:text-sm" %>
+      <%= link_to 'Create an Exercise', new_admin_curriculum_behavior_exercise_path(@behavior), class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 btn btn--primary rounded" %>
+    </div>
+
+    <% if @exercises.any? %>
+      <table class="w-full striped-table block">
+        <thead>
+          <tr>
+            <th class="w-1/4 xl:w-48 px-4 pb-2 text-left" colspan="3">Exercises</th>
+          </tr>
+        </thead>
+
+        <tbody class="block">
+          <% @exercises.each do |curriculum_exercise| %>
+            <tr id="exercise-<%= curriculum_exercise.id %>" data-type="<%= present(curriculum_exercise).draggable_type %>" data-id="<%= curriculum_exercise.id %>" draggable="true" class="droppable flex flex-wrap md:table-row">
+              <td class="w-full md:w-1/5 p-2 md:p-4 text-center">
+                <%= image_tag curriculum_exercise.image.present? ? curriculum_exercise.image.thumb.url : "blank.png", alt: "preview image for exercise #{curriculum_exercise.id}", class: "w-full" %>
+              </td>
+              <td class="w-full md:w-3/5 p-2 md:p-4 align-top">
+                <p class="mb-2 text-sm"><%= curriculum_exercise.description %></p>
+              </td>
+              <td class="w-full p-2 md:p-4">
+                <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                  <%= link_to 'Edit', edit_admin_curriculum_exercise_path(curriculum_exercise), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" %>
+                  <%= link_to 'Delete', [:admin, curriculum_exercise], method: :delete, data: { confirm: 'Delete this exercise?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <div class="flex items-center cursor-pointer" data-accordion="true" aria-expanded="false">
+      <div class="w-6 text-left">
+        <i class="fas fa-angle-right fa-fw text-grey-darkest accordion-indicator"></i>
+      </div>
+
+      <h4 class="text-sm md:text-base text-grey-darkest">Slider Image</h4>
+    </div>
+
+    <div class="my-4" aria-hidden="true">
+      <%= form_with(model: [:admin, @behavior], local: true, class: "mb-6") do |form| %>
+        <div class="<%= @behavior.exercise_image.present? ? "mb-4" : "mb-6" %>">
+          <%= form.label :exercise_image, "Slider Image", class: "block mb-1 font-bold sr-only" %>
+          <% if @behavior.exercise_image.present? %>
+            <%= image_tag @behavior.exercise_image.large.url, class: "max-w-1/4" %><br />
+          <% end %>
+          <%= form.file_field :exercise_image %>
+        </div>
+
+        <% if @behavior.exercise_image.present? %>
+          <div class="mb-6">
+            <label>
+              <%= form.check_box :remove_exercise_image %>
+              Remove image?
+            </label>
+          </div>
+        <% end %>
+
+        <%= form.button "Update Image", type: "submit", class: "btn btn--primary rounded" %>
+      <% end %>
+    </div>
+  </div>
+</div>

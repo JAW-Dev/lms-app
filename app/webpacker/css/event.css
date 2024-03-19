@@ -1,0 +1,29 @@
+.single-event h1,
+.single-event h2,
+.single-event h3,
+.single-event h4,
+.single-event h5,
+.single-event h6,
+.single-event p,
+.single-event ol,
+.single-event ul {
+  margin-bottom: 1rem;
+}
+
+.single-event * + h1,
+.single-event * + h2,
+.single-event * + h3,
+.single-event * + h4 {
+  margin-top: 1.75rem;
+}
+
+.single-event .hs-form input[type="text"],
+.single-event .hs-form input[type="email"],
+.single-event .hs-form input[type="tel"],
+.single-event .hs-form textarea {
+  background-color: white;
+}
+
+.single-event .hs-submit .hs-button {
+  @apply .btn .btn--primary;
+}

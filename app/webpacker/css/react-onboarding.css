@@ -1,0 +1,89 @@
+.carousel {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+
+.onbording-modal {
+  height: auto;
+}
+
+@media screen and (max-width: 480px) {
+  .onbording-modal {
+    height: 100vh;
+  }
+}
+
+.carousel-slides {
+  display: flex;
+  transition: transform 0.3s ease-out;
+}
+
+.carousel-slide {
+  display: flex;
+  justify-content: center;
+  flex: 0 0 100%;
+  max-width: 100%;
+  padding: 25px 25px 0;
+}
+
+.carousel-slide img {
+  max-width: 100%;
+  max-height: 300px;
+  height: auto;
+  display: block;
+  object-fit: contain; /* This ensures the image maintains its aspect ratio */
+}
+
+.carousel-dots {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  padding-bottom: 30px;
+}
+
+.carousel-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background-color: #999;
+  margin: 0 8px;
+  cursor: pointer;
+}
+
+.carousel-dot.active {
+  background-color: #333;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  font-family: 'Nunito Sans', sans-serif;
+  border-bottom: 1px solid #d9d9d9;
+  padding-bottom: 12px;
+  margin-bottom: 12px;
+}
+
+.modal-header h3 {
+  display: flex;
+  align-items: center;
+  font-weight: 600;
+  font-size: 20px;
+  line-height: 24px;
+}
+
+.modal-header__new {
+  text-transform: uppercase;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 24px;
+  color: #8b7fdb;
+}
+
+.h2h-feature-img {
+  height: 100%;
+  object-fit: cover;
+  object-position: 66.667% center;
+  @apply rounded-2lg;
+}

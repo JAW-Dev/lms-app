@@ -1,0 +1,16 @@
+<div class="flex -mx-2">
+  <div class="mx-2 dropdown">
+    <button class="btn btn--inverse rounded border">
+      <span>Export Orders</span>
+      <i class="mx-1 far fa-angle-down"></i>
+    </button>
+    <div class="dropdown__menu" role="menu">
+      <div class="dropdown__menu-content">
+        <%= link_to "All Orders", admin_curriculum_orders_path(format: :csv, t: DateTime.now.strftime('%s')), class: "dropdown__menu-item" %>
+        <%= link_to "Full Courses", admin_curriculum_orders_path(format: :csv, type: :course, t: DateTime.now.strftime('%s')), class: "dropdown__menu-item" %>
+        <%= link_to "Renewals", admin_curriculum_orders_path(format: :csv, type: :renewal, t: DateTime.now.strftime('%s')), class: "dropdown__menu-item" %>
+        <%= link_to "Gifts", admin_curriculum_orders_path(format: :csv, type: :gift, t: DateTime.now.strftime('%s')), class: "dropdown__menu-item" %>
+      </div>
+    </div>
+  </div>
+</div>

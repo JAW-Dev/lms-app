@@ -1,0 +1,14 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="text-5xl text-grey-darker font-extrabold leading-tight">New Behavior</h1>
+        <% if @course.present? %>
+          <h2 class="mt-2 text-3xl text-grey-darker font-bold leading-tight"><%= @course.title %></h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<%= render 'form', curriculum_behavior: @behavior %>

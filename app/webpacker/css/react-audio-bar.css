@@ -1,0 +1,78 @@
+/* purgecss start ignore */
+.audio-bar {
+  bottom: 48px;
+  left: 50%;
+  border-radius: 76px;
+  max-width: 785px;
+  transform: translateX(-50%);
+  box-shadow: 0px 0px 50px rgba(0, 0, 0, 0.1);
+  transition: 0.2s all ease-in;
+}
+
+.audio-bar--hide {
+  opacity: 0;
+  bottom: 28;
+}
+
+.glossy-button {
+  height: 75px;
+  width: 75px;
+  min-width: 75px;
+  min-height: 75px;
+  transition: transform 0.3s ease-out;
+}
+
+.glossy-button:active {
+  transform: scale(0.95);
+}
+
+.glossy-button--darker {
+  background: linear-gradient(180deg, #000000 0%, #5e5c5c 100%);
+}
+
+.glossy-button--lighter {
+  background: linear-gradient(180deg, #212121 0%, #737373 100%);
+}
+
+.glossy-button__icon {
+  transform: translate(0px, 6px);
+}
+
+/* Scroll Text Component from down */
+.scrolling-text-container {
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+.scrolling-text {
+  display: inline-block;
+  animation: scrolling-text-inner 10s linear infinite;
+}
+
+.scrolling-text-second {
+  display: inline-block;
+  animation: scrolling-text-inner 10s linear infinite;
+}
+
+@keyframes scrolling-text-inner {
+  25% {
+    transform: translateX(0%);
+  }
+  100% {
+    transform: translateX(-100%);
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .audio-bar {
+      border-radius: 100px;
+  }
+
+  .glossy-button {
+    height: 45px !important;
+    width: 45px !important;
+    min-width: 45px !important;
+    min-height: 45px !important;
+  }
+}
+/* purgecss end ignore */

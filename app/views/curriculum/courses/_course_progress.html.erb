@@ -1,0 +1,14 @@
+<div class="xl:max-w-sm">
+  <div class="progress-bar" data-progress="<%= present(course).progress_percent(current_user) %>">
+    <div class="progress-bar__progress"></div>
+  </div>
+
+  <div class="progress-details">
+    <% present(course) do |presented_course| %>
+      <% color_class = (course.intro? || course.bonus?) ? "text-purple-dark" : "text-purple" %>
+      <i class="<%= color_class %> mx-1 <%= presented_course.progress_icon(current_user) %>"></i>
+      <p class="mx-1 <%= color_class %> text-sm font-bold uppercase"><%= presented_course.progress_text(current_user) %></p>
+      <p class="ml-auto text-grey-darker text-sm font-bold"><%= presented_course.progress_percent(current_user) %></p>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+tr.inactive:nth-child(n) td {
+  @apply .text-grey-dark .italic;
+}
+
+tr.inactive:nth-child(n) td a:not(.btn) {
+  @apply .text-grey-dark;
+}
+
+tr.inactive:nth-child(n) td div {
+  @apply .roman;
+}
+
+.text-nowrap {
+  white-space: nowrap;
+}

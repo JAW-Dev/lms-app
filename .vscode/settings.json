@@ -1,0 +1,11 @@
+{
+  "[javascript]": {
+    "editor.formatOnSave": true
+  },
+  "[css]": {
+    "editor.formatOnSave": true
+  },
+  "css.validate": false,
+  "stylelint.enable": true,
+  "javascript.format.enable": false,
+}

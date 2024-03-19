@@ -1,0 +1,48 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="mb-2 text-5xl text-grey-darker font-extrabold leading-tight">Behavior Map</h1>
+        <h2 class="text-3xl text-grey-darker font-bold leading-tight"><%= @behavior.title %></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16 mb-8">
+  <div class="pt-12 pb-16">
+    <div class="flex flex-col-reverse md:flex-row items-center justify-between mb-8 md:-mx-2">
+      <%= link_to "&laquo; Return to Behavior".html_safe, edit_admin_curriculum_behavior_path(@behavior), class: "md:mx-2 text-xs md:text-sm" %>
+      <%= link_to 'Create a Map Point', new_admin_curriculum_behavior_behavior_map_path(@behavior), class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 btn btn--primary rounded" %>
+    </div>
+
+    <% if @behavior_maps.any? %>
+      <table class="w-full striped-table block">
+        <thead>
+          <tr>
+            <th class="w-1/4 xl:w-48 px-4 pb-2 text-left" colspan="3">Map Points</th>
+          </tr>
+        </thead>
+
+        <tbody class="block">
+          <% @behavior_maps.each do |curriculum_behavior_map| %>
+            <tr id="map-<%= curriculum_behavior_map.id %>" data-type="<%= present(curriculum_behavior_map).draggable_type %>" data-id="<%= curriculum_behavior_map.id %>" draggable="true" class="droppable flex flex-wrap md:table-row">
+              <td class="w-full md:w-auto p-2 md:p-4 text-center">
+                <%= image_tag curriculum_behavior_map.image.present? ? curriculum_behavior_map.image.thumb.url : "blank.png", alt: "preview image for behavior map #{curriculum_behavior_map.id}", class: "w-16" %>
+              </td>
+              <td class="w-full md:w-3/5 p-2 md:p-4 align-top">
+                <p class="mb-2 text-sm"><%= curriculum_behavior_map.description %></p>
+              </td>
+              <td class="w-full md:w-auto p-2 md:p-4">
+                <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                  <%= link_to 'Edit', edit_admin_curriculum_behavior_map_path(curriculum_behavior_map), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" %>
+                  <%= link_to 'Delete', [:admin, curriculum_behavior_map], method: :delete, data: { confirm: 'Delete this map point?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

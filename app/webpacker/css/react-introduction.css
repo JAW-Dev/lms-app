@@ -1,0 +1,19 @@
+.introduction--text {
+  min-width: 500px;
+  max-width: 500px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .introduction--text {
+    min-width: auto;
+    max-width: none;
+  }
+}
+
+
+@media only screen and (max-width: 1200px) {
+  .introduction--text {
+    min-width: auto;
+    max-width: auto;
+  }
+}

@@ -1,0 +1,36 @@
+.quiz-questions {
+  counter-reset: section;
+}
+
+.quiz-question::before {
+  @apply .is-highlighted .absolute .pin-t .flex .items-center .justify-center .w-6 .h-6 .font-bold .text-white .leading-tight .rounded-full;
+  left: -1.25rem;
+  counter-increment: section;
+  content: counter(section);
+}
+
+.answer {
+  @apply .block .px-2 .py-1 .no-underline .border .border-grey-light .text-grey-darkest .leading-tight;
+}
+
+.answer:hover {
+  @apply .bg-grey-lighter;
+}
+
+.answer--chosen {
+  @apply .bg-purple .text-white;
+}
+
+.answer--chosen:hover {
+  @apply .bg-purple .text-white;
+}
+
+.answer--correct,
+.answer--correct:hover {
+  @apply .bg-green .text-white;
+}
+
+.answer--incorrect,
+.answer--incorrect:hover {
+  @apply .bg-red-dark .text-white;
+}

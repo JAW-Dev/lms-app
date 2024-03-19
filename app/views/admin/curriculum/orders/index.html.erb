@@ -1,0 +1,67 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="text-5xl text-grey-darker font-extrabold leading-tight">Orders</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div class="pt-12 pb-16">
+
+    <div class="flex flex-col md:flex-row justify-between w-full mb-4 md:mb-6">
+      <%= render "admin/shared/search", search_scope: :user_email_cont, search_path: admin_curriculum_orders_path %>
+      <%= render "admin/curriculum/orders/controls" %>
+    </div>
+
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
+      <p class="text-lg mb-4 sm:mb-0 <%= "invisible" if @orders.any? %>" aria-hidden="<%= @orders.any? %>">No orders found.</p>
+    </div>
+
+    <% if @orders.any? %>
+      <%= render "admin/curriculum/orders/tabs" %>
+
+      <table class="w-full mb-8 striped-table">
+        <thead>
+          <tr>
+            <th class="px-2 md:px-4 text-left">Order Date</th>
+            <th class="px-2 md:px-4 text-left">Buyer</th>
+            <th class="hidden md:table-cell px-2 md:px-4 text-left">Item</th>
+            <th class="px-2 md:px-4 text-left">Total</th>
+            <th class="md:w-48 text-right"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @orders.includes(user: [:profile]).each do |order| %>
+            <tr>
+              <td class="p-2 md:p-4">
+                <%= l(order.sold_at, format: :short_with_year) %></p>
+              </td>
+              <td class="p-2 md:p-4">
+                <%= present(order.user.profile).full_name %>
+              </td>
+              <td class="hidden md:table-cell p-2 md:p-4">
+                <%= present(order).title %>
+              </td>
+              <td class="p-2 md:p-4">
+                <%= humanized_money_with_symbol order.total %>
+              </td>
+              <td class="p-2 md:p-4">
+                <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                  <%= link_to 'Order Details', curriculum_order_path(order), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--default rounded" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+  </div>
+</div>

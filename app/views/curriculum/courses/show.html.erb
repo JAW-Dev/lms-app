@@ -1,0 +1,34 @@
+<% title @course.title %>
+<% description @course.description %>
+
+<div class="<%= (!@course.intro? && !@course.bonus?) && "bg-grey-lighter" %> overflow-hidden" data-progress="<%= can?(:read, @course) %>">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="py-12 lg:py-16">
+      <div class="max-w-xl">
+        <h1 class="mb-4 text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight"><%= @course.title %></h1>
+        <% if can?(:read, @course) && @behaviors.any? %>
+          <%= render partial: "course_progress", locals: { course: @course } %>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @next_behavior.present? %>
+  <%= render partial: "curriculum/behaviors/next", locals: { behavior: @next_behavior, course: @course, bundle: false } %>
+<% end %>
+
+<div class="lg:container mb-16">
+  <ol class="list-reset">
+    <%= render partial: @behaviors, locals: { course: @course, bundle: false } if @behaviors.any? %>
+  </ol>
+
+  <%= render "buy_cta" if @course.first? && can?(:create, Order) && !current_user.has_full_access? %>
+</div>
+
+
+<% content_for :additional_javascript do %>
+  <%= javascript_packs_with_chunks_tag 'v1/behaviors' %>
+  <%= javascript_packs_with_chunks_tag 'v1/slider' %>
+  <%= javascript_packs_with_chunks_tag 'v1/maps' %>
+<% end %>

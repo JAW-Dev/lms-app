@@ -1,0 +1,50 @@
+<% if course.expandable_display? %>
+  <%= render "expandable", { course: course, course_counter: course_counter } if current_user %>
+<% else %>
+  <div class="course-item-wrap <%= (course.featured_display?) ? "bg-pistachio-lightest" : nil %>">
+    <div class="container course-item <%= present(course).status(current_user) %>">
+      <div class="lg:max-w-xl border-purple-lighter border-l border-dashed ml-8 mr-4 lg:mx-16" data-progress="<%= can?(:read, course) %>">
+        <div class="pl-6 pr-3 sm:pr-6 pt-12 pb-6 md:pt-16 <%= (course.featured_display?) ? "md:pb-12" : "md:pb-4" %>">
+          <div class="flex items-start mb-2 md:mb-4">
+            <div class="flex items-center relative mr-4 -ml-10 pl-px pt-px behavior-title">
+              <i class="fas fa-lock course-item-title__lock"></i>
+              <i class="fas fa-check hidden text-blue course-item-title__check"></i>
+              <span class="flex items-center justify-center mt-1 md:mt-0 text-lg font-bold text-white is-highlighted behavior-title__number"><%= present(course).number(course_counter) %></span>
+            </div>
+            <div class="w-full flex flex-col md:flex-row">
+              <div class="flex-1 mx-2 mb-6 md:mb-0">
+                <div class="flex flex-col">
+                  <h2 class="flex-1 leading-tight text-2xl mb-3 order-2 pr-10">
+                    <%= link_to course.title, course, class: "text-brown no-underline hover:underline" %>
+                    <% if course.description.strip.length > 0 %>
+                      <div class="inline-block w-0 overflow-visible">
+                        <div class="inline-block pl-4">
+                          <button data-info aria-controls="<%= "#{course.id}-description" %>" aria-expanded="false" class="info-circle -mb-1 <%= (course.featured_display?) ? "text-pistachio" : "text-purple-dark" %>">
+                            <%= inline_svg "icon-info.svg" %>
+                          </button>
+                        </div>
+                      </div>
+                    <% end %>
+                  </h2>
+                </div>
+                <% if can?(:read, course) && course.behaviors.enabled.any? %>
+                  <%= render partial: "course_progress", locals: { course: course } %>
+                <% end %>
+                <% if course.description.strip.length > 0 %>
+                  <div data-info-panel aria-hidden="true" id="<%= "#{course.id}-description" %>">
+                    <p class="text-grey-darker leading-loose mt-4 text-sm"><%= course.description %></p>
+                  </div>
+                <% end %>
+              </div>
+              <div class="flex-0 px-2 md:pl-12 md:pr-0">
+                <% present(course) do |presented_course| %>
+                  <%= link_to presented_course.watch_text(current_user), course, class: "relative block w-100 #{current_user ? "md:w-48" : "md:w-auto"} px-10 py-2 lg:py-3 text-xs md:text-base text-center is-highlighted" %>
+                <% end %>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>

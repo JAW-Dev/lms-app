@@ -1,0 +1,184 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="text-5xl text-grey-darker font-extrabold leading-tight"><%= present(@user.profile).full_name %></h1>
+        <% if @user.company.present? %>
+          <h2 class="mt-2 text-3xl text-grey-darker font-bold leading-tight"><%= @user.company.name %></h2>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div class="pt-12 pb-16 max-w-lg">
+    <%= link_to "&laquo; Return to Users".html_safe, :back, class: "block mb-6 text-xs md:text-sm" %>
+
+    <div class="mb-6">
+      <% if @user.profile.avatar.present? %>
+        <div class="mb-4">
+          <svg width="150" height="150" class="main-nav__avatar">
+            <defs>
+              <clipPath id="clipping">
+                <circle cx="75" cy="75" r="75"></circle>
+              </clipPath>
+            </defs>
+              <image href="<%= @user.profile.avatar.thumb.url %>" width="150" height="150" clip-path="url(#clipping)"></image>
+          </svg>
+        </div>
+      <% end %>
+
+      <div class="flex flex-col md:flex-row">
+        <div class="w-1/2 mb-4 md:mb-0">
+          <h3 class="mb-2 text-lg text-brown">Account Details</h3>
+
+          <% if @user.company.present? %>
+            <p class="mb-1">
+              <strong>Company:</strong> <%= @user.company.name %>
+            </p>
+          <% end %>
+
+          <p class="mb-1">
+            <strong>Email:</strong> <%= mail_to @user.email %>
+          </p>
+
+          <% if @user.full_purchase.any? %>
+            <p class="mb-1">
+              <span class="block ml-2">Purchased on: <%= l(@user.full_purchase.last.sold_at, format: :short_with_year) %></span>
+            </p>
+          <% end %>
+
+          <% if @user.subscription.any? %>
+            <p class="mb-1">
+              <span class="block ml-2">Subscribed on: <%= l(@user.subscription.last.sold_at, format: :short_with_year) %></span>
+            </p>
+            <p class="mb-1">
+              <span class="block ml-2">Subscription expires on: <%= l(@user.subscription.last.sold_at + 1.year, format: :short_with_year) %></span>
+            </p>
+          <% end %>
+
+          <% if @user.user_invite&.active? %>
+            <p class="mb-1">
+              <strong>Invitation Access:</strong>
+                <% if @user.user_invite.invited_at.present? %>
+                  <span class="block ml-2">Sent on: <%= l(@user.user_invite.invited_at, format: :short_with_year) %></span>
+                <% end %>
+                <% if @user.user_invite.expires_at.present? %>
+                  <span class="block ml-2">Expires on: <%= l(@user.user_invite.expires_at, format: :short_with_year) %></span>
+                <% else %>
+                  <span class="block ml-2">No expiration date.</span>
+                <% end %>
+              <% else %>
+            </p>
+          <% end %>
+
+          <p class="mb-1">
+            <strong>Signed up on:</strong> <%= l(@user.created_at, format: :short_with_year) %>
+          </p>
+
+          <p class="mb-1">
+            <strong>Last log in:</strong> <%= @user.sign_in_count.zero? ? "N/A" : l(@user.last_sign_in_at, format: :short_with_year) %>
+          </p>
+
+          <p class="mb-1">
+            <strong>Email Opt-in:</strong> <%= @user.profile.opt_in? ? "Yes" : "No" %>
+          </p>
+        </div>
+
+        <div class="w-1/2">
+          <% if Rails.configuration.features.dig(:hubspot) && @user.profile.hubspot.present? %>
+            <h3 class="mb-2 text-lg text-brown">HubSpot Properties</h3>
+
+            <% @user.profile.hubspot_properties.each do |key, value| %>
+              <p class="mb-1">
+                <strong><%= hubspot_label(key) %>:</strong> <%= value %>
+              </p>
+            <% end %>
+
+            <% if @user.profile.profile_url.present? %>
+              <p class="mb-1">
+                <%= link_to @user.profile.profile_url, target: :blank do %>
+                  <span>View Contact in HubSpot</span>
+                  <i class="fas fa-external-link-square text-sm"></i>
+                <% end %>
+              </p>
+            <% end %>
+          <% end %>
+        </div>
+      </div>
+      <div class="flex flex-col md:flex-row">
+        <% if @user.gifts.present? %>
+          <div class="w-full mb-4 md:mb-0">
+            <h3 class="mb-2 text-lg text-brown">Gifts</h3>
+
+              <table class="text-left">
+                <thead>
+                  <tr>
+                    <th class="py-2 pr-4">Gift Link</th>
+                    <th class="py-2 pr-4">Expiration Date</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% @user.gifts.each do |gift| %>
+                    <tr>
+                      <td class="py-2 pr-4">
+                        <p class="mb-1">
+                          <%= link_to gift.behavior.title, new_user_access_path(user_type: :gift, g: gift.slug, is_admin: true) %>
+                        </p>
+                      </td>
+                      <td class="py-2 pr-4">
+                        <p class="mb-1">
+                          <% if gift.expires_at.present? %>
+                            <span><%= l(gift.expires_at, format: :short_with_year) %></span>
+                          <% else %>
+                            <span>N/A</span>
+                          <% end %>
+                        </p>
+                      </td>
+                    </tr>
+                  <% end %>
+                </tbody>
+              </table>
+          </div>
+        <% end %>
+      </div>
+    </div>
+
+    <%= link_to "Edit User".html_safe, edit_admin_user_path(@user), class: "mb-6 btn btn--sm btn--primary rounded" %>
+
+    <% if @courses.any? %>
+      <h3 class="mb-4 text-2xl text-brown">Modules</h3>
+      <ul class="list-reset">
+        <% @courses.each do |course| %>
+          <li class="mb-4">
+            <h4 class="mb-2 py-1 px-2 bg-grey-lighter"><%= course.title %></h4>
+            <ul class="list-reset ml-4 mb-8">
+              <% course.behaviors.includes(:courses, course_behaviors: [:course]).enabled.each do |behavior| %>
+                <li class="mb-2">
+                  <div class="flex items-center mb-2 -mx-2 user-behavior <%= present(behavior).status(@user) %>">
+                    <i class="fas fa-unlock-alt fa-fw mx-2 text-brown user-behavior__unlocked" title="Unlocked"></i>
+                    <i class="fas fa-lock fa-fw mx-2 text-brown user-behavior__locked" title="Locked"></i>
+                    <i class="far fa-play fa-fw mx-2 text-grey user-behavior__unplayed" title="Unplayed"></i>
+                    <i class="fas fa-ellipsis-h fa-fw-h mx-2 text-brown user-behavior__progress" title="In Progress"></i>
+                    <i class="fas fa-check fa-fw mx-2 text-brown user-behavior__complete" title="Completed"></i>
+                    <h5 class="mx-2 text-base font-normal"><%= behavior.title %></h5>
+                    <% if @user.gifted_behaviors.include?(behavior) && !behavior.is_intro?(course) %>
+                      <% present(behavior) do |presented_behavior| %>
+                        <% if presented_behavior.gift_order(@user).present? %>
+                          <%= link_to curriculum_order_path(present(behavior).gift_order(@user)) do %>
+                            <i class="cra fa-gift text-grey-darker"></i>
+                          <% end %>
+                        <% end %>
+                      <% end %>
+                    <% end %>
+                  </div>
+                </li>
+              <% end %>
+            </ul>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
+  </div>
+</div>

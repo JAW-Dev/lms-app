@@ -1,0 +1,249 @@
+<% title 'Account Details' %>
+
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="py-12 lg:py-16">
+      <div class="max-w-lg">
+        <h1 class="text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight">Account Details</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 md:pr-8 lg:pl-16">
+  <div class="pt-12 pb-16">
+    <%= form_with(model: @user, local: true, id: "profile-form") do |form| %>
+      <% if @user.errors.any? %>
+        <div id="error_explanation" class="px-8 py-4 mb-8 bg-red-dark">
+          <p class="mb-2 text-xl font-bold text-white leading-tight">Something went wrong. Please correct the following errors and try again:</p>
+          <ul class="text-white">
+            <% @user.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <h3 class="mb-4 text-2xl text-brown">Profile Settings</h3>
+      <div class="flex flex-col md:flex-row md:-mx-4">
+        <div class="flex-1 md:mx-4">
+          <div class="mb-4">
+            <%= form.label :email, class: "block text-sm font-bold" %>
+            <%= form.email_field :email, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+            <% if @user.unconfirmed_email %>
+              <span class="text-sm">
+                Pending change to <span class="font-bold"><%= @user.unconfirmed_email %></span> &ndash;
+                <%= link_to "Resend Confirmation", new_user_confirmation_path, class: "text-blue-dark" %>
+              </span>
+            <% end %>
+          </div>
+
+          <%= form.fields_for :profile do |p| %>
+            <div class="mb-4">
+              <%= p.label :first_name, class: "block text-sm font-bold" %>
+              <%= p.text_field :first_name, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+            </div>
+
+            <div class="mb-4">
+              <%= p.label :last_name, class: "block text-sm font-bold" %>
+              <%= p.text_field :last_name, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+            </div>
+
+            <div class="mb-4">
+              <%= p.check_box :opt_in %>
+              <%= p.label :opt_in, class: "ml-1 text-sm text-grey-darkest" do %>
+                Please send me <a href="javascript:;" class="text-blue-dark" data-micromodal-trigger="opt-in-modal">more information and insights</a> from Admired&nbsp;Leadership
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+
+        <div class="flex-1 md:mx-4">
+          <div class="mb-4">
+            <%= form.fields_for :profile do |p| %>
+              <div class="mb-4">
+                <%= p.label :avatar, "Profile picture", class: "block text-sm font-bold" %>
+                <% if @user.profile.avatar.present? %>
+                  <%= image_tag @user.profile.avatar.thumb.url, class: "w-32" %><br />
+                <% end %>
+                <%= p.file_field :avatar %>
+              </div>
+  
+              <% if @user.profile.avatar.present? %>
+                <div class="mb-4">
+                  <label>
+                    <%= p.check_box :remove_avatar %>
+                    Remove profile picture
+                  </label>
+                </div>
+              <% end %>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <%= form.button "Update Profile", type: "submit", class: "w-full md:w-auto mb-6 btn btn--lg btn--primary-gradient" %>
+
+      <hr class="border-t pb-4">
+
+      <div class="flex flex-col md:flex-row md:-mx-4 mb-8">
+        <div class="flex-1 mb-8 md:mb-0 md:mx-4">
+          <h3 class="mb-4 text-2xl text-brown">Account Settings</h3>
+
+          <div class="mb-4">
+            <%= form.label :time_zone, class: "block text-sm font-bold" %>
+            <%= form.time_zone_select :time_zone, ActiveSupport::TimeZone.us_zones, { default: "Eastern Time (US & Canada)" }, { class: "border" } %>
+          </div>
+
+          <%= form.button "Update Settings", type: "submit", class: "w-full md:w-auto mb-4 md:mb-0 btn btn--lg btn--primary-gradient" %>
+        </div>
+
+        <div class="flex-1 mb-8 md:mb-0 md:mx-4">
+          <h3 class="mb-4 text-2xl text-brown">Account Password</h3>
+          <%= link_to "#{@user.direct_access? ? "Set" : "Change"} my password &raquo;".html_safe, edit_user_registration_path, class: "text-blue-dark" %>
+        </div>
+      </div>
+
+      <% if can?(:create, Order) && !current_user.has_full_access? %>
+        <hr class="border-t pb-4">
+        <div class="md:max-w-1/2 mb-8">
+          <div class="mb-8 md:mb-0">
+            <h3 class="mb-4 text-2xl text-brown">Upgrade to Full Access</h3>
+            <p class="mb-1 font-bold text-grey-darkest">Ready to start your Admired Leadership® journey?</p>
+            <p class="mb-3 text-grey-darkest">Upgrade now for full access to all of our exclusive leadership&nbsp;content.</p>
+            <%= link_to "Get Full Access", new_user_access_path, class: "w-full md:w-auto mb-4 md:mb-0 btn btn--lg btn--primary-gradient" %>
+          </div>
+        </div>
+      <% end %>
+
+      <% if current_user.has_full_access? %>
+        <hr class="border-t pb-4">
+        <div class="md:max-w-1/2 mb-8">
+          <div class="mb-8 md:mb-0">
+            <h3 class="mb-4 text-2xl text-brown">Your Access Level</h3>
+            <p class="mb-1 font-bold text-grey-darkest">Full Access</p>
+            <% if !current_user.active_subscription && current_user.access_expiration_date %>
+              <p class="mb-3 text-grey-darkest"><%= current_user.access_expiration_date < DateTime.now ? "Expired" : "Expires" %> on: <%= l(current_user.access_expiration_date, format: :short_with_year) %></p>
+            <% end %>
+          </div>
+     
+          <% if current_user.stripe_sub.present? %>
+            <div class="mb-8 md:mb-0 mt-8">
+              <h3 class="mb-4 text-2xl text-brown">Your Subscription</h3>
+              <p class="mb-1 font-bold text-grey-darkest">Admired Leadership Yearly Subscription</p>
+              <p class="mb-3 text-grey-darkest"><%=current_user.stripe_sub.status == "canceled" ?  "Expired" : current_user.stripe_sub.cancel_at_period_end ? "Expires on" : "Renews on:" %> <%= current_user.stripe_sub.status == "canceled" ? nil : l(DateTime.strptime(current_user.stripe_sub.current_period_end.to_s, '%s'), format: :short_with_year) %></p>
+              <% if current_user.stripe_sub.status != "canceled"%>
+                <% if current_user.stripe_sub.cancel_at_period_end %>
+                  <%= link_to "Continue My Subscription &raquo;".html_safe, 'javascript:;', class: "text-sm text-blue-dark", data: { "micromodal-trigger" => "continue-subscription-modal"} %>
+                <% else %>
+                  <%= link_to "End My Subscription &raquo;".html_safe, 'javascript:;', class: "text-sm text-blue-dark", data: { "micromodal-trigger" => "cancel-subscription-modal"} %>
+                <% end %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if can?(:create, Order) && current_user.can_purchase_subscription? %>
+        <hr class="border-t pb-4">
+        <div class="flex flex-col md:flex-row md:-mx-4">
+          <div class="flex-1 md:max-w-1/2 md:mx-4">
+            <div class="mb-8 md:mb-0">
+              <h3 class="mb-4 text-2xl text-brown">Subscribe to Admired Leadership</h3>
+              <p class="mb-1 font-bold text-grey-darkest">Continue your leadership journey by subscribing.</p>
+              <p class="mb-4 text-grey-darkest">Subscribe to access to our full content, resources and  your history and notes. Plus, receive access to new content as it becomes available.</p>
+              <div class="flex flex-col md:flex-row md:-mx-2">
+                <%= link_to "Learn More", subscription_details_path, class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 btn btn--lg btn--primary-gradient leading-tight" %>
+              </div>
+            </div>
+          </div>
+          <!-- TODO: restore once we migrate to PaymentIntents -->
+          <%#= render 'users/payment_methods' %>
+        </div>
+      <% end %>
+    <% end %>
+  </div>
+</div>
+
+
+
+<%= render "shared/modal", modal_id: "opt-in-modal", aria_label: "Dialog explaining additional communications. Escape will close the window." do %>
+  <header class="flex items-center justify-between mb-4">
+    <p class="text-xl font-bold text-grey-darkest">Communications from Admired Leadership</p>
+    <button class="micromodal__close p-2" aria-label="Close modal" data-micromodal-close></button>
+  </header>
+  <main class="text-grey-darkest">
+    <p class="mb-4">Admired Leadership is committed to protecting and respecting your privacy, and we’ll only use your personal information to administer your account and to provide the products and services you requested from us. From time to time, we would like to contact you about our products and services, as well as other content that may be of interest to you.</p>
+    <p>You can unsubscribe from these communications at any time. For more information on how to unsubscribe, our privacy practices, and how we are committed to protecting and respecting your privacy, please review our Privacy&nbsp;Policy.</p>
+  </main>
+<% end %>
+
+<% if current_user.db_sub && (current_user.stripe_sub.cancel_at_period_end || current_user.stripe_sub.status != "canceled") %>
+  <%= render "shared/modal", modal_id: "continue-subscription-modal", aria_label: "Dialog for subscription continuation. Escape will close the window." do %>
+    <header class="flex items-center justify-between mb-4">
+      <p class="text-xl font-bold text-grey-darkest">Continue Your Subscription</p>
+      <button class="micromodal__close p-2" aria-label="Close modal" data-micromodal-close></button>
+    </header>
+    <% if current_user.stripe_sub.cancel_at_period_end && (current_user.access_expiration_date > DateTime.now || current_user.stripe_sub.status == "active") %>
+      <main class="mb-6 text-grey-darkest">
+        <p>You will be charged $200 at the end of your current period end date of <%= current_user.stripe_sub.status == "active" ?  l(DateTime.strptime(current_user.stripe_sub.current_period_end.to_s, '%s'), format: :short_with_year) : l(current_user.access_expiration_date, format: :short_with_year)%>.</p>
+        <p>Subscription will get renewed annually until cancellation.</p>
+      </main>
+    <% else %>
+      <main class="mb-6 text-grey-darkest">
+        <p>You are renewing a subscription that expired on <%= l(DateTime.strptime(current_user.stripe_sub.current_period_end.to_s, '%s'), format: :short_with_year)%>. You will be charged $200 today to start your subscription plan.</p>
+        <p>Subscription will get renewed annually until cancellation.</p>
+      </main>
+    <% end %>
+    <footer>
+      <div class="flex flex-col md:flex-row items-center md:-mx-2">
+        <%= link_to "Continue My Subscription", curriculum_order_path(current_user.db_sub), remote: true, method: :patch, data: { params: "[order][status]=resubscribed", type: "json", "micromodal-close" => true } , class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 btn btn--primary-gradient" %>
+        <%= link_to "Go Back", "javascript:;", class: "md:mr-2 md:ml-auto text-grey-darker text-sm", data: { "micromodal-close" => true } %>
+      </div>
+    </footer>
+  <% end %>
+<% end %>
+
+<% if current_user.db_sub && (!current_user.stripe_sub.cancel_at_period_end && (current_user.stripe_sub.status == "active" || current_user.stripe_sub.status == "trialing")) %>
+  <%= render "shared/modal", modal_id: "cancel-subscription-modal", aria_label: "Dialog for subscription cancellation. Escape will close the window." do %>
+    <header class="flex items-center justify-between mb-4">
+      <p class="text-xl font-bold text-grey-darkest">Cancel Your Admired Leadership Subscription</p>
+      <button class="micromodal__close p-2" aria-label="Close modal" data-micromodal-close></button>
+    </header>
+    <main class="mb-6 text-grey-darkest">
+      <p>If you choose to end your current subscription, we are grateful for the time you have invested in the Admired Leadership platform. We trust it's made a significant difference in your leadership. If you change your mind later and want to rejoin the community &mdash; you will be more than welcome.</p>
+    </main>
+    <footer>
+      <div class="flex flex-col md:flex-row items-center md:-mx-2">
+        <%= link_to "Cancel My Subscription", curriculum_order_path(current_user.db_sub), remote: true, method: :patch, data: { params: "[order][status]=paused", type: "json", "micromodal-close" => true }, class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 btn btn--primary-gradient" %>
+        <%= link_to "Keep My Subscription", "javascript:;", class: "md:mr-2 md:ml-auto text-grey-darker text-sm", data: { "micromodal-close" => true } %>
+      </div>
+    </footer>
+  <% end %>
+
+  <%= render "shared/modal", modal_id: "cancel-confirmation-modal", aria_label: "Dialog confirming subscription cancellation. Escape will close the window." do %>
+    <header class="flex items-center justify-between mb-4">
+      <p class="text-xl font-bold text-grey-darkest">Thank You</p>
+      <button class="micromodal__close p-2" aria-label="Close modal" data-micromodal-close></button>
+    </header>
+    <main class="mb-6 text-grey-darkest" data-transaction="<%= current_user.db_sub %>" data-content="renewal" data-reappear="90">
+      <p class="mb-4">We've ended your Admired Leadership subscription.</p>
+      <select name="renew-remind" class="border p-2 pr-6 custom-select">
+        <option selected>Remind me to renew in...</option>
+        <option value="1">One month</option>
+        <option value="3">Three months</option>
+        <option value="0">No, thanks</option>
+      </select>
+    </main>
+    <footer>
+      <div class="flex flex-col md:flex-row items-center md:-mx-2">
+        <%= link_to "Close", "javascript:;", class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 btn btn--outline", data: { "micromodal-close" => true } %>
+      </div>
+    </footer>
+  <% end %>
+<% end %>
+
+<% content_for :additional_javascript do %>
+  <%= javascript_packs_with_chunks_tag 'v1/avatar' %>
+  <%= javascript_packs_with_chunks_tag 'v1/user-subscription' %>
+<% end %>

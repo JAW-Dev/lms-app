@@ -1,0 +1,24 @@
+<header class="flex items-center justify-between mb-4">
+  <p class="text-3xl font-bold text-grey-darkest">Renew Your Account</p>
+  <button class="micromodal__close p-2" aria-label="Close modal" data-micromodal-close></button>
+</header>
+
+<main class="mb-4 text-grey-darkest leading-normal" data-content="<%= session[:alert] %>" data-reappear="1">
+  <p class="mb-4 font-bold">Continue your leadership journey by renewing your membership.</p>
+  <p class="mb-4">Extending your membership in the Admired Leadership community is easy. And a great value &mdash; just $200 for another full year. Here are your benefits:</p>
+  <ul class="mb-8 pl-6">
+    <li>Continued access to all course content (including updated videos)</li>
+    <li>Continuity of tracking history and notes</li>
+    <li>Opportunity for involvement in monthly community discussion groups</li>
+    <li>Access to private “subscribers only” webinars</li>
+    <li>Invitation to our annual Admired Leadership Community Conference</li>
+  </ul>
+</main>
+
+<footer>
+  <div class="flex flex-col md:flex-row items-center md:-mx-2">
+    <%= link_to "Renew Account", curriculum_subscriptions_new_path, class: "w-full md:w-auto mb-6 md:mb-0 md:mx-2 btn btn--primary-gradient" %>
+    <%= link_to "Talk To Someone First", contact_path, class: "w-full md:w-auto mb-6 md:mb-0 md:mx-2 btn btn--outline" %>
+    <%= link_to "No Thanks", "javascript:;", class: "md:mr-2 md:ml-auto text-grey-darker text-sm", data: { "micromodal-close" => true } %>
+  </div>
+</footer>

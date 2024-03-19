@@ -1,0 +1,76 @@
+<% title @bundle.name %>
+<% description @bundle.description %>
+
+<div class="bg-grey-lighter overflow-hidden" data-progress="<%= can?(:read, @bundle) %>">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="py-12 lg:py-16">
+      <div class="max-w-lg">
+        <h1 class="mb-4 text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight"><%= @bundle.name %></h1>
+        <div class="progress-bar" data-progress="25%">
+          <div class="progress-bar__progress"></div>
+        </div>
+
+        <div class="progress-details">
+          <i class="text-purple mx-1 fas fa-sync-alt fa-xs"></i>
+          <p class="mx-1 text-purple text-sm font-bold uppercase">In progress</p>
+          <p class="mx-1 text-grey-darker text-sm font-bold">25%</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% if @next_behavior.present? %>
+  <div class="container">
+    <% present(@next_behavior.behavior) do |presented_behavior| %>
+      <div class="my-1 lg:max-w-xl lg:mx-16">
+        <div class="p-6 lg:px-0 lg:py-20">
+          <div class="flex flex-col md:flex-row">
+            <div class="flex-1 mb-6 md:mb-0">
+              <div class="relative mb-4 lg:mb-2">
+                <%= image_tag @bundle.image.large.url, alt: "preview image for #{@bundle.name}" if @bundle.image.present? %>
+                <%= link_to presented_behavior.watch_text(current_user, @next_behavior.bundle_course.course), presented_behavior.watch_link(current_user, @next_behavior.bundle_course.course, @bundle), class: "px-10 py-2 lg:py-3 text-center is-highlighted behavior-button" %>
+              </div>
+            </div>
+            <div class="flex-1 px-2 md:px-4 lg:px-8">
+              <% if @bundle.subheading.present? %>
+                <p class="mb-2 text-lg font-bold text-grey-darker leading-tight"><%= @bundle.subheading %></p>
+              <% end %>
+              <p class="text-grey-darker leading-loose md:text-sm"><%= @bundle.description %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+<% end %>
+
+<div class="lg:container mb-16">
+  <ol class="list-reset">
+    <% @courses.each do |bundle_course| %>
+      <li class="bundle-item">
+        <div class="flex pl-8 pr-10 lg:pl-12 py-8 text-left bg-gradient" data-accordion="true" aria-expanded="false">
+          <div class="flex-1">
+            <div class="flex items-center mb-2">
+              <div class="flex items-center relative mr-4 pl-px">
+                <span class="flex items-center justify-center text-lg font-bold text-purple-dark bg-white leading-tight behavior-title__number"><%= bundle_course.course.position %></span>
+              </div>
+              <h2 class="flex-1 ml-px leading-tight text-xl text-white">
+                <span><%= bundle_course.course.title %></span>
+              </h2>
+            </div>
+          </div>
+          <span class="text-2xl md:text-3xl text-white behavior__indicator">
+            <i class="far fa-angle-down"></i>
+          </span>
+        </div>
+
+        <div aria-hidden="true" data-accordion-panel>
+          <ol class="list-reset">
+            <%= render partial: bundle_course.behaviors.includes(:courses, :behavior_maps, :questions, :exercises, :examples), locals: { course: bundle_course.course, bundle: @bundle } %>
+          </ol>
+        </div>
+      </li>
+    <% end %>
+  </ol>
+</div>

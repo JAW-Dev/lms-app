@@ -1,0 +1,20 @@
+<% title 'Manage Seats' %>
+
+<div class="bg-grey-lighter">
+  <div class="container mb-10 px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="mb-3 text-5xl text-grey-darker font-extrabold leading-tight">Manage Seats</h1>
+        <h2 class="text-3xl text-grey-darker font-bold leading-tight"><%= present(@order).title %></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div id="user-seats" data-transaction="<%= @order.slug %>"></div>
+</div>
+
+<% content_for :additional_javascript do %>
+  <%= javascript_packs_with_chunks_tag 'v1/seats' %>
+<% end %>

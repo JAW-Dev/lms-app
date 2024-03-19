@@ -1,0 +1,24 @@
+<div class="<%= (@course.intro? || @course.bonus?) && "bg-pistachio-lightest" %>">
+  <div class="container py-1">
+    <% present(behavior) do |presented_behavior| %>
+      <div class="lg:max-w-xl lg:mx-16">
+        <div class="p-6 lg:px-0 lg:py-20">
+          <h2 class="mb-4 leading-tight text-2xl lg:text-3xl">
+            <%= link_to behavior.title, presented_behavior.watch_link(current_user, course, bundle), class: "text-brown no-underline hover:underline" %>
+          </h2>
+          <div class="flex flex-col md:flex-row">
+            <div class="flex-1 mb-6 md:mb-0">
+              <div class="relative mb-4 lg:mb-2">
+                <%= image_tag presented_behavior.thumbnail_url, alt: "preview image for #{behavior.title}" %>
+                <%= link_to presented_behavior.watch_text(current_user, course), presented_behavior.watch_link(current_user, course, bundle), class: "px-10 py-2 lg:py-3 text-center is-highlighted behavior-button" %>
+              </div>
+            </div>
+            <div class="flex-1 px-2 md:px-4 lg:px-8">
+              <p class="text-grey-darker leading-loose md:text-sm"><%= course.description %></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,117 @@
+<nav class="main-nav print:hidden <%= cookies["collapse-menu"] ? "is-collapsed" : ""  %> <%= yield :nav %>">
+
+  <div class="main-nav__inner">
+
+    <div class="main-nav__logos">
+      <span class="cursor-pointer hidden lg:block main-nav__toggle" id="nav-slide-toggle">
+        <i class="text-2xl text-grey-dark hover:text-white far fa-angle-left"></i>
+      </span>
+
+      <%= link_to "https://admiredleadership.com/", class: "lg:w-full" do %>
+        <%= inline_svg "cra-full-logo.svg", class: "h-16 lg:h-20 cra-logo--full print-hidden" %>
+        <%= inline_svg "cra-logomark-white.svg", class: "w-16 h-20 hidden cra-logo--mark print-hidden mx-auto" %>
+        <%= inline_svg "cra-full-logo-reversed.svg", class: "hidden print:block h-12" %>
+      <% end %>
+
+      <span class="text-xl text-grey-dark cursor-pointer hover:text-white lg:hidden print-hidden" id="nav-menu-toggle">
+        <i class="far fa-bars"></i>
+      </span>
+    </div>
+
+    <div class="nav-menu">
+      <div class="px-4 py-6 main-nav__cta">
+        <% if user_signed_in? %>
+          <% if current_user.profile.has_name? %>
+            <%= link_to user_profile_path, class: "block mb-6 text-center no-underline" do %>
+              <svg width="150" height="150" class="main-nav__avatar">
+                <defs>
+                  <clipPath id="clipping">
+                    <circle cx="75" cy="75" r="75"></circle>
+                  </clipPath>
+                </defs>
+                <% if current_user.profile.avatar.present? %>
+                  <image href="<%= current_user.profile.avatar.thumb.url %>" width="150" height="150" clip-path="url(#clipping)"></image>
+                <% else %>
+                  <circle cx="75" cy="75" r="75" fill="#ccc"></circle>
+                  <% present(current_user.profile) do |profile| %>
+                    <text x="50%" y="60%" class="text-5xl" text-anchor="middle"><%= profile.initials %></text>
+                  <% end %>
+                <% end %>
+              </svg>
+            <% end %>
+          <% end %>
+          <button class="block w-full uppercase text-white text-left font-bold" id="user-menu-toggle">
+            <span class="inline-block overflow-hidden whitespace-no-wrap mr-2 max-w-90 user-name">
+              <% present(current_user.profile) do |profile| %>
+                <%= profile.full_name %>
+              <% end %>
+            </span>
+            <i class="align-top far fa-angle-down"></i>
+          </button>
+          <nav class="relative">
+            <ul class="absolute list-reset w-full mt-2 bg-grey-darkest shadow-md z-10 max-h-0 opacity-0 overflow-hidden user-menu">
+              <li class="mb-px">
+                <%= link_to user_profile_path, class: "block nav-item" do %>
+                  <span class="text-white">My Account</span>
+                <% end %>
+              </li>
+              <% if current_user.company.present? && current_user.has_role?(:company_rep, current_user.company) %>
+                <li class="mb-px">
+                  <%= link_to edit_admin_company_path(current_user.company), class: "block nav-item" do %>
+                    <span class="text-white">Company Details</span>
+                  <% end %>
+                </li>
+              <% end %>
+              <% if current_user&.full_purchase&.any? %>
+                <li class="mb-px">
+                  <%= link_to curriculum_orders_path, class: "block nav-item" do %>
+                    <span class="text-white">Order History</span>
+                  <% end %>
+                </li>
+              <% end %>
+              <li class="mb-px">
+                <%= link_to destroy_user_session_path, method: :delete, class: "block nav-item" do %>
+                  <span class="text-white">Log Out</span>
+                <% end %>
+              </li>
+            </ul>
+          </nav>
+        <% else %>
+          <h3 class="text-lg text-white uppercase mb-2">Get Started</h3>
+          <p class="text-xs font-bold text-grey">
+            <% if default_full_access %>
+              Sign up for full access to Admired&nbsp;Leadership.
+            <% else %>
+              Sign up for a free account to unlock our five foundational videos and gain access to additional resources.
+            <% end %>
+          </p>
+          <p class="mb-6">
+            <%= link_to "Learn more", new_user_registration_path, class: "text-xs text-white" %>
+          </p>
+          <div class="flex -mx-2">
+            <%= link_to "Sign Up", new_user_registration_path, class: "flex-1 mx-2 py-3 text-center is-highlighted" %>
+            <%= link_to "Log In", new_user_session_path, class: "flex-1 mx-2 py-3 text-center is-highlighted" %>
+          </div>
+        <% end %>
+      </div>
+
+      <ul class="list-reset">
+        <% if current_user && current_user.has_role?(:manager) %>
+          <%= render "shared/admin_nav" %>
+        <% elsif current_user&.cra_employee? %>
+          <li class="nav-item-wrap mb-1">
+            <%= active_link_to admin_user_invites_path, class: "nav-item", class_active: "is-highlighted" do %>
+              <span class="nav-item__icon">
+                <i class="text-2xl fas fa-user-friends"></i>
+              </span>
+              <span class="nav-item__label">User Invites</span>
+            <% end %>
+          </li>
+        <% end %>
+        <%= render "shared/user_nav" %>
+      </ul>
+    </div>
+
+  </div>
+
+</nav>

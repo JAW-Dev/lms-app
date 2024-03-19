@@ -1,0 +1,181 @@
+<% title "Community Conference 2020" %>
+
+<div class="bg-grey-lighter">
+  <div class="container px-8 lg:px-16">
+    <div class="py-12 pb-16 max-w-lg mx-auto">
+      <h1 class="mb-2 text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight">Conferences</h1>
+      <h2 class="text-2xl lg:text-3xl text-grey-darker font-bold leading-tight">Community Conference&nbsp;2020</h2>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:px-16">
+  <div class="pt-12 pb-16 xl:pr-24 max-w-lg mx-auto">
+    <h2 class="mb-4 md:mb-8 text-brown">Morning Session</h2>
+    <div class="mb-8">
+      <div class="flex flex-col md:flex-row md:-mx-4">
+        <div class="md:w-1/5 md:mx-4">
+          <p class="mb-2 md:mb-0 text-sm md:text-right md:text-base">9:00 – 9:45 am</p>
+        </div>
+        <div class="md:w-4/5 md:pl-4 md:border-l border-dashed">
+          <h3 class="mb-4 text-xl text-grey-darker leading-tight">Opening Session</h3>
+          <div class="flex flex-col md:flex-row md:-mx-4 mb-8 md:mb-12">
+            <div class="md:w-1/2 md:mx-4">
+              <h4 class="mb-2 text-lg text-purple italic leading-tight"><%= link_to "The Promise of Admired Leadership".html_safe, "/conferences/community-2020/the-promise-of-admired-leadership", class: "text-purple" %><sup>&reg;</sup> <span class="block my-1 text-grey-darker font-normal text-base">with Randall Stutman, PhD.</span></h4>
+            </div>
+            <div class="md:w-1/2 md:mx-4">
+              <%= link_to "/conferences/community-2020/the-promise-of-admired-leadership", class: "block relative bg-black video-preview" do %>
+                <%= image_tag "https://play.vidyard.com/GSTzMAgQPp9Tea6Qryasfp.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:-mx-4">
+        <div class="md:w-1/5 md:mx-4">
+          <p class="mb-2 md:mb-0 text-sm md:text-right md:text-base">10:00 – 10:45 am</p>
+        </div>
+        <div class="md:w-4/5 md:pl-4 md:border-l border-dashed">
+          <h3 class="mb-4 text-xl text-grey-darker leading-tight">Panel Discussion</h3>
+          <div class="flex flex-col md:flex-row md:-mx-4 mb-8 md:mb-12">
+            <div class="md:w-1/2 md:mx-4">
+              <h4 class="mb-2 text-lg italic leading-tight"><%= link_to "Can You Really Learn Leadership Online?", "/conferences/community-2020/learn-leadership-online", class: "text-purple" %> <span class="block my-1 text-grey-darker font-normal text-base">with Shane Parrish and Scott Baker</span></h4>
+            </div>
+            <div class="md:w-1/2 md:mx-4">
+              <%= link_to "/conferences/community-2020/learn-leadership-online", class: "block relative bg-black video-preview" do %>
+                <%= image_tag "https://play.vidyard.com/nNK1hkEs1gHHtthoZbXCxr.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:-mx-4">
+        <div class="md:w-1/5 md:mx-4">
+          <p class="mb-2 md:mb-0 text-sm md:text-right md:text-base">11:00 – 12:00 pm</p>
+        </div>
+        <div class="md:w-4/5 md:pl-4 md:border-l border-dashed">
+          <h3 class="mb-4 text-xl text-grey-darker leading-tight">Special Keynote Speaker</h3>
+          <div class="flex flex-col md:flex-row md:-mx-4 mb-8">
+            <div class="md:w-1/2 md:mx-4">
+              <h4 class="mb-2 text-lg italic leading-tight"><%= link_to "Wholehearted Hope", "/conferences/community-2020/wholehearted-hope", class: "text-purple" %> <span class="block my-1 text-grey-darker font-normal text-base">with Danielle Strickland</span></h4>
+            </div>
+            <div class="md:w-1/2 md:mx-4">
+              <%= link_to "/conferences/community-2020/wholehearted-hope", class: "block relative bg-black video-preview" do %>
+                <%= image_tag "https://play.vidyard.com/UT6VPznTNiHaTLtv755L1L.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h2 class="mb-4 md:mb-8 text-brown">Afternoon Session</h2>
+    <div class="mb-2 <%= can?(:view_conference, :subscriber_content) ? "unlocked" : "locked" %>">
+      <div class="flex flex-col md:flex-row md:-mx-4">
+        <div class="md:w-1/5 md:mx-4">
+          <p class="mb-2 md:mb-0 text-sm md:text-right md:text-base">1:00 – 2:00 pm</p>
+        </div>
+        <div class="md:w-4/5 md:pl-4 md:border-l border-dashed">
+          <h3 class="mb-4 text-xl text-grey-darker leading-tight">Subscriber Webinar</h3>
+          <div class="flex flex-col md:flex-row md:-mx-4 mb-8 md:mb-12">
+            <div class="md:w-1/2 md:mx-4">
+              <h4 class="mb-2 text-lg italic leading-tight">
+                <%= link_to "Putting Admired Leadership Behaviors Into Action", can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/behaviors-into-action" : "javascript:;", class: "text-purple", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i> <span class="block my-1 text-grey-darker font-normal text-base">with live Q&A</span>
+              </h4>
+            </div>
+            <div class="md:w-1/2 md:mx-4">
+              <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/behaviors-into-action" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                <%= image_tag "https://play.vidyard.com/4rsAM3ctPuC5GunsFNTWMg.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:-mx-4">
+        <div class="md:w-1/5 md:mx-4">
+          <p class="mb-2 md:mb-0 text-sm md:text-right md:text-base">2:30 – 3:30 pm</p>
+        </div>
+        <div class="md:w-4/5 md:pl-4 md:border-l border-dashed">
+          <h3 class="mb-4 text-xl text-grey-darker leading-tight">Concurrent Leadership Topics</h3>
+          <div class="flex flex-col md:flex-row md:-mx-4 mb-8 md:mb-12">
+            <div class="md:w-1/2 md:mx-4">
+              <h4 class="mb-2 text-lg italic leading-tight"><%= link_to "Leading Virtual Teams", can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/leading-virtual-teams" : "javascript:;", class: "text-purple", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i> <span class="block my-1 text-grey-darker text-base">Creating Connection and Culture Over Distance</span><span class="block text-grey-darker font-normal text-base">with Diane Hong</span></h4>
+            </div>
+            <div class="md:w-1/2 md:mx-4">
+              <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/leading-virtual-teams" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                <%= image_tag "https://play.vidyard.com/zAReRPw4DWJrMD9DA3HeG5.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="flex flex-col md:flex-row md:-mx-4 mb-8 md:mb-12">
+            <div class="md:w-1/2 md:mx-4">
+              <h4 class="mb-2 text-lg text-purple italic leading-tight"><%= link_to "The Hidden Code of Executive&nbsp;Style".html_safe, can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/executive-style" : "javascript:;", class: "text-purple", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i> <span class="block my-1 text-grey-darker text-base">The Key to Executive Presence and&nbsp;Influence</span><span class="block text-grey-darker font-normal text-base"> with Robin Abramson and Suzanne Peterson</span></h4>
+            </div>
+            <div class="md:w-1/2 md:mx-4">
+              <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/executive-style" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                <%= image_tag "https://play.vidyard.com/GTk3svPzG44heBDhtkMuLR.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+
+          <div class="flex flex-col md:flex-row md:-mx-4 mb-8 md:mb-12">
+            <div class="md:w-1/2 md:mx-4">
+              <h4 class="mb-2 text-lg italic leading-tight"><%= link_to "Interviewing in the Virtual Environment", can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/interviewing-in-the-virtual-environment" : "javascript:;", class: "text-purple", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i> <span class="block my-1 text-grey-darker text-base">Selecting Talent in Our New Reality</span><span class="block text-grey-darker font-normal text-base">with Montana Rozmus</span></h4>
+            </div>
+            <div class="md:w-1/2 md:mx-4">
+              <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/interviewing-in-the-virtual-environment" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                <%= image_tag "https://play.vidyard.com/tWkq56UJ6rKGJASdR77FnY.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex flex-col md:flex-row md:-mx-4">
+        <div class="md:w-1/5 md:mx-4">
+          <p class="mb-2 md:mb-0 text-sm md:text-right md:text-base">4:00 – 5:00 pm</p>
+        </div>
+        <div class="md:w-4/5 md:pl-4 md:border-l border-dashed">
+          <h3 class="mb-4 text-xl text-grey-darker leading-tight">Closing Session</h3>
+          <div class="flex flex-col md:flex-row md:-mx-4 mb-8 md:mb-12">
+            <div class="md:w-1/2 md:mx-4">
+              <h4 class="mb-2 text-lg italic leading-tight"><%= link_to "Do You Think Like An Admired&nbsp;Leader?".html_safe, can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/do-you-think-like-an-admired-leader" : "javascript:;", class: "text-purple", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } %> <i class="fas fa-lock text-grey-dark session-topic__lock"></i> <span class="block my-1 text-grey-darker font-normal text-base">with Randall Stutman, PhD.</span></h4>
+            </div>
+            <div class="md:w-1/2 md:mx-4">
+              <%= link_to can?(:view_conference, :subscriber_content) ? "/conferences/community-2020/subscribers/do-you-think-like-an-admired-leader" : "javascript:;", class: "block relative bg-black video-preview", data: can?(:view_conference, :subscriber_content) ? {} : { "micromodal-trigger" => "subscriber_cta" } do %>
+                <%= image_tag "https://play.vidyard.com/yTcCz9dQhB3xoDmzGBBD5u.jpg" %>
+                <i class="fas fa-play text-4xl text-white"></i>
+              <% end %>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="micromodal" id="subscriber_cta" aria-hidden="true">
+  <div class="micromodal__overlay" tabindex="-1" data-micromodal-close>
+    <div class="max-h-screen px-8 py-6 bg-white micromodal__container" role="dialog" aria-modal="true" aria-label="Become a subscriber to unlock all conference content.">
+      <header class="flex justify-end">
+        <button class="micromodal__close p-2" aria-label="Close modal" data-micromodal-close></button>
+      </header>
+      <main class="mb-6 text-grey-darkest leading-normal">
+        <p class="mb-2 text-2xl font-bold">Subscribers Only</p>
+        <p class="mb-4">Upgrade now for full access to all of our exclusive leadership&nbsp;content.</p>
+        <%= link_to "Get Full Access", new_user_access_path(user_type: :me), class: "w-full md:w-auto btn btn--primary-gradient" %>
+      </main>
+    </div>
+  </div>
+</div>

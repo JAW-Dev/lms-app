@@ -1,0 +1,44 @@
+.course-item-wrap.expandable {
+  position: relative;
+  transition: box-shadow 0.2s ease;
+}
+
+.course-item-wrap.expandable:hover,
+.course-item-wrap.expandable:focus-within {
+  @apply .shadow-lg .z-1;
+}
+
+.course-item-wrap.expandable .expand-indicator svg {
+  transition: transform 0.2s ease;
+}
+
+.course-item-wrap.expandable [aria-expanded="true"] .expand-indicator svg {
+  transform: rotate(180deg);
+}
+
+.course-item-title__lock,
+.course-item-title__check {
+  @apply .absolute;
+  right: 2.5rem;
+}
+
+.course-item.unlocked .course-item-title__lock {
+  @apply .hidden;
+}
+
+.course-item.completed .course-item-title__check {
+  @apply .block;
+}
+
+.course-item.locked .behavior-button[data-continue] {
+  @apply .hidden;
+}
+
+.course-item.unlocked .behavior-button[data-purchase] {
+  @apply .hidden;
+}
+
+.behavior--feature .course-item-title__lock,
+.behavior--feature .course-item-title__check {
+  @apply .text-white;
+}

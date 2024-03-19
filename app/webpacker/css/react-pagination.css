@@ -1,0 +1,10 @@
+.pagination button {
+  padding: 8px 16px;
+
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.pagination {
+  gap: 8px;
+}

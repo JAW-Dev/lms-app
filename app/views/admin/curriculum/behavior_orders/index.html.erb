@@ -1,0 +1,67 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="text-5xl text-grey-darker font-extrabold leading-tight">Gifts</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div class="pt-12 pb-16">
+
+    <div class="flex flex-col md:flex-row justify-between w-full mb-4 md:mb-6 -mx-1">
+      <%= render "admin/shared/search", search_scope: :user_email_or_gift_recipient_email_or_gift_recipient_name_cont, search_path: admin_curriculum_behavior_orders_path %>
+      <%= render "admin/curriculum/orders/controls" %>
+    </div>
+    
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
+      <p class="text-lg mb-4 sm:mb-0 <%= "invisible" if @orders.any? %>" aria-hidden="<%= @orders.any? %>">No gifts found.</p>
+    </div>
+
+    <% if @orders.any? %>
+      <%= render "admin/curriculum/orders/tabs" %>
+
+      <table class="w-full mb-8 striped-table">
+        <thead>
+          <tr>
+            <th class="px-2 md:px-4 text-left">Order Date</th>
+            <th class="px-2 md:px-4 text-left">Buyer</th>
+            <th class="px-2 md:px-4 text-left">Sent to</th>
+            <th class="px-2 md:px-4 text-left">Status</th>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @orders.each do |order| %>
+            <tr>
+              <td class="p-2 md:p-4">
+                <%= l(order.sold_at, format: :short_with_year) %></p>
+              </td>
+              <td class="p-2 md:p-4">
+                <p><%= link_to present(order.user.profile).full_name, [:admin, order.user] %></p>
+              </td>
+              <td class="p-2 md:p-4">
+                <p><%= mail_to order.gift.recipient_email %><%= " (#{order.gift.recipient_name})" if order.gift.recipient_name.present? %></p>
+              </td>
+              <td class="p-2 md:p-4">
+                <p><%= raw present(order.gift).status %></p>
+              </td>
+              <td class="p-2 md:p-4">
+                <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                  <%= link_to 'Order Details', curriculum_order_path(order), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--default rounded" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+  </div>
+</div>

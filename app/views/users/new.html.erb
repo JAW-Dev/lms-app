@@ -1,0 +1,43 @@
+<% title 'Sign Up' %>
+
+<div class="bg-grey-lightest min-h-full">
+  <div class="container pb-10 lg:pb-0 sm:px-8 lg:pr-12">
+    <div class="lg:py-12">
+      <div class="flex flex-col xl:flex-row">
+        <div class="flex-1 my-10 lg:my-6 px-8">
+          <h1 class="mb-6 text-2xl md:text-3xl text-grey-darkest leading-tight">Begin Your Journey to Becoming a&nbsp;Better Leader</h1>
+          <p class="mb-4">By purchasing the complete Admired Leadership<sup>&reg;</sup> course, you'll receive one year of full access to:</p>
+          <ul class="mb-6 pl-6">
+            <li class="mb-2">15+ hours of video and audio content.</li>
+            <li class="mb-2">100 behaviors, each explained in about 10 minutes or less.</li>
+            <li class="mb-2">10 distinct modules covering a wide variety of important leadership topics.</li>
+            <li class="mb-2">Extensive study materials including behavior maps, questions, examples and exercises.</li>
+          </ul>
+          <p class="mb-4">In addition to the content, subscribers will receive access to the following:</p>
+          <ul class="mb-8 pl-6">
+            <li class="mb-2">Invitation to the annual Admired Leadership Community Conference.</li>
+            <li class="mb-2">Weekly book summaries to stay abreast of the current writings on leadership.</li>
+            <li class="mb-2">Private webinars with an executive coach to have your questions answered live.</li>
+            <li class="mb-2">Monthly community discussion groups where leaders like yourself meet to discuss the Admired Leadership behaviors. An Admired Leadership coach will be on hand to facilitate the dialogue.</li>
+          </ul>
+          <p class="text-lg mb-6 font-bold">Sign up now and get the complete course for just $1,000</p>
+          <p class="text-sm text-grey-darker">Note: The full access is valid for 1-year from date of purchase. Renewal is $200 a year and does not automatically renew.</p>
+        </div>
+
+        <div class="w-full xl:w-1/2">
+          <div class="bg-white mb-4 shadow-md overflow-hidden">
+            <%= render partial: "devise/registrations/form", locals: { resource: @user, resource_name: :user, show_opt_in: true, form_title: "Get Started", button_label: "Start Checkout", hide_omniauth: true } %>
+          </div>
+          <p class="text-sm text-center">
+            Already have any account? <%= link_to "Log in to get started", new_curriculum_order_path %>.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :additional_javascript do %>
+  <%= javascript_packs_with_chunks_tag 'v1/modal' %>
+  <%= javascript_packs_with_chunks_tag 'v1/avatar' %>
+<% end %>

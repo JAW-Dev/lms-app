@@ -1,0 +1,25 @@
+.accordion-indicator {
+  transition: transform 0.3s ease;
+}
+
+[data-accordion][aria-expanded="true"] .accordion-indicator {
+  transform: rotate(90deg);
+}
+
+[data-accordion-panel]
+  [data-accordion]:not([aria-expanded="true"])
+  .accordion-indicator {
+  transform: rotate(0);
+}
+
+[data-accordion-panel] {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.3s ease;
+}
+
+@media print {
+  [data-accordion-panel] {
+    max-height: none;
+  }
+}

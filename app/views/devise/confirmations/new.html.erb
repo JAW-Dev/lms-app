@@ -1,0 +1,52 @@
+<% title 'Resend Confirmation Instructions' %>
+
+<div class="h-full z-10 relative">
+
+  <header class="relative pin-l z-50 w-full" id="v2-header" style="position: fixed; z-index: 999; transition: all 0.1s linear 0s; top: 0px;">
+    <div class="bg-white-faint w-full flex justify-center border-b border-gray-light">
+      <div class="w-full full-screen-container my-3 lg:my-6 flex items-center">
+        <a href="/">
+          <img src="/packs/media/reskin-images/logo--cra-reversed-89921be8.svg" alt="Admired Leadership Logo" class="-mb-2" style="max-height: 38px;">
+        </a>
+        <div class="flex items-center ml-auto" style="gap: 36px;">
+          <p class="hide-label font-bold" style="font-size: 14px;"><%= link_to "Get Full Access", new_user_access_path, class: "text-charcoal" %></p>
+          <a href="/users/sign_in" class="uppercase no-underline flex px-6 py-3 bg-link-purple border-2 border-link-purple text-white font-extrabold uppercase rounded-full hover:bg-purple-500 hover:border-purple-500 font-bold" style="width: fit-content; border-radius: 16px;">
+            <div>Log In</div>
+          </a>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="flex flex-col justify-center items-center w-full h-full" style="color: #3C3C3C">
+    <div id="login" class="p-6 md:p-16" style="border-radius: 32px; box-shadow: rgba(0, 0, 0, 0.2) 0px 10px 50px; width: 100%; max-width: 430px; margin-top: 160px;">
+      <h3 class="mb-8" style="font-size: 20px; font-weight: 600;">Resend confirmation instructions</h3>
+      <%= render "devise/shared/error_messages", resource: resource %>
+
+      <%= form_for(resource, as: resource_name, url: confirmation_path(resource_name), html: { method: :post }) do |f| %>
+        <div class="flex flex-col" style="gap: 8px;">
+          <%= f.label :email, class: "text-sm text-charcoal font-bold" %>
+          <div class="active-text flex items-center border-2 relative" style="border-radius: 12px; min-width: 100%;">
+            <%= f.email_field :email, autofocus: true, autocomplete: "email", value: (resource.pending_reconfirmation? ? resource.unconfirmed_email : resource.email), required: true, class: "px-2 py-2 rounded-full focus:outline-none w-full", style: "border-radius: 12px" %>
+          </div>
+        </div>
+
+        <% if flash.alert %>
+          <div className="mb-2" style="display: flex; gap: 10px;">
+            <div style="width: 24px; height: 24px;">
+              <%= inline_svg('reskin-images/icon--danger.svg') %>
+            </div>
+            <div><%= flash.alert %></div>
+          </div>
+        <% end %>
+
+        <div class="actions mt-12 px-4 actions inline-flex justify-center itmes-center mt-4 bg-link-purple border-link-purple hover:border-purple-500" style="height: 44px; border-radius: 16px;">
+          <%= f.button "Resend instructions", type: "submit", class: "w-full h-full text-white font-bold" %>
+        </div>
+      <% end %>
+
+    </div>
+  </div>
+</div>
+
+<div class="h-full w-full absolute pin-t pin-l z-0" style="opacity: 0.05; background: linear-gradient(180deg, rgba(60, 60, 60, 0.00) 0%, #3C3C3C 100%);"></div>

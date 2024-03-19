@@ -1,0 +1,81 @@
+<% title 'Get Access' %>
+<% content_for(:nav) { "is-collapsed" } %>
+
+<div class="bg-grey-lightest">
+  <div class="container px-8 access-paths">
+    <div class="py-12 mx-auto access-paths__container">
+      <h1 class="mx-4 mb-8 text-3xl lg:text-4xl text-grey-darkest leading-tight">Pick your path.</h1>
+
+      <div class="flex flex-col xl:flex-row xl:-mx-4 pt-4 pb-8">
+        <div class="flex flex-col w-full xl:w-1/3 xl:mx-4 mb-10 xl:mb-0 px-4">
+          <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-grey-light">
+            <i class="fad fa-male text-4xl text-purple-dark"></i>
+          </div>
+          <h2 class="text-xl mb-4 font-bold text-grey-darkest">For Individuals</h2>
+          <div class="flex-grow">
+            <p class="mb-4 text-grey-darkest italic">Begin Your Journey to Becoming a Better Leader</p>
+            <ul class="mb-4 pl-8 text-grey-darkest">
+              <li>100 Behaviors</li>
+              <li>15 Hours of Video Content</li>
+              <li>Extensive Study Materials</li>
+              <li>10 Modules</li>
+              <li>A Full Year of Access</li>
+            </ul>
+            <p class="mb-4 font-bold">$1,000 for full-course access</p>
+          </div>
+          <%= link_to 'Get Access for Me', user_signed_in? ? new_curriculum_order_path : new_user_access_path(user_type: :me), class: "w-full mb-2 btn btn--lg btn--primary-gradient" %>
+        </div>
+
+        <div class="hidden lg:block border-r"></div>
+
+        <div class="flex flex-col w-full xl:w-1/3 xl:mx-4 mb-10 xl:mb-0 px-4">
+          <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-grey-light">
+            <i class="fad fa-users text-3xl text-purple-dark"></i>
+          </div>
+          <h2 class="text-xl mb-4 font-bold text-grey-darkest">For Teams</h2>
+          <div class="flex-grow">
+            <p class="mb-4 text-grey-darkest italic">Great Leaders Develop Teams of Great Leaders</p>
+            <p class="mb-2 text-grey-darkest">Learn more about:</p>
+            <ul class="mb-4 pl-8 text-grey-darkest">
+              <li>Group Pricing</li>
+              <li>Team Dialogues</li>
+              <li>Individual Coaching</li>
+            </ul>
+            <p class="mb-4 font-bold">Contact us for custom solutions for your&nbsp;team</p>
+          </div>
+          <%= link_to 'Get Access for My Team', new_user_access_path(user_type: :team), class: "w-full mb-2 btn btn--lg btn--primary-gradient shadow-md" %>
+        </div>
+
+        <div class="hidden lg:block border-r"></div>
+
+        <div class="flex flex-col w-full xl:w-1/3 xl:mx-4 mb-10 xl:mb-0 px-4">
+          <div class="flex items-center justify-center w-12 h-12 mb-4 rounded-full bg-grey-light">
+            <i class="fad fa-hands-heart text-3xl text-purple-dark"></i>
+          </div>
+          <h2 class="text-xl mb-4 font-bold text-grey-darkest">For Non-Profits Leaders</h2>
+          <div class="flex-grow">
+            <p class="mb-4 text-grey-darkest italic">Better Leaders Make People Better</p>
+            <p class="mb-4 text-grey-darkest">We understand that the importance of leadership development is not always an easy fit with existing budget priorities in many non-profit organizations.</p>
+            <p class="mb-4 text-grey-darkest">Still, the Admired Leadership content is ideal for all kinds of leaders in government, education, athletics, and the arts. Religious leaders and community workers as well.</p>
+            <p class="mb-4 font-bold">Contact us for attractive course options</p>
+          </div>
+          <%= link_to "Get More Info", new_user_access_path(user_type: :nonprofit), class: "w-full mb-2 btn btn--lg btn--primary-gradient shadow-md" %>
+        </div>
+      </div>
+
+      <% unless user_signed_in? %>
+        <hr class="border-t pb-6">
+
+        <div class="px-4 pb-8">
+          <h2 class="mb-4 text-xl lg:text-3xl text-grey-darkest leading-tight">Not ready to enroll? No problem!</h2>
+
+          <p class="mb-2 text-grey-darkest">Don't miss <span class="font-bold">An Introduction to Admired Leadership<sup>&reg;</sup></span></p>
+          <p class="mb-6 text-grey-darkest">Watch our five complimentary foundational videos.</p>
+          <div class="w-full xl:w-1/3">
+            <%= link_to 'Get Free Access', new_user_access_path(user_type: :direct), class: "w-full mb-2 btn btn--lg btn--primary-gradient" %>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

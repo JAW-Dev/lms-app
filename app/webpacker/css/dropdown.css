@@ -1,0 +1,35 @@
+.dropdown {
+  @apply .relative .flex;
+}
+
+.dropdown__menu {
+  @apply .hidden .absolute .pin-r;
+  top: 100%;
+  width: calc(100% + 1rem);
+}
+
+.dropdown__menu-content {
+  @apply .mt-1 .py-1 .bg-white .border .shadow-md;
+}
+
+.dropdown__menu-item {
+  @apply .block .px-2 .py-1 .text-grey-darker .text-right .text-sm .no-underline;
+}
+
+.dropdown__menu-item:hover {
+  @apply .bg-grey-lighter .text-grey-darkest;
+}
+
+.dropdown:hover .dropdown__menu {
+  @apply .block;
+}
+
+.custom-select,
+.custom-select--arrow,
+select.hs-input {
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' version='1.1' x='12px' y='0px' width='24px' height='5px' viewBox='0 0 6 3' enable-background='new 0 0 6 3' xml:space='preserve' fill='%236357B5'%3E%3Cpolygon points='5.992,0 2.992,3 -0.008,0 '/%3E%3C/svg%3E");
+  background-position: calc(100% - 0.5rem) center;
+  background-repeat: no-repeat;
+  @apply pr-8;
+}

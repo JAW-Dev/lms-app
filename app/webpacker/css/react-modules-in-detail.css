@@ -1,0 +1,57 @@
+/* purgecss start ignore */
+.module-slider-gradient {
+  background: linear-gradient(
+    90deg,
+    #f8f8f8 80.89%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  /* filter: blur(21px); */
+}
+
+.swiper-initialized {
+  min-width: 100vw;
+}
+
+.swiper-slide {
+  width: auto !important;
+}
+
+.behavior-swiper > .swiper-wrapper {
+  margin-right: -600px !important;
+}
+
+.behavior-play-card {
+  box-shadow: 0px 20px 50px rgba(0, 0, 0, 0.1);
+  height: 518px;
+  width: 465px;
+}
+
+.module-text {
+  min-width: 465px;
+  min-height: 680px;
+}
+
+@media only screen and (max-width: 1200px) {
+  .module-text {
+    min-width: auto;
+    min-height: auto;
+  }
+  .behavior-swiper > .swiper-wrapper {
+    margin-right: 0 !important;
+  }
+}
+
+@media only screen and (max-width: 768px) {
+  .behavior-play-card {
+    height: auto;
+    width: auto;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .module-text {
+    width: auto !important;
+    min-width: auto !important;
+  }
+}
+/* purgecss end ignore */

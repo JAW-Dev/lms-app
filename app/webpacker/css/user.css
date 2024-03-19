@@ -1,0 +1,92 @@
+.user-behavior__locked,
+.user-behavior__unlocked,
+.user-behavior__unplayed,
+.user-behavior__progress,
+.user-behavior__complete {
+  @apply .hidden;
+}
+
+/* Locked */
+.user-behavior.locked {
+  @apply .opacity-50;
+}
+
+.user-behavior.locked .user-behavior__locked {
+  @apply .block;
+}
+
+/* Unlocked */
+.user-behavior.unlocked .user-behavior__unlocked {
+  @apply .block;
+}
+
+/* Completed */
+.user-behavior.completed .user-behavior__complete {
+  @apply .block;
+}
+
+/* In-progress */
+.user-behavior.in-progress .user-behavior__progress {
+  @apply .block;
+}
+
+/* Unplayed */
+.user-behavior.unplayed .user-behavior__unplayed {
+  @apply .block;
+}
+
+/* .user-behavior.unlocked .user-behavior__locked,
+.user-behavior.completed .user-behavior__unplayed {
+  @apply .hidden;
+}
+
+.user-behavior.unlocked .user-behavior__unplayed {
+  @apply .block;
+}
+
+.user-behavior.in-progress .user-behavior__progress {
+  @apply .block;
+}
+
+.user-behavior.in-progress .user-behavior__unplayed {
+  @apply .hidden;
+}
+
+.user-behavior.completed .user-behavior__progress,
+.user-behavior.completed .user-behavior__unplayed {
+  @apply .hidden;
+}
+
+.user-behavior.completed .user-behavior__complete {
+  @apply .block;
+} */
+
+#avatar-preview__img {
+  transform-origin: 50% 50%;
+}
+
+.avatar-preview__img--cw {
+  transform: rotate(90deg);
+}
+
+.avatar-preview__img--ccw {
+  transform: rotate(-90deg);
+}
+
+.access-paths__container {
+  @apply .max-w-xl;
+}
+
+.is-collapsed + section .access-paths__container {
+  @apply .max-w-none;
+}
+
+@screen lg {
+  .access-paths {
+    @apply .px-24;
+  }
+
+  .is-collapsed + section .access-paths {
+    @apply .px-8;
+  }
+}

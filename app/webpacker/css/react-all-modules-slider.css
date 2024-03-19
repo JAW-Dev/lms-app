@@ -1,0 +1,26 @@
+/* purgecss start ignore */
+
+.module-video-card {
+  max-width: 432px;
+}
+
+.module-video-card:first-child {
+  /* background: black !important; */
+}
+
+@media only screen and (max-width: 768px) {
+  .module-video-card {
+    max-width: none;
+    width: 100%;
+  }
+
+  .module-video-card > div:first-child {
+    width: 100%;
+    padding-right: 64px;
+  }
+  .module-video-card__button {
+    right: 0 !important;
+  }
+}
+
+/* purgecss end ignore */

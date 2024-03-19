@@ -1,0 +1,21 @@
+<div class="relative lg:sticky print:hidden <%= alert.present? ? 'notice notice--alert' : 'notice' %> <%= notice.blank? && alert.blank? ? 'is-hidden' : '' %>">
+  <p class="text-center text-xl font-bold p-4">
+    <%= raw(notice) %>
+    <%= raw(alert) %>
+  </p>
+  <span class="close-notice">
+    <i class="text-xl far fa-times"></i>
+  </span>
+</div>
+
+<% if session[:alert].present? && cookies["alert.#{session[:alert]}"].blank? %>
+  <%= render "shared/modal", modal_id: "alerts-modal", aria_label: "Dialog with a message from Admired Leadership. Escape will close the window." do %>
+    <%= render "shared/alerts/#{session[:alert]}" %>
+  <% end %>
+<% end %>
+
+<%= render "shared/modal", modal_id: "processing-modal", aria_label: "Dialog while processing in background. Escape will close the window." do %>
+  <div class="flex justify-center">
+    <p class="text-xl font-bold text-grey-darkest">Please wait...</p>
+  </div>
+<% end %>

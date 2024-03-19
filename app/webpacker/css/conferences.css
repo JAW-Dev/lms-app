@@ -1,0 +1,163 @@
+.unlocked .session-topic__lock {
+  @apply .hidden;
+}
+
+#register-bg .hs-input:not([type="checkbox"]):not([type="radio"]) {
+  width: 100%;
+  font-family: inherit;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+
+#register-bg .hs-input[type="checkbox"],
+#register-bg .hs-input[type="radio"] {
+  margin-right: 0.5em;
+}
+
+#register-bg .hs-button {
+  @apply .btn .btn--lg .btn--primary;
+}
+
+img.conferences-intro-image {
+  width: 100%;
+  height: auto;
+}
+
+section.conferences-section {
+  display: flex;
+  justify-content: center;
+  padding: 50px 0;
+  transition: all 0.3s ease;
+}
+
+section.conferences-section:hover {
+  box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 12px;
+}
+
+section.conferences-section p {
+  color: #535557;
+}
+
+section.conferences-section h2 {
+  text-transform: uppercase;
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 36px;
+}
+
+section.conferences-section h3 {
+  font-size: 1.25rem;
+  font-weight: 600;
+}
+
+section.conferences-section a {
+  color: #8f89bf;
+  transition: all 0.3s ease;
+  text-decoration: none;
+}
+section.conferences-section a:hover,
+section.conferences-section a:focus {
+  color: #191970;
+}
+
+.conferences-section__wrapper {
+  padding: 16px;
+  display: flex;
+  max-width: 1200px;
+  width: 100%;
+}
+
+.conferences-section-1__text-content {
+  width: 50%;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  justify-content: center;
+  padding-right: 48px;
+}
+
+.conferences-text-block {
+  margin-bottom: 36px;
+}
+
+.conferences-text-block:last-of-type {
+  margin-bottom: 0px;
+}
+
+.conferences-text-block > h3 {
+  margin-bottom: 16px;
+}
+
+.conferences-text-block > p {
+  margin-bottom: 12px;
+}
+
+.conferences-text-block > p:last-of-type {
+  margin-bottom: 0px;
+}
+
+section.conferences-section ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.conferences-section-1__video {
+  width: 50%;
+  height: auto;
+  display: flex;
+  align-items: start;
+  justify-content: center;
+}
+
+.conferences-section__wrapper--agenda {
+  flex-direction: column;
+}
+
+.conferences-section__wrapper--agenda ul:first-of-type {
+  font-weight: bold;
+  max-width: 700px;
+  color: black;
+}
+.conferences-section__wrapper--agenda ul:first-of-type > li {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+.conferences-section__wrapper--agenda ul:first-of-type > li p:last-of-type {
+  width: 70%;
+}
+
+.register-button {
+  padding: 16px 35px;
+  background: #8f87c1;
+  border: none;
+  border-radius: 8px;
+  color: white !important;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 24px;
+}
+
+.register-button:hover {
+  filter: brightness(1.2);
+}
+
+@media (max-width: 991.98px) {
+  .conferences-section__wrapper {
+    padding: 16px;
+    flex-direction: column;
+    width: 100%;
+  }
+  .conferences-section-1__text-content {
+    padding-right: 0px;
+    margin-bottom: 24px;
+    width: 100%;
+  }
+  .conferences-section-1__video {
+    width: 100%;
+  }
+
+  .register-button {
+    margin: 24px auto 0 auto;
+  }
+}

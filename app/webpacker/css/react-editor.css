@@ -1,0 +1,47 @@
+.custom-quill .ql-editor.ql-blank::before {
+  color: #999; /* Placeholder text color */
+  font-style: normal; /* Placeholder font style */
+}
+
+.custom-quill .ql-editor {
+  font-size: 16px; /* Content font size */
+  color: #3c3c3c; /* Content text color */
+}
+
+.ql-toolbar {
+  border-top: none !important;
+  border-left: none !important;
+  border-right: none !important;
+  border-bottom: 1px solid #dad9d9 !important;
+}
+
+.ql-container {
+  border: none !important;
+}
+
+/* Style the button background when underline is active */
+.custom-quill .ql-toolbar .ql-underline.ql-active,
+.custom-quill .ql-toolbar .ql-italic.ql-active,
+.custom-quill .ql-toolbar .ql-bold.ql-active,
+.custom-quill .ql-toolbar .ql-list.ql-active {
+  background-color: rgba(139, 127, 219, 0.3);
+  fill: white;
+  border-radius: 4px;
+}
+
+.custom-quill .ql-toolbar button.ql-italic {
+  margin: 0 4px !important;
+}
+
+@media only screen and (max-width: 992px) {
+  .custom-quill .ql-editor {
+    height: calc(100vh - 300px);
+  }
+
+  .custom-quill .ql-toolbar {
+    padding: 8px 0px !important;
+  }
+  .ql-toolbar.ql-snow .ql-picker-label {
+    padding: 0;
+  }
+}

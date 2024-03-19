@@ -1,0 +1,58 @@
+<div style="background-color: #3b3e44; padding: 10px 0; text-align: center;">
+  <%= image_tag(asset_url("cra-full-logo.png"), alt: "Admired Leadership logo", style: "width: 264px", width: "264") %>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width: 100%; background-color: #dfdfe0;">
+  <tbody>
+    <tr>
+      <td>&nbsp;</td>
+      <td style="max-width: 600px">
+        <div style="max-width: 600px; margin: 25px auto;">
+          <table style="background-color: #fff; width: 100%; border-radius: 4px;">
+            <tbody>
+              <tr>
+                <td style="padding: 20px;">
+                  <table style="width: 100%">
+                    <tbody>
+                      <tr>
+                        <td><p style="margin: 0; margin-bottom: 16px; font-size: 24px;  font-weight: bold; font-family: Nunito Sans, Calibri, Helvetica, sans-serif;">Order Complete</p></td>
+                        <td align="right"><p style="margin: 0; margin-bottom: 16px; font-size: 16px; font-family: Nunito Sans, Calibri, Helvetica, sans-serif;">#<%= @order.transaction_id.upcase %></p></td>
+                      </tr>
+                      <%= render "order_details" %>
+                      <tr>
+                        <td colspan="2" align="center" style="padding-bottom: 16px;">
+                          <% if @order.gift? %>
+                            <p style="margin: 0; margin-bottom: 16px; font-size: 14px; font-family: Nunito Sans, Calibri, Helvetica, sans-serif;">Gift sent to <%= @order.gift.recipient_email %></p>
+                          <% else %>
+                            <table style="width: 100%;">
+                              <tbody>
+                                <tr>
+                                  <td style="padding: 10px 20px;">
+                                    <!-- Button : BEGIN -->
+                                    <table align="center" role="presentation" cellspacing="0" cellpadding="0" border="0" style="margin: auto;">
+                                      <tr>
+                                        <td class="button-td button-td-primary" style="background: #978edf;">
+                                          <%= link_to "Launch Content", curriculum_courses_url, class: "button-a button-a-primary", style: "background: #978edf; font-family: Nunito Sans, Calibri, Helvetica, sans-serif; font-size: 14px; line-height: 16px; font-weight: bold; text-decoration: none; padding: 12px 36px; color: #ffffff; display: block; text-transform: uppercase;" %>
+                                        </td>
+                                      </tr>
+                                    </table>
+                                    <!-- Button : END -->
+                                  </td>
+                                </tr>
+                              </tbody>
+                            </table>
+                          <% end %>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>

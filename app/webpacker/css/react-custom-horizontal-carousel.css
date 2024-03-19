@@ -1,0 +1,17 @@
+.carousel-container {
+  position: relative;
+  overflow: hidden;
+}
+
+.custom-horizontal-carousel {
+  display: flex;
+  overflow-x: scroll;
+  scroll-behavior: smooth;
+  white-space: nowrap;
+  scrollbar-width: none; /* Firefox */
+  -ms-overflow-style: none; /* Internet Explorer 10+ */
+}
+
+.custom-horizontal-carousel::-webkit-scrollbar {
+  display: none; /* Safari and Chrome */
+}

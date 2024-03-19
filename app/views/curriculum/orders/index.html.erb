@@ -1,0 +1,58 @@
+<% title 'My Orders' %>
+
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="py-12 lg:py-16">
+      <div class="max-w-lg">
+        <h1 class="text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight">Order History</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div class="pt-12 pb-16">
+    <% if @orders.any? %>
+      <table class="w-full striped-table">
+        <thead>
+          <tr>
+            <th class="px-4 text-left">Order Details</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @orders.includes([:courses, :behaviors, gift: [:user]]).each do |order| %>
+          <tr>
+            <td class="p-2 md:p-4 align-top">
+              <% if order.is_a?(BehaviorOrder) && order.gift? %>
+                <% order.behaviors.each do |behavior| %>
+                  <p class="mb-2"><%= behavior.title %> <i class="cra fa-gift"></i></p>
+                <% end %>
+              <% else %>
+                <% order.courses.each do |course| %>
+                  <p class="mb-2"><%= course.title %></p>
+                <% end %>
+              <% end %>
+
+              <p class="mb-2 text-sm hidden md:block">Purchase date: <%= l(order.sold_at, format: :short_with_year) %></p>
+              <% if order&.gift&.redeemed? %>
+                <p class="mb-2 text-sm hidden md:block">Redeemed by <%= order.gift.user.email %> on <%= l(order.gift.user.created_at, format: :short_with_year) %></p>
+              <% end %>
+            </td>
+
+            <td class="p-2 md:p-4 align-top">
+              <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                <%= link_to 'View Receipt', curriculum_order_path(order), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--default" %>
+                <%= link_to 'Manage Seats', curriculum_user_seats_path(order), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary-gradient" if can?(:create, UserSeat) %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% else %>
+      <p>No orders yet.</p>
+    <% end %>
+  </div>
+</div>

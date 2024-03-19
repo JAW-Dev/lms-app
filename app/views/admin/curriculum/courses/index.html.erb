@@ -1,0 +1,55 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="text-5xl text-grey-darker font-extrabold leading-tight">Program Modules</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div class="pt-12 pb-16">
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
+      <p class="text-lg mb-4 sm:mb-0 <%= "invisible" if @courses.any? %>" aria-hidden="<%= @courses.any? %>">No modules created yet.</p>
+      <%= link_to 'Create a Module', new_admin_curriculum_course_path, class: "btn btn--primary rounded" %>
+    </div>
+
+    <% if @courses.any? %>
+      <table class="w-full striped-table text-left">
+        <thead>
+          <tr>
+            <th class="p-2 md:p-4 w-24">Enabled?</th>
+            <th class="p-2 md:p-4 w-24 md:w-32 text-center">Image</th>
+            <th class="p-2 md:p-4">Details</th>
+            <th class="p-2 md:p-4 w-96"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @courses.each do |curriculum_course| %>
+          <tr id="course-<%= curriculum_course.id %>" data-type="<%= present(curriculum_course).draggable_type %>" data-id="<%= curriculum_course.id %>" draggable="true" class="droppable">
+            <td class="p-2 md:p-4 text-center font-bold">
+              <%= raw curriculum_course.enabled? ? '<span class="text-green">Y</span>' : '<span class="text-red">N</span>' %>
+            </td>
+            <td class="p-2 md:p-4">
+              <%= image_tag present(curriculum_course).thumbnail_url, alt: "preview image for #{curriculum_course.title}", class: "block w-16 md:w-32" %>
+            </td>
+            <td class="p-2 md:p-4 align-top">
+              <p class="mb-2"><%= curriculum_course.title %></p>
+              <p class="mb-2 text-sm hidden md:block"><%= curriculum_course.description %></p>
+              <%= link_to 'Manage Behaviors', admin_curriculum_course_course_behaviors_path(curriculum_course), class: "btn btn--sm btn--primary rounded" %>
+            </td>
+            <td class="p-2 md:p-4">
+              <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                <%= link_to 'Edit', edit_admin_curriculum_course_path(curriculum_course), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" %>
+                <%= link_to 'Delete', [:admin, curriculum_course], method: :delete, data: { confirm: 'Delete this module?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

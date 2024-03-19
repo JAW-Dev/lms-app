@@ -1,0 +1,53 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="text-5xl text-grey-darker font-extrabold leading-tight">Companies</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div class="pt-12 pb-16">
+    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-6">
+      <%= form_tag admin_companies_path, method: :get, class: "flex flex-wrap items-center w-full md:w-3/4 lg:w-1/2 mb-4 md:mb-0 -mx-1" do %>
+        <%= text_field_tag :q, sanitize(@search_term), class: "flex-1 mx-1 p-2 bg-grey-lighter shadow-inner" %>
+        <%= button_tag "Search", class: "mx-1 btn btn--primary rounded" %>
+        <%= link_to "Clear search", admin_companies_path, class: "w-full sm:w-auto mx-1 mt-2 sm:mt-0 text-sm" if @search_term.present? %>
+      <% end %>
+      <%= link_to 'Create a Company', new_admin_company_path, class: "btn btn--primary rounded leading-tight" %>
+    </div>
+    <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
+      <p class="text-lg mb-4 sm:mb-0 <%= "invisible" if @companies.any? %>" aria-hidden="<%= @companies.any? %>">No companies found.</p>
+    </div>
+
+    <% if @companies.any? %>
+      <table class="w-full striped-table">
+        <thead>
+          <tr>
+            <th class="w-80 px-2 md:px-4 text-left">Name</th>
+            <th class="w-80 px-2 md:px-4 text-left">Address</th>
+            <th class="md:w-48 text-right"</th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @companies.each do |company| %>
+            <tr>
+              <td class="p-2 md:p-4"><%= company.name %></td>
+              <td class="p-2 md:p-4"><%= present(company).short_address %></td>
+              <td class="p-2 md:p-4">
+                <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                  <%= link_to 'Users', users_admin_company_path(company), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" %>
+                  <%= link_to 'Edit', edit_admin_company_path(company), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" %>
+                  <%= link_to 'Delete', [:admin, company], method: :delete, data: { confirm: 'Delete this company?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

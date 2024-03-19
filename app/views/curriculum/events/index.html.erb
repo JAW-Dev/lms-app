@@ -1,0 +1,59 @@
+<% title 'Events' %>
+
+<div class="bg-grey-lighter">
+  <div class="container px-8 lg:px-24">
+    <div class="py-12 pb-16 mx-auto">
+      <h1 class="text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight">Events</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:px-24">
+  <div class="pt-10 pb-16 mx-auto">
+    <div class="flex flex-col-reverse md:flex-row md:-mx-4">
+      <div class="md:w-1/2 md:mx-4">
+        <h2 class="mb-4 text-lg text-grey-darkest font-bold">Admired Leadership® events provide opportunities to strengthen the behaviors of any serious leader.</h2>
+        <p class="mb-4 text-grey-darkest">For 2022, we’ll be hosting multi-day Admired Leadership Institutes in both southern Utah and the Berkshires. Look for single-day events in Austin and New York City. Our annual Community Conference will take place in October. Plus, subscribers have access to our ongoing AL Direct live Q&A sessions.</p>
+        <p class="mb-4 text-grey-darkest">All our events are dialogue-driven opportunities to exchange ideas, share organizational challenges, and deepen understanding of Admired Leadership behaviors.</p>
+      </div>
+      <div class="md:w-1/2 md:mx-4 mb-4 md:mb-0">
+        <!-- next gen formats! -->
+        <picture>
+          <source srcSet="<%= asset_url("ali-group.avif") %>" type="image/avif" />
+          <source srcSet="<%= asset_url("ali-group.webp") %>" type="image/webp" />
+          <img width="584" height="332" decoding="async" loading="lazy" src="<%= asset_url("ali-group.jpg") %>" alt="Admired Leadership Institute discussion group" class="align-middle" />
+        </picture>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="bg-grey-lighter">
+  <div class="container px-8 lg:px-24">
+    <div class="pt-16 pb-16 mx-auto">
+      <% if @events.any? %>
+        <% @events.each do |event| %>
+          <%
+            event_url = event.link_url.present? ? event.link_url : curriculum_show_event_path(event.slug)
+            event_target = event.link_url.present? ? '_blank' : '';
+          %>
+          <div class="mb-16 px-5 py-6 bg-white border border-grey-dark">
+            <div class="flex flex-col md:flex-row md:-mx-4">
+              <div class="md:w-1/2 md:mx-4">
+                <%= link_to image_tag(event.image, class: "-mt-10 mb-6 md:mb-0 align-middle shadow-xl"), event_url, target: event_target %>
+              </div>
+              <div class="md:w-1/2 md:mx-4">
+                <h3 class="mb-2 text-lg font-bold"><%= link_to event.title, event_url, class: "text-blue-dark no-underline", target: event_target %></h3>
+                <p class="mb-2 text-sm font-bold"><%= event.display_date || event.date %></p>
+                <p class="mb-4 text-sm"><%= event.excerpt %></p>
+                <%= link_to event.link_text, event_url, class: "uppercase tracking-wide btn btn--primary-gradient", target: event_target %>
+              </div>
+            </div>
+          </div>
+        <% end %>
+      <% else %>
+        <h3 class="text-xl font-bold text-grey-darkest">No events are currently scheduled. Check back soon!</h3>
+      <% end %>
+    </div>
+  </div>
+</div>

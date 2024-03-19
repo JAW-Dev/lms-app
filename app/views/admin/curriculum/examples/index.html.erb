@@ -1,0 +1,76 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="mb-2 text-5xl text-grey-darker font-extrabold leading-tight">Behavior Examples</h1>
+        <h2 class="text-3xl text-grey-darker font-bold leading-tight"><%= @behavior.title %></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16 mb-8">
+  <div class="pt-12 pb-16">
+    <div class="flex flex-col-reverse md:flex-row items-center justify-between mb-8 md:-mx-2">
+      <%= link_to "&laquo; Return to Behavior".html_safe, edit_admin_curriculum_behavior_path(@behavior), class: "md:mx-2 text-xs md:text-sm" %>
+      <%= link_to 'Create an Example', new_admin_curriculum_behavior_example_path(@behavior), class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 btn btn--primary rounded" %>
+    </div>
+
+    <% if @examples.any? %>
+      <table class="w-full striped-table block mb-6">
+        <thead>
+          <tr>
+            <th class="px-4 pb-2 text-left" colspan="2">Examples</th>
+          </tr>
+        </thead>
+
+        <tbody class="block">
+          <% @examples.each do |curriculum_example| %>
+            <tr id="example-<%= curriculum_example.id %>" data-type="<%= present(curriculum_example).draggable_type %>" data-id="<%= curriculum_example.id %>" draggable="true" class="flex flex-wrap md:table-row droppable">
+              <td class="w-full p-2 md:p-4">
+                <p class="text-sm"><%= curriculum_example.description %></p>
+              </td>
+              <td class="w-full p-2 md:p-4">
+                <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                  <%= link_to 'Edit', edit_admin_curriculum_example_path(curriculum_example), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" %>
+                  <%= link_to 'Delete', [:admin, curriculum_example], method: :delete, data: { confirm: 'Delete this example?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+
+    <div class="flex items-center cursor-pointer" data-accordion="true" aria-expanded="false">
+      <div class="w-6 text-left">
+        <i class="fas fa-angle-right fa-fw text-grey-darkest accordion-indicator"></i>
+      </div>
+
+      <h4 class="text-sm md:text-base text-grey-darkest">Slider Image</h4>
+    </div>
+
+    <div class="my-4" aria-hidden="true">
+      <%= form_with(model: [:admin, @behavior], local: true, class: "mb-6") do |form| %>
+        <div class="<%= @behavior.example_image.present? ? "mb-4" : "mb-6" %>">
+          <%= form.label :example_image, "Slider Image", class: "block mb-1 font-bold sr-only" %>
+          <% if @behavior.example_image.present? %>
+            <%= image_tag @behavior.example_image.large.url, class: "max-w-1/4" %><br />
+          <% end %>
+          <%= form.file_field :example_image %>
+        </div>
+
+        <% if @behavior.example_image.present? %>
+          <div class="mb-6">
+            <label>
+              <%= form.check_box :remove_example_image %>
+              Remove image?
+            </label>
+          </div>
+        <% end %>
+
+        <%= form.button "Update Image", type: "submit", class: "btn btn--primary rounded" %>
+      <% end %>
+    </div>
+  </div>
+</div>

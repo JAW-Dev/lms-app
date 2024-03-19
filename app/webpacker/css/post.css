@@ -1,0 +1,75 @@
+/* purgecss start ignore */
+
+.category-description > *,
+.post-content > * {
+  @apply .mb-6;
+  line-height: 1.75;
+}
+
+.post-content li {
+  @apply .mb-4;
+}
+
+.post-content ol {
+  @apply .ml-4 .pl-2 .border-l .border-dashed .border-purple-lighter;
+  list-style: none;
+  counter-reset: section;
+}
+
+.post-content ol > li {
+  @apply .relative .pl-4;
+}
+
+.post-content ol > li::before {
+  @apply .is-highlighted .absolute .pin-t .flex .items-center .justify-center .w-6 .h-6 .font-bold .text-white .leading-tight .rounded-full;
+  left: -1.25rem;
+  counter-increment: section;
+  content: counter(section);
+}
+
+.post-content li > ul,
+.post-content li > ol {
+  @apply .mt-2;
+}
+
+.post-content blockquote {
+  @apply .px-4 .py-6 .text-purple-dark .text-lg .font-bold .text-center .border-grey-light .border-t-2 .border-b-2;
+}
+
+.has-purple-light-color {
+  @apply .text-purple-dark;
+}
+
+.has-gray-medium-color {
+  @apply .text-grey-darker;
+}
+
+.has-text-align-center {
+  @apply .text-center;
+}
+
+.wp-block-separator {
+  @apply .h-px .border-t-2;
+  max-width: 25%;
+}
+
+.wp-block-separator.has-gray-medium-background-color,
+.wp-block-separator.has-gray-medium-color {
+  @apply .border-grey-dark;
+}
+
+.wp-block-image .alignright {
+  @apply .float-right .mb-4 .ml-6;
+}
+
+.wp-block-image .alignleft {
+  @apply .float-left .mb-4 .mr-6;
+}
+
+@screen md {
+  .post-content blockquote {
+    @apply .m-12;
+  }
+}
+
+/* purgecss end ignore */

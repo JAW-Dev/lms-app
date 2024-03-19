@@ -1,0 +1,67 @@
+<div class="container px-8 md:pr-8 lg:pl-16">
+  <div class="pt-12 pb-16">
+    <%= form_with(model: [:admin, curriculum_bundle], local: true, class: "lg:max-w-3/4") do |form| %>
+      <% if curriculum_bundle.errors.any? %>
+        <div id="error_explanation" class="px-8 py-4 mb-8 bg-red-dark">
+          <p class="mb-2 text-xl font-bold text-white leading-tight">Something went wrong. Please correct the following errors and try again:</p>
+          <ul class="text-white">
+            <% curriculum_bundle.errors.full_messages.each do |message| %>
+              <li><%= message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class="mb-6">
+        <label>
+          <%= form.check_box :enabled %>
+          Enable bundle?
+        </label>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :sku, "SKU", class: "block mb-1 font-bold" %>
+        <%= form.text_field :sku, class: "w-full lg:w-1/2 xl:w-1/4 p-2 bg-grey-lighter shadow-inner" %>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :name, class: "block mb-1 font-bold" %>
+        <%= form.text_field :name, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :subheading, class: "block mb-1 font-bold" %>
+        <%= form.text_field :subheading, class: "w-full p-2 bg-grey-lighter shadow-inner" %>
+      </div>
+
+      <div class="mb-6">
+        <%= form.label :description, class: "block mb-1 font-bold" %>
+        <%= form.text_area :description, class: "w-full h-32 p-2 bg-grey-lighter shadow-inner" %>
+      </div>
+
+      <div class="<%= curriculum_bundle.image.present? ? "mb-4" : "mb-6" %>">
+        <%= form.label :image, class: "block mb-1 font-bold" %>
+        <% if curriculum_bundle.image.present? %>
+          <%= image_tag curriculum_bundle.image.large.url, class: "max-w-1/4" %><br />
+        <% end %>
+        <%= form.file_field :image %>
+      </div>
+
+      <% if curriculum_bundle.image.present? %>
+        <div class="mb-6">
+          <label>
+            <%= form.check_box :remove_image %>
+            Remove image?
+          </label>
+        </div>
+      <% end %>
+
+      <hr class="border-t pb-4">
+
+      <div class="flex flex-col md:flex-row items-center md:-mx-2">
+        <%= form.button nil, type: "submit", class: "w-full md:w-auto mb-6 md:mx-2 md:mb-0 btn btn--lg btn--primary rounded" %>
+        <%= link_to "Cancel", admin_curriculum_bundles_path, class: "md:mx-2" %>
+      </div>
+    <% end %>
+  </div>
+</div>

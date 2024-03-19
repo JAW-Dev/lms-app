@@ -1,0 +1,16 @@
+<% if false %>
+    <%= javascript_packs_with_chunks_tag 'pages/HelpToHabit' %>
+    <%= content_tag :div,
+    id: "help_to_habit_data",
+    user_data: @user.to_json do %>
+    <% end %>
+<% end %>
+
+<div class="w-screen h-screen flex items-center justify-center">
+    <div class=" flex flex-col mx-auto items-center justify-center">
+        <%= inline_svg "cra-full-logo-reversed.svg", class: "print:block h-12" %>
+        <h1 class="mt-8 text-6xl text-purple-500 font-black">Coming Soon</h1>
+        <p class="text-lg font-bold text-center max-w-sm">The Help to Habit is cooking up. Visit back in the near future to get full access to this feature as a member of Admired Leadership!</p>
+        <a class="mt-16 text-xl text-white py-5 px-8 rounded-xl bg-link-purple hover:bg-purple-500 font-black" href="/">Back</a>
+    </div>
+</div>

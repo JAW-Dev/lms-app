@@ -1,0 +1,40 @@
+<% title title %>
+<% content_for(:nav) { "hidden" } %>
+
+<div class="h-full bg-grey-darkest lg:overflow-hidden">
+  <div class="flex flex-col sm:flex-row overflow-x-hidden">
+    <div class="flex-1 mb-4 sm:mb-0">
+      <nav class="video-module__nav">
+        <div class="flex items-center relative">
+          <%= link_to "/conferences/community-2020", class: "absolute flex text-grey text-xl no-underline z-1" do %>
+            <i class="far fa-angle-left"></i>
+            <span class="hidden md:block ml-1 text-sm">Back</span>
+          <% end %>
+          <div class="flex-1">
+            <div class="flex justify-center relative">
+              <h1 class="mx-2 text-base text-grey-lightest">
+                <span class="hidden lg:inline-block">Community Conference 2020</span>
+                <span class="hidden lg:inline-block mx-2 font-normal"> | </span>
+                <span class="font-normal"><%= title %></span>
+              </h1>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="vidyard-player">
+        <img
+          style="width: 100%; margin: auto; display: block;"
+          class="vidyard-player-embed"
+          src="https://play.vidyard.com/<%= player_uuid %>.jpg"
+          data-uuid="<%= player_uuid %>"
+          data-v="4"
+          data-type="inline"
+        />
+      </div>
+    </div>
+  </div>
+</div>
+
+<% content_for :additional_javascript do %>
+  <%= javascript_include_tag "https://play.vidyard.com/embed/v4.js", async: Rails.env.production? %>
+<% end %>

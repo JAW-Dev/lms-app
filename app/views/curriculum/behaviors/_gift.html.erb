@@ -1,0 +1,19 @@
+<div class="container px-6 lg:pr-12">
+  <% present(behavior) do |presented_behavior| %>
+    <div class="lg:max-w-lg md:mx-10 pb-32">
+      <h2 class="mb-6 leading-tight text-2xl text-purple-dark"><%= behavior.title %></h2>
+      <div class="vidyard-player pb-8 print:hidden" data-status="<%= present(current_user).video_status(@behavior) %>" data-slug="<%= @behavior.slug %>">
+        <img
+          style="width: 100%; margin: auto; display: block;"
+          class="vidyard-player-embed"
+          src="https://play.vidyard.com/<%= @behavior.player_uuid %>.jpg"
+          data-uuid="<%= present(@behavior).media_uuid(@media_type) %>"
+          data-v="4"
+          data-type="inline"
+        />
+      </div>
+
+      <%= render partial: "curriculum/behaviors/gifted-behavior", locals: { behavior: @behavior, course: @course, bundle: false } if @behavior.present? %>
+    </div>
+  <% end %>
+</div>

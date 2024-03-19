@@ -1,0 +1,21 @@
+.gift-toggle {
+  @apply .cursor-pointer;
+  top: calc(20% + 1.25rem);
+  left: -2rem;
+  transition: background-color 0.025s ease 0.025s;
+}
+
+.gift-toggle--open {
+  @apply .bg-transparent;
+}
+
+.gift-content {
+  @apply .pin-l;
+  top: calc(20% + 1.25rem);
+  transition: left 0.2s ease;
+}
+
+.gift-content--open {
+  left: -16rem;
+  opacity: 0.9;
+}

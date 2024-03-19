@@ -1,0 +1,326 @@
+/**
+ * This injects Tailwind's base styles, which is a combination of
+ * Normalize.css and some additional base styles.
+ *
+ * You can see the styles here:
+ * https://github.com/tailwindcss/tailwindcss/blob/master/css/preflight.css
+ *
+ * If using `postcss-import`, use this import instead:
+ *
+ * @import "tailwindcss/preflight";
+ */
+
+/* @tailwind preflight; */
+/* purgecss start ignore */
+@import 'tailwindcss/preflight';
+
+/**
+  * This injects any component classes registered by plugins.
+  *
+  * If using `postcss-import`, use this import instead:
+  *
+  * @import "tailwindcss/components";
+  */
+
+/* @tailwind components; */
+
+@import 'tailwindcss/components';
+
+/**
+  * Here you would add any of your custom component classes; stuff that you'd
+  * want loaded *before* the utilities so that the utilities could still
+  * override them.
+  *
+  * Example:
+  *
+  * .btn { ... }
+  * .form-input { ... }
+  *
+  * Or if using a preprocessor or `postcss-import`:
+  *
+  * @import "components/buttons";
+  * @import "components/forms";
+  */
+
+/**
+  * This injects all of Tailwind's utility classes, generated based on your
+  * config file.
+  *
+  * If using `postcss-import`, use this import instead:
+  *
+  * @import "tailwindcss/utilities";
+  */
+
+/* @tailwind utilities; */
+
+@import 'tailwindcss/utilities';
+
+/**
+  * Here you would add any custom utilities you need that don't come out of the
+  * box with Tailwind.
+  *
+  * Example :
+  *
+  * .bg-pattern-graph-paper { ... }
+  * .skew-45 { ... }
+  *
+  * Or if using a preprocessor or `postcss-import`:
+  *
+  * @import "utilities/background-patterns";
+  * @import "utilities/skew-transforms";
+  */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,600;0,700;0,800;0,900;1,400;1,600;1,700;1,800&display=swap');
+@import url('https://fonts.googleapis.com/css?family=Source+Code+Pro:500');
+
+@import 'trix/dist/trix';
+@import 'plyr/dist/plyr.css';
+@import 'react-daterange-picker/dist/css/react-calendar.css';
+@import 'react-datepicker/dist/react-datepicker.css';
+@import '../css/nav';
+@import '../css/button';
+@import '../css/accordion';
+@import '../css/card';
+@import '../css/notice';
+@import '../css/course';
+@import '../css/behavior';
+@import '../css/exercise';
+@import '../css/progress-bar';
+@import '../css/draggable';
+@import '../css/video';
+@import '../css/notes';
+@import '../css/order';
+@import '../css/checkbox';
+@import '../css/user';
+@import '../css/modal';
+@import '../css/tables';
+@import '../css/maps';
+@import '../css/post';
+@import '../css/questions';
+@import '../css/quiz';
+@import '../css/dropdown';
+@import '../css/gifts';
+@import '../css/hubspot';
+@import '../css/webinars';
+@import '../css/conferences';
+@import 'react-day-picker/lib/style.css';
+@import '../css/react-day-picker';
+@import 'animate.css/animate.css';
+@import '../css/team-signup';
+@import '../css/event';
+@import '../css/info-button';
+@import '../css/react-modules-in-detail';
+@import '../css/react-dropdown-menu';
+@import '../css/react-modules-content-modal.css';
+@import '../css/react-all-modules-slider.css';
+@import '../css/react-reminder-section.css';
+@import '../css/react-stay-in-the-know.css';
+@import '../css/react-page-loading.css';
+@import '../css/react-book-summaries.css';
+@import '../css/react-play-button.css';
+@import '../css/react-audio-bar.css';
+@import '../css/react-video-player.css';
+@import '../css/react-introduction.css';
+@import '../css/react-linear-progress-bar.css';
+@import '../css/react-program.css';
+@import '../css/react-habit-card.css';
+@import '../css/react-header.css';
+@import '../css/react-admin-user.css';
+@import '../css/react-toggle-switch.css';
+@import '../css/react-pagination.css';
+@import '../css/react-search-input.css';
+@import '../css/react-notes.css';
+@import '../css/react-editor.css';
+@import '../css/react-custom-horizontal-carousel.css';
+@import '../css/react-layout.css';
+@import 'swiper/swiper-bundle.css';
+@import 'react-quill/dist/quill.snow.css';
+@import '../css/react-onboarding.css';
+@import '../css/react-spinner.css';
+@import '../css/forms.css';
+@import '../css/carousel.css';
+
+button:focus {
+  outline: none;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+.no-op {
+  display: none;
+}
+
+.screen-reader-text {
+  border: 0;
+  clip: rect(1px, 1px, 1px, 1px);
+  clip-path: inset(50%);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px;
+  word-wrap: normal !important;
+}
+
+.cursor-help {
+  cursor: help;
+}
+
+.bg-gradient {
+  @apply .relative .z-1;
+  background: linear-gradient(224deg,
+      config('colors.purple') 0,
+      config('colors.blue') 100%);
+}
+
+.DateRangePicker__CalendarSelection {
+  background-color: config('colors.blue-light');
+  border-color: config('colors.blue');
+}
+
+.DateRangePicker__CalendarHighlight--single {
+  border-color: config('colors.blue');
+}
+
+@media print {
+  .print-hidden {
+    display: none !important;
+  }
+}
+
+/* Custom Globals */
+
+.full-screen-container {
+  padding: 0 5%;
+}
+
+.transition {
+  transition: all 0.2s ease-in;
+}
+
+.shadow-circle-img {
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.2);
+}
+
+@keyframes color-animation {
+  0% {
+    background: #dfdfe0;
+  }
+
+  100% {
+    background: #f2f2f2;
+  }
+}
+
+.loading-colors {
+  animation: color-animation 1.5s infinite linear alternate;
+  border-radius: 8px;
+}
+
+.swiper-scrollbar {
+  display: none !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+/* For WebKit-based browsers (Chrome, Safari, etc.) */
+.customized-scrollbar::-webkit-scrollbar {
+  width: 10px;
+  /* Adjust the width of the scrollbar */
+  background-color: transparent;
+}
+
+.customized-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(0, 0, 0, 0.2);
+  /* Change scrollbar color */
+  border-radius: 10px;
+  /* Adjust the border-radius for rounded corners */
+  border: 2px solid transparent;
+  /* Create a transparent border around the thumb */
+  background-clip: padding-box;
+  /* Clip the background to not overlap the border */
+}
+
+/* For Firefox */
+.customized-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+}
+
+/* Container with the scrollbar */
+.customized-scrollbar {
+  overflow-y: scroll;
+  padding-right: 10px;
+  /* Create padding equal to the scrollbar width */
+  box-sizing: content-box;
+  /* Set box-sizing so the padding doesn't affect the container width */
+}
+
+.disable-scrollbars::-webkit-scrollbar {
+  background: transparent;
+  /* Chrome/Safari/Webkit */
+  width: 0px;
+}
+
+.disable-scrollbars {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+}
+
+.disable-scrollbars {
+  scrollbar-width: none;
+  /* Firefox */
+  -ms-overflow-style: none;
+  /* IE 10+ */
+
+  &::-webkit-scrollbar {
+    background: transparent;
+    /* Chrome/Safari/Webkit */
+    width: 0px;
+  }
+}
+
+.active-icon path {
+  stroke: #6357B5;
+}
+
+.gray-icon path {
+  stroke: #b8c2cc;
+}
+
+/* Custom breakpoint at 1315px */
+@media (min-width: 1315px) {
+  .container {
+    max-width: 1315px;
+  }
+}
+
+
+.left-container {
+  left: calc((100vw - 1315px) / 2);
+}
+
+@media only screen and (min-width: 992px) {
+  .left-container {
+    left: calc((100vw - 992px) / 2);
+  }
+}
+
+@media only screen and (min-width: 1200px) {
+  .left-container {
+    left: calc((100vw - 1200px) / 2);
+  }
+}
+
+
+
+/* purgecss end ignore */

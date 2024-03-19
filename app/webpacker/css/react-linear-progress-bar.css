@@ -1,0 +1,8 @@
+.linear-progress-bar {
+    border-radius: 8px;
+}
+
+.linear-progress-bar__progress {
+    border-radius: 8px;
+    transition: width 0.3s ease-in-out;
+}

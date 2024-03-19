@@ -1,0 +1,87 @@
+<li class="nav-item-wrap mb-px">
+  <% if current_user&.has_full_access? %>
+    <%= active_link_to curriculum_course_navigation_path, class: "nav-item", class_active: "is-highlighted" do %>
+      <span class="nav-item__icon">
+        <i class="text-2xl fas fa-pennant"></i>
+      </span>
+      <span class="nav-item__label">Start Here</span>
+    <% end %>
+  <% elsif !default_full_access %>
+    <%= active_link_to new_user_access_path, class: "nav-item", class_active: "is-highlighted", active: [users: :new, 'curriculum/orders' => :new] do %>
+      <span class="nav-item__icon">
+        <i class="text-2xl fad fa-layer-group"></i>
+      </span>
+      <span class="nav-item__label"><%= link_to "Get Full Access", new_user_access_path, class: "text-charcoal" %></span>
+    <% end %>
+  <% end %>
+</li>
+
+<li class="nav-item-wrap mb-px">
+  <%= active_link_to curriculum_courses_path, class: "nav-item", class_active: "is-highlighted", active: [['curriculum/courses'], []] do %>
+    <span class="nav-item__icon">
+      <i class="text-2xl fas fa-home-lg"></i>
+    </span>
+    <span class="nav-item__label">Modules</span>
+  <% end %>
+</li>
+
+<% if user_signed_in? && can?(:read, Curriculum::Note) %>
+  <li class="nav-item-wrap mb-px">
+    <%= link_to "/v2/program/notes", class: "nav-item" do %>
+      <span class="nav-item__icon">
+        <i class="text-2xl fas fa-sticky-note"></i>
+      </span>
+      <span class="nav-item__label">Notes</span>
+    <% end %>
+  </li>
+<% end %>
+
+<li class="nav-item-wrap bg-grey-darker mb-px">
+  <a class="nav-item" href="#">
+    <span class="nav-item__icon">
+      <i class="text-2xl fas fa-books"></i>
+    </span>
+    <span class="nav-item__label">Resources</span>
+    <i class="fas fa-chevron-down submenu-arrow"></i>
+  </a>
+  <ul class="bg-grey submenu">
+    <li class="submenu__item bg-grey-lighter p-2">
+      <%= link_to "AL Direct", curriculum_webinars_path, class:"block text-sm no-underline uppercase" %>
+    </li>
+    <% if can?(:read, Curriculum::BookSummary) %>
+      <li class="submenu__item bg-grey-lighter p-2">
+        <%= link_to "Books", curriculum_book_summaries_path, class:"block text-sm no-underline uppercase" %>
+      </li>
+    <% end %>
+    <li class="submenu__item bg-grey-lighter p-2">
+      <%= link_to "Field Notes", "https://admiredleadership.com/field-notes/archive/", class:"block text-sm no-underline uppercase", target:"_blank", rel: "noopener noreferrer" %>
+    </li>
+    <li class="submenu__item bg-grey-lighter p-2">
+      <% if can?(:read, Curriculum::Event) %>
+        <%= link_to "Events", curriculum_events_path, class:"block text-sm no-underline uppercase" %>
+      <% else %>
+        <%= link_to "Events", "https://admiredleadership.com/events/", class:"block text-sm no-underline uppercase", target:"_blank", rel: "noopener noreferrer" %>
+      <% end %>
+    </li>
+    <li class="submenu__item bg-grey-lighter p-2">
+      <%= link_to "FAQs", "https://admiredleadership.com/frequently-asked-questions/", class:"block text-sm no-underline uppercase", target:"_blank", rel: "noopener noreferrer" %>
+    </li>
+    <li class="submenu__item bg-grey-lighter p-2">
+      <%= link_to "Course Navigation", curriculum_course_navigation_path, class:"block text-sm no-underline uppercase" %>
+    </li>
+    <% if can?(:read, Curriculum::Webinar) %>
+      <li class="submenu__item bg-grey-lighter p-2">
+        <%= link_to "Community Discussion Groups", curriculum_resources_study_groups_path, class:"block text-sm no-underline uppercase" %>
+      </li>
+    <% end %>
+  </ul>
+</li>
+
+<li class="nav-item-wrap bg-grey-darker mb-px">
+  <%= active_link_to help_topics_path, class: "nav-item", class_active: "is-highlighted" do %>
+    <span class="nav-item__icon">
+      <i class="text-2xl fas fa-question"></i>
+    </span>
+    <span class="nav-item__label">Support</span>
+  <% end %>
+</li>

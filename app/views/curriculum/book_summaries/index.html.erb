@@ -1,0 +1,68 @@
+<% title "Book Summaries" %>
+
+<% content_for :additional_stylesheets do %>
+  <% @book_summaries.first.stylesheets.each do |stylesheet_url| %>
+    <%= stylesheet_link_tag stylesheet_url %>
+  <% end %>
+<% end %>
+
+<div class="book-summary bg-grey-lighter is-preview">
+  <div class="container">
+    <div class="py-16 max-w-lg mx-auto">
+      <h1 class="mb-0 text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight">Book Summaries</h1>
+    </div>
+  </div>
+</div>
+
+<div class="book-summaries pt-12">
+  <% @book_summaries.each do |book_summary| %>
+    <article class="book-summary is-preview mb-8">
+      <header class="book-summary__header container">
+        <div class="book-summary__header-row">
+          <div class="book-summary__image-wrap">
+            <a href="<%= curriculum_show_book_summary_path(book_summary.slug) %>">
+              <%= raw book_summary.featured_image %>
+            </a>
+          </div>
+          <div class="book-summary__excerpt-wrap">
+            <h2 class="book-summary__preview-title mt-5 md:mt-0 text-2xl">
+              <% if book_summary.status_icon %>
+                <i class="text-base float-right <%= book_summary.status_icon %>" title="<%= book_summary.status_label %>" aria-label="<%= book_summary.status_label %>"></i>
+              <% end %>
+              <a href="<%= curriculum_show_book_summary_path(book_summary.slug) %>" class="text-black no-underline hover:underline focus:underline">
+                <%= book_summary.title %>
+                <% if book_summary.subtitle %>
+                  <div class="book-summary__preview-subtitle text-lg mt-1"><%= book_summary.subtitle %></div>
+                <% end %>
+              </a>
+            </h2>
+            <p class="book-summary__author">
+              <span>Book Author: </span>
+              <%= book_summary.author %>
+            </p>
+
+            <div class="book-summary__excerpt-inner">
+              <%= raw book_summary.excerpt %>
+            </div>
+
+            <a href="<%= curriculum_show_book_summary_path(book_summary.slug) %>" class="btn btn--primary">
+              Read Summary
+            </a>
+          </div>
+        </div>
+      </header>
+    </article>
+  <% end %>
+</div>
+
+<% if @pages %>
+  <nav class="flex items-center justify-center pt-6 pb-20" style="gap: 1rem;">
+    <% (1...@pages + 1).to_a.each do |n| %>
+      <%
+        url = n == 1 ? curriculum_book_summaries_url : curriculum_book_summaries_page_url(n)
+        class_name = @page == n ? "bg-grey-lighter text-purple-darkest" : "text-purple-darker"
+      %>
+      <%= link_to n, url, class: "no-underline inline-flex items-center justify-center w-8 h-8 hover:bg-purple hover:text-white focus:bg-purple focus:text-white #{class_name}" %>
+    <% end %>
+  </nav>
+<% end %>

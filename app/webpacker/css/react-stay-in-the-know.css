@@ -1,0 +1,57 @@
+/* purgecss start ignore */
+.stay-in-the-know-content {
+  min-height: 518px;
+}
+
+.stay-in-the-know-swiper > .swiper-wrapper {
+  /* margin-left: 380px !important; */
+}
+
+/* .stay-in-the-know-swiper {
+    margin-left: -50px;
+} */
+
+.stay-in-the-know-card {
+  border-radius: 32px;
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.2);
+  min-width: 383px;
+  width: 383px;
+  min-height: 412px;
+  height: 412px;
+}
+.stay-in-the-know-car__img {
+  min-width: 127px;
+  width: 127px;
+  border-radius: 16px;
+}
+
+@media only screen and (max-width: 768px) {
+  .stay-in-the-know-content {
+    min-height: none !important;
+  }
+
+  .stay-in-the-know-swiper > .swiper-wrapper {
+    margin-left: 0 !important;
+  }
+
+  .stay-in-the-know-card {
+    width: 100% !important;
+    height: auto;
+  }
+
+  .stay-in-the-know-car__img {
+    min-width: none !important;
+    width: 100%;
+    border-radius: 16px;
+    aspect-ratio: 16/9;
+    overflow: hidden;
+  }
+}
+
+@media only screen and (max-width: 576px) {
+  .stay-in-the-know-card {
+    min-width: auto !important;
+    width: 100% !important;
+  }
+}
+/* purgecss end ignore */

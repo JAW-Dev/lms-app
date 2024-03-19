@@ -1,0 +1,11 @@
+.note-dropdown-more--active path {
+    stroke: white;
+}
+
+.note-dropdown-menu-icon:hover path {
+    stroke: white;
+}
+
+.note-dropdown-menu-icon:hover circle {
+    stroke: white;
+}

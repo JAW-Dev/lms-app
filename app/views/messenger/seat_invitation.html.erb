@@ -1,0 +1,50 @@
+<div style="background-color: #3b3e44; padding: 10px 0; text-align: center;">
+  <%= image_tag(asset_url("cra-full-logo.png"), alt: "Admired Leadership logo", style: "width: 264px", width: "264") %>
+</div>
+
+<table border="0" cellpadding="0" cellspacing="0" style="width: 100%; background-color: #dfdfe0;">
+  <tbody>
+    <tr>
+      <td>&nbsp;</td>
+      <td style="max-width: 600px">
+        <div style="max-width: 600px; margin: 25px auto;">
+          <table style="background-color: #fff; width: 100%; border-radius: 4px;">
+            <tbody>
+              <tr>
+                <td style="padding: 20px;">
+                  <table style="width: 100%">
+                    <tbody>
+                      <tr>
+                        <td colspan="2">
+                          <p style="margin: 0; margin-bottom: 8px; font-size: 16px; font-family: Nunito Sans, Calibri, Helvetica, sans-serif;"><%= @rep.full_name %> has given you access to:</p>
+                          <p style="margin: 0; margin-bottom: 16px; font-size: 16px; font-family: Nunito Sans, Calibri, Helvetica, sans-serif;"><strong><%= @order.title %></strong></p>
+                          <p style="margin: 0; margin-bottom: 16px; font-size: 16px; font-family: Nunito Sans, Calibri, Helvetica, sans-serif;">Sign up now to get started!</p>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td colspan="2" align="center" style="padding-bottom: 8px;">
+                          <table style="width: 100%">
+                            <tbody>
+                              <tr>
+                                <td width="25%">&nbsp;</td>
+                                <td style="padding: 6px 8px; background-color: #978edf; color: #fff; text-align: center;">
+                                  <%= link_to "Sign Up", new_user_registration_url, style: "color: #fff; font-size: 14px; font-weight: bold; font-family: Nunito Sans, Calibri, Helvetica, sans-serif; text-decoration: none; text-transform: uppercase;" %>
+                                </td>
+                                <td width="25%">&nbsp;</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </td>
+      <td>&nbsp;</td>
+    </tr>
+  </tbody>
+</table>

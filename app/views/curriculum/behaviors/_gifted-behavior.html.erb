@@ -1,0 +1,108 @@
+<% present(behavior) do |behavior_details| %>
+  <ul class="list-reset">
+    <% if behavior.has_audio? %>
+      <li class="mb-4">
+        <div class="flex items-center">
+          <div class="w-8 text-left">
+            <i class="fas fa-headphones-alt text-grey-dark"></i>
+          </div>
+          <h4 class="text-sm md:text-base font-normal">
+            <button type="button" id="listen">Listen to Audio Only</button>
+            <div class="w-0 h-0 overflow-hidden">
+              <div id="audio-embed" class="vidyard-player-embed" data-uuid="<%= behavior_details.media_uuid('audio') %>" data-v="4" data-type="lightbox">
+            </div>
+            <script>
+              document.getElementById('listen').addEventListener('click', function() {
+                var players = VidyardV4.api.getPlayersByUUID('<%= behavior_details.media_uuid('audio') %>');
+                var player = players[0];
+                player.showLightbox();
+              });
+            </script>
+          </h4>
+        </div>
+      </li>
+    <% end %>
+
+    <% if behavior.behavior_maps.any? %>
+      <li class="mb-4">
+        <div class="flex items-center" data-accordion="true" aria-expanded="false">
+          <div class="w-8 text-left">
+            <i class="fas fa-angle-right fa-fw text-grey-dark accordion-indicator"></i>
+          </div>
+
+          <h4 class="text-sm md:text-base font-normal text-grey-darkest">Behavior Map</h4>
+        </div>
+
+        <div class="panel-full panel-full--shadow" aria-hidden="true">
+          <ul class="list-reset flex map-points overflow-x-auto">
+            <% behavior.behavior_maps.each do |map_point| %>
+              <li class="flex flex-col flex-no-shrink items-center">
+                <div class="map-point">
+                  <div class="map-point__icon">
+                    <% if map_point.image.present? %>
+                      <%= image_tag map_point.image.small.url %>
+                    <% end %>
+                  </div>
+                </div>
+                <div class="flex map-point-description">
+                  <div class="flex flex-col items-center w-full">
+                    <i class="far <%= cycle('fa-angle-double-down', 'fa-angle-double-up') -%> text-lg"></i>
+                    <p class="w-full py-4 text-xs text-center"><%= map_point.description %></p>
+                  </div>
+                </div>
+              </li>
+            <% end %>
+          </ul>
+        </div>
+      </li>
+    <% end %>
+
+    <% if behavior.examples.any? %>
+      <li class="mb-4">
+        <div class="flex items-center" data-accordion="true" aria-expanded="false">
+          <div class="w-8 text-left">
+            <i class="fas fa-angle-right fa-fw text-grey-dark accordion-indicator"></i>
+          </div>
+
+          <h4 class="text-sm md:text-base font-normal text-grey-darkest">
+            Examples (<%= behavior.examples.size %>)
+          </h4>
+        </div>
+
+        <%= render partial: "curriculum/behaviors/supplemental", locals: { bg_image: behavior&.example_image.large.url, supplemental_items: behavior.examples } %>
+      </li>
+    <% end %>
+
+    <% if behavior.questions.any? %>
+      <li class="mb-4">
+        <div class="flex items-center" data-accordion="true" aria-expanded="false">
+          <div class="w-8 text-left">
+            <i class="fas fa-angle-right fa-fw text-grey-dark accordion-indicator"></i>
+          </div>
+
+          <h4 class="text-sm md:text-base font-normal text-grey-darkest">
+            Discussion Questions (<%= behavior.questions.size %>)
+          </h4>
+        </div>
+
+        <div class="discussion-questions" data-questions="<%= behavior.questions.to_json( :only => [:id, :description] ) %>"></div>
+      </li>
+    <% end %>
+
+    <% if behavior.exercises.any? %>
+      <li class="mb-4">
+        <div class="flex items-center" data-accordion="true" aria-expanded="false">
+          <div class="w-8 text-left">
+            <i class="fas fa-angle-right fa-fw text-grey-dark accordion-indicator"></i>
+          </div>
+
+          <h4 class="text-sm md:text-base font-normal text-grey-darkest">
+            Exercises (<%= behavior.exercises.size %>)
+          </h4>
+        </div>
+
+        <%= render partial: "curriculum/behaviors/supplemental", locals: { bg_image: behavior&.exercise_image.large.url, supplemental_items: behavior.exercises } %>
+      </li>
+    <% end %>
+  </ul>
+<% end %>

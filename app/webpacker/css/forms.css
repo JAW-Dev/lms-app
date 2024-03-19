@@ -1,0 +1,253 @@
+.hs-form-field label{
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 700;
+	line-height: 21px;
+	margin-bottom: .5rem;
+}
+
+.hs-fieldtype-checkbox label span,
+.hs-form-field legend {
+	font-weight: 400;
+}
+
+
+.hs-form-field input,
+.hs-form-field textarea {
+	border-radius: 12px;
+	border: 1px solid rgba(60, 60, 60, 0.20);
+	background-color: white !important;
+	padding: .5rem;
+  line-height: 16px;
+}
+
+.hs-fieldtype-checkbox label:first-child span {
+	font-weight: 600;
+}
+
+ul.inputs-list.multi-container li.hs-form-checkbox {
+  margin: 20px 0;
+}
+
+ul.inputs-list.multi-container li.hs-form-checkbox label {
+  position: relative;
+}
+
+ul.inputs-list.multi-container li.hs-form-checkbox label span {
+  display: inline-block;
+  margin-left: 40px; /* Width of the new checkbox and any additional spacing on the left */
+  margin-right: 16px; /* Additional spacing on the right */
+	height: 17px;
+}
+
+/* Hide the original checkbox */
+ul.inputs-list.multi-container li.hs-form-checkbox label input {
+  height: 24px;
+  left: 0;
+  opacity: 0;
+  position: absolute;
+  top: 0;
+  width: 24px;
+}
+
+/* Add new checkbox */
+ul.inputs-list.multi-container li.hs-form-checkbox label span::before {
+  content: "";
+  height: 24px;
+  width: 24px;
+  background-color: white;
+  border: 1px solid rgba(60, 60, 60, 0.20);
+  border-radius: 4px;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transition: background-color 0.3s;
+}
+
+/* Style new checked item */
+ul.inputs-list.multi-container li.hs-form-checkbox label span::after {
+  content: "";
+  position: absolute;
+  top: 5px;
+	left: 9px;
+	width: 5px;
+	height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+  transition: opacity 0.2s ease-in-out;
+  opacity: 0;
+}
+
+/* Show when checked */
+ul.inputs-list.multi-container li.hs-form-checkbox label input:checked + span::before {
+  background-color: #6357b5;
+  border: 1px solid #6357b5;
+}
+
+ul.inputs-list.multi-container li.hs-form-checkbox label input:checked + span::after {
+  opacity: 1;
+}
+
+/* Style when focused */
+ul.inputs-list.multi-container li.hs-form-checkbox label input:focus + span::after {
+  outline: 3px solid transparent; /* For Windows high contrast mode. */
+}
+
+.hs_submit {
+	margin-top: 36px;
+}
+
+.hs_submit input[type="submit"] {
+	border-radius: 12px;
+	background: #6357B5;
+	box-shadow: none;
+	margin-top: 36px;
+}
+
+
+#access-teams form .hs_firstname,
+#access-teams form .hs_lastname,
+#access-teams form .hs_mobilephone,
+#access-teams form .hs_company,
+#access-teams form .hs_firstname input,
+#access-teams form .hs_lastname input,
+#access-teams form .hs_mobilephone input,
+#access-teams form .hs_company input,
+#access-teams form .hs_email,
+#access-teams form .hs_message,
+#access-teams form .hs_email input,
+#access-teams form .hs_message textarea {
+  width: 100% !important;
+}
+
+#access-teams.form-wrapper form {
+  display: grid;
+  grid-template-columns: repeat(2, calc(50% - 12px));
+  gap: 24px;
+  max-width: none !important;
+}
+
+input,
+select,
+textarea {
+  font-size: 16px;
+  line-height: 21px;
+}
+
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible {
+  border-color: #8B7FDB;
+  outline: none;
+}
+
+.hs-form .input,
+.hs-form input,
+.hs-form select,
+.hs-form textarea {
+  font-size: 16px;
+  line-height: 23px;
+}
+
+#access-teams .hs_firstname,
+#access-teams .hs_lastname,
+#access-teams .hs_mobilephone,
+#access-teams .hs_company,
+#access-teams .hs-form .field {
+  margin-bottom: 0;
+}
+
+#access-teams .hs_email,
+#access-teams .hs_message {
+  grid-column: 1 / -1;
+}
+
+#access-teams .hs_submit,
+#access-teams .hs_submit input {
+  margin-top: 0;
+}
+
+.hs-error-msgs{
+  list-style-type: none;
+  padding: 0;
+  margin: 10px 0 0 5px;
+}
+
+.hs-error-msg {
+  font-size: 12px;
+  color: #c60000;
+}
+.hs-input {
+  border: 2px solid #dfdfe0 !important;
+  box-shadow: none !important;
+}
+
+.hs-input:focus-visible {
+  border-color: #8B7FDB;
+  outline: none;
+}
+
+.active-text:focus-within,
+.active-text:active {
+  outline: none;
+  border-color: #8B7FDB;
+}
+
+.custom-checkbox-container {
+  position: relative;
+  padding-left: 31px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background-color: white;
+  border: 1px solid rgba(60, 60, 60, 0.20);
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.custom-checkbox-container input:checked ~ .custom-checkbox {
+  background-color: #6357b5;
+  border: 1px solid #6357b5;
+}
+
+.custom-checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox-container input:checked ~ .custom-checkbox:after {
+  display: block;
+}
+
+.custom-checkbox-container .custom-checkbox:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}
+
+@media screen and (max-width: 480px) {
+  .hide-label {
+    display: none;
+  }
+}

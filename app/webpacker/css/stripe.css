@@ -1,0 +1,27 @@
+/* .InputElement {
+  @apply h-8 p-2 bg-grey-lighter shadow-inner;
+} */
+
+input.animated {
+  animation: 0.001s void-animation-out;
+}
+
+@keyframes void-animation-in {
+  0% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes void-animation-out {
+  0% {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 1;
+  }
+}

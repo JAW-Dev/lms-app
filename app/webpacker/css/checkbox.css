@@ -1,0 +1,75 @@
+.checkbox__input {
+  @apply .hidden;
+}
+
+.checkbox__label {
+  @apply .flex;
+}
+
+.checkbox__label::before {
+  @apply .relative .flex-no-shrink .inline-block .h-4 .w-4 .mr-2 .border .text-center;
+  content: "";
+  top: calc(0.25rem - 2px);
+  transition: background-color 0.1s ease;
+}
+
+.checkbox__input:checked + .checkbox__label::before {
+  @apply .bg-purple .text-white .leading-none;
+  content: "✓";
+}
+
+.checkbox--toggle:checked ~ .hidden {
+  @apply .block;
+}
+
+.custom-checkbox-container {
+  position: relative;
+  padding-left: 31px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.custom-checkbox-container input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+  height: 0;
+  width: 0;
+}
+
+.custom-checkbox {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 24px;
+  width: 24px;
+  background-color: white;
+  border: 1px solid rgba(60, 60, 60, 0.20);
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.custom-checkbox-container input:checked ~ .custom-checkbox {
+  background-color: #6357b5;
+  border: 1px solid #6357b5;
+}
+
+.custom-checkbox:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+.custom-checkbox-container input:checked ~ .custom-checkbox:after {
+  display: block;
+}
+
+.custom-checkbox-container .custom-checkbox:after {
+  left: 9px;
+  top: 5px;
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 3px 3px 0;
+  transform: rotate(45deg);
+}

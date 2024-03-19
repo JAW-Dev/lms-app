@@ -1,0 +1,74 @@
+<% title 'Resources' %>
+
+<div class="bg-grey-lighter">
+  <div class="container px-8 lg:px-16">
+    <div class="py-16 max-w-lg mx-auto">
+      <h1 class="text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight">Resources</h1>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:px-16">
+  <div class="pt-10 pb-16 max-w-lg mx-auto">
+    <div class="flex flex-wrap items-stretch -mx-4">
+      <% @resource_categories.each do |category| %>
+        <div class="p-4 pb-10 w-full md:w-1/2">
+          <%= link_to category.link, class: "card" do %>
+            <div class="absolute flex items-center h-12 w-12 p-1 bg-grey-lighter border border-grey-dark rounded-full card__icon">
+              <%= image_tag category.icon, alt: "" %>
+            </div>
+            <div class="flex items-center -mx-1">
+              <h2 class="font-bold text-purple text-lg mx-1"><%= raw category.name %></h2>
+              <span class="text-grey text-sm font-bold mx-1">(<%= category.resource_count %>)</span>
+            </div>
+            <p class="text-grey-dark"><%= raw category.description %></p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <div class="p-4 pb-10 w-full md:w-1/2">
+        <%= link_to "https://admiredleadership.com/events/", class: "card" do %>
+          <div class="absolute flex items-center h-12 w-12 p-2 bg-grey-lighter border border-grey-dark rounded-full card__icon">
+            <%= image_tag "icon-events.png", alt: "" %>
+          </div>
+          <h2 class="font-bold text-purple text-lg">Events</h2>
+          <p class="text-grey-dark">Live events and opportunities connected to Admired Leadership®</p>
+        <% end %>
+      </div>
+
+      <div class="p-4 pb-10 w-full md:w-1/2">
+        <%= link_to "https://admiredleadership.com/frequently-asked-questions/", class: "card" do %>
+          <div class="absolute flex items-center h-12 w-12 p-2 bg-grey-lighter border border-grey-dark rounded-full card__icon">
+            <%= image_tag "icon-faqs.png", alt: "" %>
+          </div>
+          <h2 class="font-bold text-purple text-lg">FAQs</h2>
+          <p class="text-grey-dark">Answers to common questions related to the Admired Leadership® program.</p>
+        <% end %>
+      </div>
+
+      <% if user_signed_in? %>
+        <div class="p-4 pb-10 w-full md:w-1/2">
+          <%= link_to curriculum_course_navigation_path, class: "card" do %>
+            <div class="absolute flex items-center h-12 w-12 p-1 bg-grey-lighter border border-grey-dark rounded-full card__icon">
+              <%= image_tag "icon-navigation.png", alt: "" %>
+            </div>
+            <h2 class="font-bold text-purple text-lg">Course Navigation</h2>
+            <p class="text-grey-dark">How do I select the behavior I should work on&nbsp;first?</p>
+          <% end %>
+        </div>
+      <% end %>
+
+      <% if can?(:read, Curriculum::Webinar) %>
+        <div class="p-4 pb-10 w-full md:w-1/2">
+          <%= link_to curriculum_webinars_path, class: "card" do %>
+            <div class="absolute flex justify-center items-center h-12 w-12 p-1 bg-grey-lighter border border-grey-dark rounded-full card__icon">
+              <i class="fad fa-mind-share text-2xl"></i>
+            </div>
+            <h2 class="font-bold text-purple text-lg">Webinars</h2>
+            <p class="text-grey-dark">Ask questions and offer advice during our regularly scheduled online sessions.</p>
+          <% end %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</div>

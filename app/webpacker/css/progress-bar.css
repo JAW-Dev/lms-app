@@ -1,0 +1,56 @@
+.progress-bar {
+  @apply .relative .bg-grey-light .rounded-lg;
+  padding: 2px;
+}
+
+.locked .progress-bar {
+  @apply .hidden;
+}
+
+.progress-bar__progress {
+  @apply .relative .rounded-lg .bg-purple .z-1;
+  height: 0.5rem;
+  width: 0;
+  transition: width 0.75s ease 0.25s;
+}
+
+.progress-details {
+  @apply .flex .items-center .-mx-1 .p-1;
+}
+
+.locked .progress-details {
+  @apply .hidden;
+}
+
+.progress-details svg {
+  opacity: 0;
+  transition: transform 1s ease-in-out, opacity 0.5s ease;
+}
+
+.progress-bar--visible + .progress-details svg {
+  opacity: 1;
+  transform: rotate(360deg);
+}
+
+.progress-bar--visible[data-progress^="100"] + .progress-details svg {
+  position: relative;
+  opacity: 1;
+  transform: none;
+  animation: 0.2s slideIn;
+}
+
+@screen lg {
+  .progress-bar__progress {
+    height: 0.675rem;
+  }
+}
+
+@keyframes slideIn {
+  from {
+    left: -5px;
+  }
+
+  to {
+    left: 0;
+  }
+}

@@ -1,0 +1,57 @@
+.notes {
+  transition: margin-right 0.4s ease;
+}
+
+.notes.notes--open {
+  @apply .mr-0;
+}
+
+.notes__toggle {
+  @apply .cursor-pointer;
+  top: 15%;
+  left: -2rem;
+}
+
+.notes .trix-button[data-trix-attribute="code"],
+.notes .trix-button[data-trix-action="decreaseNestingLevel"],
+.notes .trix-button[data-trix-action="increaseNestingLevel"],
+.notes .trix-button-group[data-trix-button-group="history-tools"],
+.notes trix-toolbar .trix-button-group-spacer {
+  @apply .hidden;
+}
+
+.notes trix-toolbar .trix-button-group.trix-button-group--block-tools {
+  @apply .ml-0;
+}
+
+.notes trix-toolbar .trix-button--icon {
+  width: 2rem;
+  height: 1.5rem;
+}
+
+.notes trix-toolbar .trix-button--print {
+  @apply .text-sm .leading-none;
+}
+
+.notes .trix-content {
+  @apply .flex-grow .mb-4 .py-2 .px-1 .border-0;
+}
+
+.notes .trix-content ul,
+.notes .trix-content ol {
+  @apply .pl-2;
+}
+
+[data-accordion-panel] > .notes {
+  @apply .mt-1 .py-2 .px-4 .bg-grey-lighter;
+}
+
+@media print {
+  trix-toolbar {
+    @apply .hidden;
+  }
+
+  [data-accordion-panel] > .notes {
+    @apply .bg-white;
+  }
+}

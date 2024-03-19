@@ -1,0 +1,47 @@
+<% restricted = restricted || false %>
+<div class="container px-8 md:pr-8 lg:pl-16">
+  <div class="pt-12 pb-16">
+    <%= form_with(model: [:admin, user_invite], local: true, class: "lg:max-w-3/4") do |form| %>
+      <div class="mb-6">
+        <%= form.label :user_list, class: "block mb-1 font-bold" do %>
+          Email addresses/Names
+          <em class="font-normal text-xs">(One per line, e.g. joe.fox@example.com,Joe)</em>
+        <% end %>
+        <%= form.text_area :user_list, class: "w-full h-32 p-2 bg-grey-lighter shadow-inner", required: true %>
+      </div>
+
+      <div class="mb-6">
+        <div
+          class="invitation"
+          data-expires-at="<%= user_invite&.expires_at&.strftime('%Y-%m-%d') %>"
+          data-fieldname="user_invite"
+          data-placeholder="None"
+          data-courses="<%= Curriculum::Course.enabled.order(position: :asc).to_json(only: [:id, :title]) %>"
+          data-selected="[]"
+          data-restricted="<%= restricted %>"
+          data-message="<%= user_invite&.message %>"
+          data-discount="<%= user_invite.discount %>"
+          data-base-price="<%= CourseOrder.new.base_price %>"
+          data-user-roles="<%= "[]" %>"
+          <% if Rails.configuration.features.dig(:hubspot) %>
+            data-user-access-type=""
+            data-user-access-type-label="<%= hubspot_label(:access_type) %>"
+            data-user-access-type-values="<%= @access_types.map{|obj| [obj['label'], obj['value']] } %>"
+          <% end %>
+        >
+        </div>
+      </div>
+
+      <hr class="border-t pb-4">
+
+      <div class="flex flex-col md:flex-row items-center md:-mx-2">
+        <%= form.button "Send Invitations", type: "submit", class: "w-full md:w-auto mb-6 md:mx-2 md:mb-0 btn btn--lg btn--primary rounded" %>
+        <%= link_to "Cancel", admin_users_path, class: "md:mx-2" %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :additional_javascript do %>
+  <%= javascript_packs_with_chunks_tag 'v1/invitation' %>
+<% end %>

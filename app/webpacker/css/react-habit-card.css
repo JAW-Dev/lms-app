@@ -1,0 +1,28 @@
+/* purgecss start ignore */
+.habit-card {
+  box-shadow: 0px 10px 50px rgba(0, 0, 0, 0.15);
+  border-radius: 32px;
+  max-width: 384px;
+  min-height: 191px;
+}
+
+.habit-card__img-wrapper {
+  background: #f1f1f1;
+  height: 70px;
+  width: 70px;
+  min-width: 70px;
+  min-height: 70px;
+  padding: 12px;
+}
+
+@media only screen and (max-width: 768px) {
+  .habit-card__img-wrapper {
+    background: #f1f1f1;
+    height: 50px;
+    width: 50px;
+    min-width: 50px;
+    min-height: 50px;
+    padding: 5px;
+  }
+}
+/* purgecss end ignore */

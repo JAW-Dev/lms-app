@@ -1,0 +1,45 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="mb-2 text-5xl text-grey-darker font-extrabold leading-tight">Behavior Discussion Questions</h1>
+        <h2 class="text-3xl text-grey-darker font-bold leading-tight"><%= @behavior.title %></h2>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16 mb-8">
+  <div class="pt-12 pb-16">
+    <div class="flex flex-col-reverse md:flex-row items-center justify-between mb-8 md:-mx-2">
+      <%= link_to "&laquo; Return to Behavior".html_safe, edit_admin_curriculum_behavior_path(@behavior), class: "md:mx-2 text-xs md:text-sm" %>
+      <%= link_to 'Create a Question', new_admin_curriculum_behavior_question_path(@behavior), class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 btn btn--primary rounded" %>
+    </div>
+
+    <% if @questions.any? %>
+      <table class="w-full striped-table block mb-6">
+        <thead>
+          <tr>
+            <th class="px-4 pb-2 text-left" colspan="2">Discussion Questions</th>
+          </tr>
+        </thead>
+
+        <tbody class="block">
+          <% @questions.each do |curriculum_question| %>
+            <tr id="question-<%= curriculum_question.id %>" data-type="<%= present(curriculum_question).draggable_type %>" data-id="<%= curriculum_question.id %>" draggable="true" class="flex flex-wrap md:table-row droppable">
+              <td class="w-full p-2 md:p-4">
+                <p class="text-sm"><%= curriculum_question.description %></p>
+              </td>
+              <td class="w-full p-2 md:p-4">
+                <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                  <%= link_to 'Edit', edit_admin_curriculum_question_path(curriculum_question), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" %>
+                  <%= link_to 'Delete', [:admin, curriculum_question], method: :delete, data: { confirm: 'Delete this question?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+/* purgecss start ignore */
+
+.play-button {
+    height: 128px;
+    width: 128px;
+    transform: translateY(-50%);
+}
+
+@media only screen and (max-width: 576px) {
+    .play-button {
+        transform: scale(0.5) translateY(-100%);
+    }
+}
+
+/* purgecss end ignore */

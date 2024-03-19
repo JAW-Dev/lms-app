@@ -1,0 +1,101 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="text-5xl text-grey-darker font-extrabold leading-tight">User Invites</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div class="pt-12 pb-16">
+
+    <div class="flex flex-col md:flex-row justify-between w-full mb-4 md:mb-8 -mx-1">
+      <%= render "admin/shared/search", search_scope: :email_cont, search_path: admin_user_invites_path %>
+      <%= render "admin/users/controls" %>
+    </div>
+
+    <ul class="list-reset flex mb-4 border-b">
+      <li class="-mb-px mr-1">
+        <%= active_link_to "All Invites", admin_user_invites_path(:"q[status]" => "all", :"q[s]" => "invited_at desc"), class: "py-2 px-4 inline-block bg-white text-sm text-blue no-underline", active: @status === "all", class_active: "text-grey-darker border-l border-t border-r rounded-t" %>
+      </li>
+      <li class="-mb-px mr-1">
+        <%= active_link_to "Active Invites", admin_user_invites_path(:"q[status]" => "active", :"q[s]" => "invited_at desc"), class: "py-2 px-4 inline-block bg-white text-sm text-blue no-underline", active: @status === "active", class_active: "text-grey-darker border-l border-t border-r rounded-t" %>
+      </li>
+      <li class="-mb-px mr-1">
+        <%= active_link_to "Pending Invites", admin_user_invites_path(:"q[status]" => "pending", :"q[s]" => "invited_at desc"), class: "py-2 px-4 inline-block bg-white text-sm text-blue no-underline", active: @status === "pending", class_active: "text-grey-darker border-l border-t border-r rounded-t" %>
+      </li>
+    </ul>
+    
+    <% if !@users.any? %>
+
+      <div class="flex flex-col sm:flex-row items-center justify-between mb-8">
+        <p class="text-lg mb-4 sm:mb-0 <%= "invisible" if @users.any? %>" aria-hidden="<%= @users.any? %>">No users found.</p>
+      </div>
+
+    <% else %>
+
+      <table class="w-full mb-8 striped-table">
+        <thead>
+          <tr>
+            <th class="px-2 md:px-4 text-left"><%= sort_link(@q, :email_address, 'Email', {default_order: :asc}, {class: "text-purple-darker no-underline"}) %></th>
+            <th class="px-2 md:px-4 text-left"><%= sort_link(@q, :domain, 'Domain', {default_order: :asc}, {class: "text-purple-darker no-underline"}) %></th>
+            <th class="px-2 md:px-4 text-left"><%= sort_link(@q, :invited_at, 'Sent', {default_order: :desc}, {class: "text-purple-darker no-underline"}) %></th>
+            <th class="px-2 md:px-4 text-left"><%= sort_link(@q, :expires_at, 'Expires', {default_order: :desc}, {class: "text-purple-darker no-underline"}) %></th>
+            <th class="text-right"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @users.each do |invite| %>
+            <tr>
+              <td class="p-2 md:p-4">
+                <p><%= mail_to invite.email %></p>
+              </td>
+              <td class="p-2 md:p-4">
+                <p><%= present(invite).domain %></p>
+              </td>
+              <td class="p-2 md:p-4">
+                <p><%= l(invite.invited_at, format: :short_with_year) %></p>
+              </td>
+              <td class="p-2 md:p-4">
+                <p><%= invite.expires_at.present? ? l(invite.expires_at, format: :short_with_year) : "N/A" %></p>
+              </td>
+              <td class="p-2 md:p-4">
+                <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                  <%= link_to 'Resend Invitation', [:admin, invite], remote: true, method: :patch, data: { params: present(invite).resend_params, type: "json" }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" if can? :update, invite %>
+                  <%= link_to 'Delete', [:admin, invite], method: :delete, data: { confirm: 'Delete this invitation?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" if can? :destroy, invite %>
+                </div>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+
+      <div class="text-center">
+        <%== pagy_nav(@pagy) %>
+      </div>
+    <% end %>
+  </div>
+</div>
+
+<% content_for :additional_javascript do %>
+  <script>
+    document.body.addEventListener('ajax:success', () => {
+      const noticeEvent = new CustomEvent('showNotice', {
+        detail: 'Invitation resent.'
+      });
+
+      document.dispatchEvent(noticeEvent);
+    });
+
+    document.body.addEventListener('ajax:error', (e) => {
+      const alertEvent = new CustomEvent('showAlert', {
+        detail: e.detail
+      });
+
+      document.dispatchEvent(alertEvent);
+    });
+  </script>
+<% end %>

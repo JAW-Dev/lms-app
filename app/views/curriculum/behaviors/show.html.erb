@@ -1,0 +1,81 @@
+<% title present(@behavior).page_title(@media_type) %>
+<% content_for(:viewport) { ", maximum-scale=1" } %>
+<% content_for(:nav) { "hidden" } %>
+
+<div class="h-full bg-grey-darkest lg:overflow-hidden print:bg-white">
+  <div class="flex flex-col sm:flex-row overflow-x-hidden print:flex-col">
+    <div class="flex-1 mb-4 sm:mb-0">
+      <nav class="video-module__nav">
+        <div class="flex items-center relative">
+          <%= link_to @bundle.present? ? curriculum_bundle_path(@bundle) : curriculum_course_path(@course), class: "absolute flex text-grey text-xl no-underline z-1 print:hidden" do %>
+            <i class="far fa-angle-left"></i>
+            <span class="hidden md:block ml-1 text-sm">Back</span>
+          <% end %>
+          <div class="flex-1">
+            <div class="flex justify-center relative">
+              <button class="flex -mx-2 text-grey text-lg focus:outline-none" id="toggle-behavior-nav">
+                <h1 class="mx-2 text-base text-grey-lightest print:text-black">
+                  <span class="hidden lg:inline-block print:inline-block"><%= @course.title %></span>
+                  <span class="hidden lg:inline-block mx-2 font-normal print:inline-block"> | </span>
+                  <span class="font-normal"><%= @behavior.title %></span>
+                </h1>
+                <span class="video-module__nav-indicator">
+                  <i class="mx-2 far fa-angle-down print:hidden"></i>
+                </span>
+              </button>
+              <div class="video-module__behavior-list">
+                <ol class="list-reset">
+                  <%= render partial: "curriculum/behaviors/nav", collection: @behaviors, as: :behavior, locals: { course: @course, bundle: @bundle } %>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+      </nav>
+      <div class="vidyard-player print:hidden" data-status="<%= present(current_user).video_status(@behavior) %>" data-bundle="<%= @bundle&.slug %>" data-module="<%= @course.slug %>" data-slug="<%= @behavior.slug %>">
+        <img
+          style="width: 100%; margin: auto; display: block;"
+          class="vidyard-player-embed"
+          src="https://play.vidyard.com/<%= @behavior.player_uuid %>.jpg"
+          data-uuid="<%= present(@behavior).media_uuid(@media_type) %>"
+          data-v="4"
+          data-type="inline"
+        />
+      </div>
+    </div>
+    <div class="relative sm:w-80 sm:h-screen sm:-mr-80 p-2 pb-4 bg-grey-lightest sm:shadow-left-side print:w-full print:-mr-0 print:bg-white print:shadow-none notes">
+      <% if can? :create, Curriculum::Note %>
+        <button class="hidden sm:inline-block absolute w-8 py-2 bg-grey-lightest z-10 notes__toggle">
+          <i class="fas fa-file-alt my-px"></i>
+        </button>
+        <%= form_with(model: @note, class: "relative flex flex-col h-full bg-grey-lightest overflow-y-auto z-20 print:bg-white") do |form| %>
+          <%= form.rich_text_area :content, placeholder: "Add your notes here..." %>
+        <% end %>
+      <% end %>
+
+      <% if can? :create, Order %>
+        <% unless @course.first? || @behavior.is_intro?(@course) %>
+          <button class="hidden sm:inline-block absolute w-8 py-2 bg-grey-lightest z-10 gift-toggle">
+            <i class="cra fa-gift text-lg"></i>
+          </button>
+          <div class="hidden sm:block absolute w-64 pr-8 pl-4 py-2 bg-grey-lightest gift-content">
+            <p class="mb-3 text-sm text-grey-darker"><%= t("gifting", behavior: @behavior.title).html_safe %></p>
+            <%= link_to "Gift This Behavior", new_curriculum_order_path(course: @course, behavior: @behavior), class: "inline-block mb-2 mx-auto uppercase tracking-wide btn btn--primary-gradient" %>
+          </div>
+        <% end %>
+      <% end %>
+    </div>
+  </div>
+</div>
+
+<% content_for :additional_javascript do %>
+  <%= javascript_include_tag "https://play.vidyard.com/embed/v4.js", async: Rails.env.production? %>
+  <%= javascript_packs_with_chunks_tag 'v1/video' %>
+  <%= javascript_packs_with_chunks_tag 'v1/notes' if can?(:create, Curriculum::Note) %>
+  <%= javascript_packs_with_chunks_tag 'v1/gifts' if can?(:create, Order) %>
+  <% if params[:print] %>
+    <script>
+      window.print();
+    </script>
+  <% end %>
+<% end %>

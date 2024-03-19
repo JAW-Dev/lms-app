@@ -1,0 +1,2 @@
+class BehaviorOrderPresenter < OrderPresenter
+end

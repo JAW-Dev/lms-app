@@ -1,0 +1,31 @@
+<li>
+  <div class="course-item <%= bundle.present? ? "behavior behavior--bundle" : "behavior" %> <%= present(behavior).status(current_user) %>">
+    <div class="lg:border-purple-lighter lg:border-l lg:border-dashed lg:ml-16">
+      <div class="flex px-6 py-8 text-left">
+        <div class="flex-1">
+
+          <div class="flex items-center mb-2">
+            <div class="flex items-center relative mr-4 lg:mr-6 lg:-ml-10 pl-px behavior-title">
+              <i class="fas fa-lock invisible lg:visible text-grey-darker course-item-title__lock"></i>
+              <i class="fas fa-check hidden invisible lg:visible text-blue course-item-title__check"></i>
+              <span class="flex items-center justify-center text-lg font-bold text-white is-highlighted leading-tight behavior-title__number"><%= present(behavior).number(behavior_counter, course) %></span>
+            </div>
+            <h2 class="flex-1 ml-px leading-tight text-xl">
+              <%= link_to behavior.title, bundle.present? ? curriculum_bundle_behavior_path(bundle, behavior) : curriculum_course_behavior_path(course, behavior), class: "text-brown no-underline hover:underline" %>
+            </h2>
+          </div>
+
+          <div class="flex flex-col md:flex-row">
+            <div class="flex-1 mx-12 lg:mx-4">
+              <h3 class="text-grey-darker text-sm">
+                <% present(behavior) do |behavior_details| %>
+                  <%= behavior_details.total_time %>
+                <% end %>
+              </h3>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</li>

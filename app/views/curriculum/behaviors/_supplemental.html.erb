@@ -1,0 +1,27 @@
+<div aria-hidden="true" data-accordion-panel>
+  <div class="py-4">
+    <div class="flex is-highlighted">
+      <div class="hidden relative md:flex w-1/3">
+        <%= image_tag bg_image, class: "absolute w-full h-full object-cover" %>
+      </div>
+      <div class="flex flex-col items-center justify-between w-full md:w-2/3 p-6 md:p-8">
+        <ul class="list-reset flex w-full mb-4 overflow-hidden">
+          <% supplemental_items.each do |item| %>
+            <li class="flex items-center flex-no-shrink w-full px-2 supplemental-panel">
+              <p class="text-sm font-normal normal-case"><%= item.description %></p>
+            </li>
+          <% end %>
+        </ul>
+        <nav class="supplemental-nav" data-slider>
+          <ul class="list-reset flex justify-center -mx-1">
+            <% supplemental_items.each_with_index do |item, index| %>
+              <li data-index="<%= index %>" tabindex="0" class="mx-1 cursor-pointer supplemental-nav__item <%= index.zero? ? "supplemental-nav__item--active" : "" %>">
+                <span class="sr-only"><%= index + 1 %></span>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,50 @@
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="pt-12 pb-16">
+      <div class="max-w-lg">
+        <h1 class="text-5xl text-grey-darker font-extrabold leading-tight">Webinars</h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16 mb-8">
+  <div class="pt-12 pb-16">
+    <div class="flex flex-col-reverse md:flex-row items-center justify-between mb-8 md:-mx-2">
+      <p class="text-lg mb-4 sm:mb-0 <%= "invisible" if @webinars.any? %>" aria-hidden="<%= @webinars.any? %>">No webinars created yet.</p>
+      <%= link_to 'Add a Webinar', new_admin_curriculum_webinar_path, class: "w-full md:w-auto mb-4 md:mb-0 md:mx-2 btn btn--primary rounded" %>
+    </div>
+
+    <% if @webinars.any? %>
+      <table class="w-full striped-table">
+        <thead>
+          <tr>
+            <th class="w-16 md:w-32">Preview Image</th>
+            <th class="w-2/3">Webinar Details</th>
+            <th></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @webinars.each do |webinar| %>
+          <tr>
+            <td class="p-2 md:p-4">
+              <%= image_tag present(webinar).thumbnail_url, alt: "preview image for #{webinar.title}", class: "w-16 md:w-32" %>
+            </td>
+            <td class="p-2 md:p-4 align-top">
+              <p class="mb-2"><%= webinar.title %></p>
+              <p class="mb-2 text-sm md:block"><%= curriculum_webinar_url(webinar) %></p>
+            </td>
+            <td class="p-2 md:p-4">
+              <div class="flex flex-col lg:flex-row justify-end -mx-1">
+                <%= link_to 'Edit', edit_admin_curriculum_webinar_path(webinar), class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--primary rounded" %>
+                <%= link_to 'Delete', [:admin, webinar], method: :delete, data: { confirm: 'Delete this webinar?' }, class: "mx-1 mb-1 lg:mb-0 btn btn--sm btn--warn rounded" %>
+              </div>
+            </td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
+    <% end %>
+  </div>
+</div>

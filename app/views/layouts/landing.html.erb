@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en" xml:lang="en" xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta charset="utf-8">
+    <meta content="ie=edge" http-equiv="x-ua-compatible">
+    <meta content="width=device-width, initial-scale=1, shrink-to-fit=no<%= yield :viewport %>" name="viewport">
+    <meta name="apple-mobile-web-app-title" content="Admired Leadership">
+    <meta name="application-name" content="Admired Leadership">
+    <%= display_meta_tags reverse: true, separator: "|", site: "Admired Leadership" %>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= render "shared/favicons" %>
+    <%= stylesheet_pack_tag 'application', media: 'all' %>
+    <%= yield :additional_stylesheets %>
+    <%= yield :data_layer %>
+    <% if user_signed_in? && Rails.configuration.features.dig(:hubspot) %>
+      <script>
+        var _hsq = window._hsq = window._hsq || [];
+        _hsq.push(["identify",{
+          email: '<%= current_user.email %>'
+        }]);
+      </script>
+    <% end %>
+    <%= render "shared/analytics" %>
+  </head>
+
+  <body class="font-sans leading-normal bg-white antialiased">
+    <header class="bg-grey-lighter">
+      <div class="container sm:px-8 pt-10 pb-12 flex-col sm:flex-row flex items-center justify-between" style="gap: 1.5rem">
+        <%= link_to "https://admiredleadership.com/", class: "inline-block" do %>
+          <%= inline_svg "cra-full-logo-reversed.svg", class: "h-16 cra-logo--full" %>
+        <% end %>
+
+        <span type="button"
+          data-class-name="btn btn--primary-gradient btn--lg"
+          data-modal="button"
+          data-link="What is Admired Leadership?"
+          data-title="What is Admired Leadership?"
+          data-description="Dialog explaining what Admired Leadership is. Escape will close the dialog."
+          data-content="<p class='mb-4'>At Admired Leadership, we believe that leadership is what you do. Based on 30 years of research and over 12,000 completed studies of leaders, we have uncovered hundred of leaderships behaviors of the most Admired Leaders.</p><p>Admired Leadership is a catalog of those timeless and universal routines and behaviors that every leader can learn. The Admired Leadership approach does not require that you understand yourself or others, but instead is focused on the behaviors associated with excellence in leadership. By learning and practicing these behaviors, leaders possess the actions that create results and followership.</p>">
+          What is Admired Leadership?
+        </span>
+      </div>
+    </header>
+
+    <main class="flex flex-col lg:h-full">
+      <div class="flex flex-col flex-1">
+        <%= render "shared/alerts" %>
+        <section class="w-full lg:overflow-y-auto">
+          <%= yield %>
+        </section>
+      </div>
+    </main>
+
+    <div class="modal-container"></div>
+
+    <%= javascript_include_tag "https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver%2CCustomEvent%2CElement.prototype.closest" %>
+    <%= javascript_packs_with_chunks_tag "v1/application" %>
+    <%= javascript_include_tag "https://kit.fontawesome.com/87cfae3d7e.js", crossorigin: "anonymous" %>
+
+    <%= yield :additional_javascript %>
+  </body>
+
+</html>

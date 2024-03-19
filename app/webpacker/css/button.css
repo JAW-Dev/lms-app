@@ -1,0 +1,144 @@
+.btn {
+  @apply .inline-block .px-3 .py-2 .text-sm .text-center font-bold .uppercase .no-underline;
+  transition: background 0.2s ease;
+}
+
+.btn.leading-tight {
+  line-height: 1.15;
+}
+
+.btn--sm {
+  @apply .px-2 .py-1 .text-xs;
+}
+
+.btn--lg {
+  @apply .px-6 .py-3;
+}
+
+.btn--primary {
+  @apply .bg-purple .text-white;
+}
+
+.btn--primary:hover {
+  @apply .bg-blue;
+}
+
+.btn--secondary {
+  @apply .bg-green-dark .text-white;
+}
+
+.btn--secondary:hover {
+  @apply .bg-green-darker;
+}
+
+.btn--warn {
+  @apply .bg-red-light .text-white;
+}
+
+.btn--warn:hover {
+  @apply .bg-red;
+}
+
+/* .btn--disabled,
+.btn--disabled:hover,
+button[disabled],
+button[disabled]:hover {
+  @apply .bg-grey-light .text-grey-dark .cursor-default;
+  background-image: none;
+} */
+
+.btn--disabled::before,
+button[disabled]::before {
+  @apply .hidden;
+}
+
+.btn--default {
+  @apply .bg-grey-light .text-grey-darkest;
+}
+
+.btn--default:hover {
+  @apply .bg-grey;
+}
+
+.btn--inverse {
+  @apply .bg-white .text-grey-darkest;
+}
+
+.btn--inverse:hover {
+  @apply .bg-grey-light;
+}
+
+.btn--outline {
+  @apply .bg-white .text-purple .border .border-purple;
+  padding-top: calc(config("padding.2") - 1px);
+  padding-bottom: calc(config("padding.2") - 1px);
+}
+
+.btn--lg.btn--outline {
+  padding-top: calc(config("padding.3") - 1px);
+  padding-bottom: calc(config("padding.3") - 1px);
+}
+
+.btn--sm.btn--outline {
+  padding-top: calc(config("padding.1") - 1px);
+  padding-bottom: calc(config("padding.1") - 1px);
+}
+
+.btn--outline:hover {
+  @apply .bg-purple .text-white;
+}
+
+.btn--light {
+  @apply .font-light;
+}
+
+.is-highlighted {
+  @apply .text-white .font-bold .uppercase .no-underline .relative .z-1 .shadow;
+  background: linear-gradient(
+    224deg,
+    config("colors.purple") 0,
+    config("colors.blue") 100%
+  );
+}
+
+#access-teams .is-highlighted {
+  @apply .text-white .font-bold .capitalize .no-underline .relative .z-1 .shadow;
+  background: linear-gradient(
+    224deg,
+    config("colors.purple") 0,
+    config("colors.blue") 100%
+  );
+}
+
+.is-highlighted::before,
+.btn--primary-gradient::before {
+  @apply .block .pin-t .pin-l .w-full .h-full .absolute opacity-0;
+  content: "";
+  background: linear-gradient(
+    224deg,
+    config("colors.blue") 0,
+    config("colors.blue-dark") 100%
+  );
+  z-index: -1;
+  transition: opacity 0.3s ease;
+}
+
+a.is-highlighted:hover::before,
+button.is-highlighted:hover::before,
+.btn--primary-gradient:hover::before {
+  @apply .opacity-100;
+}
+
+.btn--primary-gradient {
+  @apply .is-highlighted;
+}
+
+.btn.hidden {
+  display: none;
+}
+
+@screen md {
+  .btn--sm {
+    @apply .text-sm;
+  }
+}

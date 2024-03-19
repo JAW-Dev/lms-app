@@ -1,0 +1,22 @@
+.striped-table tr:nth-child(odd) td,
+.striped-list li:nth-child(odd) {
+  @apply .bg-grey-lighter;
+}
+
+[draggable="true"],
+.cursor-grab {
+  cursor: grab;
+}
+
+.draggable--dragging {
+  @apply .opacity-75 .bg-white;
+  cursor: grabbing;
+}
+
+.droppable {
+  border-top: 2px dashed transparent;
+}
+
+.droppable.droppable--hover {
+  border-top-color: config("colors.grey");
+}

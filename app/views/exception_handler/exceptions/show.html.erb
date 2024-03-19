@@ -1,0 +1,22 @@
+<% title  @exception.description.html_safe %>
+
+<div class="bg-grey-lighter">
+  <div class="container px-8 md:pr-8 lg:pl-16">
+    <div class="py-12 lg:py-16">
+      <div class="max-w-lg">
+        <h1 class="text-4xl lg:text-5xl text-grey-darker font-extrabold leading-tight"><%= @exception.description.html_safe %></h1>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="container px-8 lg:pr-12 lg:pl-16">
+  <div class="pt-12 pb-16">
+    <%= content_tag :div, class: "exception", data: { status: @exception.status, response: @exception.response.to_s.humanize, rails: Rails.version } do %>
+      <h2 class="mb-4 text-2xl text-brown"><%= error_details(@exception.status) %></h2>
+    <% end %>
+    <p>
+      <%= link_to "Return to the modules list", root_path %> or <%= link_to "contact us", contact_path %> for further assistance.
+    </p>
+  </div>
+</div>

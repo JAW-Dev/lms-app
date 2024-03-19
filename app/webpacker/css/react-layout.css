@@ -1,0 +1,17 @@
+.contact-us__col-right {
+	min-width: 545px;
+	max-width: 545px;
+}
+
+@media only screen and (max-width: 1200px) {
+	.contact-us__col-right {
+		min-width: 0;
+		max-width: none;
+	}
+}
+
+.contact-us__contact {
+	gap: 18px;
+	padding: 10px 0;
+}
+
